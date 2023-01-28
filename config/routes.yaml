@@ -1,7 +1,7 @@
 controllers_front:
     resource: ../src/Controller/Front
     type: attribute
-    prefix: /front
+    prefix: /
     name_prefix: front_
 
 controllers_back:
