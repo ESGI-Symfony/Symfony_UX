@@ -1,4 +1,4 @@
-{% extends './front/base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Log in!{% endblock %}
 
@@ -29,5 +29,6 @@
     </button>
 
     <a href="{{ path('app_register') }}">Register</a>
+    <a href="{{ path('app_forgot_password_request') }}">Forgot password</a>
 </form>
 {% endblock %}
