@@ -19,4 +19,53 @@ address:
     type: 'The latitude must be a float.'
     range: 'Latitude must be between {{ min }} and {{ max }}.'
 
-rental:
+user_lessor:
+  motivation:
+    not_blank: 'The motivation cannot be blank.'
+    type: 'The motivation must be a string.'
+
+  status:
+    not_blank: 'The status cannot be blank.'
+    max_length: 'The status cannot be longer than {{ limit }} characters.'
+    type: 'The status must be a string.'
+
+  refusing_reason:
+    not_blank: 'The refusing reason cannot be blank.'
+    type: 'The refusing reason must be a string.'
+
+user:
+  email:
+    not_blank: 'The email cannot be blank.'
+    max_length: 'The email cannot be longer than {{ limit }} characters.'
+    type: 'The email {{ value }} is not a valid email.'
+
+  nickname:
+    not_blank: 'The nickname cannot be blank.'
+    max_length: 'The nickname cannot be longer than {{ limit }} characters.'
+    type: 'The nickname must be a string.'
+
+    password:
+      not_blank: 'The password cannot be blank.'
+      max_length: 'The password cannot be longer than {{ limit }} characters.'
+      type: 'The password must be a string.'
+
+    is_verified:
+      not_blank: 'The is_verified status cannot be blank.'
+      type: 'The is_verified status must be a boolean.'
+
+    firstname:
+      max_length: 'The firstname cannot be longer than {{ limit }} characters.'
+      type: 'The firstname must be a string.'
+
+    lastname:
+      max_length: 'The lastname cannot be longer than {{ limit }} characters.'
+      type: 'The lastname must be a string.'
+
+    lessor_number:
+      type: 'The lessor number must be a number.'
+
+transport:
+  name:
+    not_blank: 'The name cannot be blank.'
+    max_length: 'The name cannot be longer than {{ limit }} characters.'
+    type: 'The name must be a string.'

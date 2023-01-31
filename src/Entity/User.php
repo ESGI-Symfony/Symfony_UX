@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -20,27 +21,58 @@ class User implements UserInterface, \Symfony\Component\Security\Core\User\Passw
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'user.email.not_blank')]
+    #[Assert\Length(
+        max: 255,
+        maxMessage: 'user.email.max_length'
+    )]
+    #[Assert\Email(message: 'address.email.type')]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $pseudo = null;
+    #[Assert\NotBlank(message: 'user.nickname.not_blank')]
+    #[Assert\Length(
+        max: 255,
+        maxMessage: 'user.nickname.max_length'
+    )]
+    #[Assert\Type(type: 'string', message: 'user.nickname.type')]
+    private ?string $nickname = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'user.password.not_blank')]
+    #[Assert\Length(
+        max: 255,
+        maxMessage: 'user.password.max_length'
+    )]
+    #[Assert\Type(type: 'string', message: 'user.password.type')]
     private ?string $password = null;
 
     #[ORM\Column]
     private array $roles = [];
 
     #[ORM\Column(type: 'boolean')]
+    #[Assert\NotBlank(message: 'user.is_verified.not_blank')]
+    #[Assert\Type(type: 'boolean', message: 'user.password.type')]
     private $isVerified = false;
 
     #[ORM\Column(length: 150, nullable: true)]
+    #[Assert\Type(type: 'string', message: 'user.firstname.type')]
+    #[Assert\Length(
+        max: 150,
+        maxMessage: 'user.firstname.max_length'
+    )]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 150, nullable: true)]
+    #[Assert\Type(type: 'string', message: 'user.lastname.type')]
+    #[Assert\Length(
+        max: 150,
+        maxMessage: 'user.lastname.max_length'
+    )]
     private ?string $lastname = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\Type(type: 'number', message: 'user.lessor_number.type')]
     private ?int $lessor_number = null;
 
     #[ORM\OneToMany(mappedBy: 'lessor', targetEntity: UserLessorRequest::class, orphanRemoval: true)]
@@ -103,18 +135,6 @@ class User implements UserInterface, \Symfony\Component\Security\Core\User\Passw
     public function setEmail(string $email): self
     {
         $this->email = $email;
-
-        return $this;
-    }
-
-    public function getPseudo(): ?string
-    {
-        return $this->pseudo;
-    }
-
-    public function setPseudo(string $pseudo): self
-    {
-        $this->pseudo = $pseudo;
 
         return $this;
     }
@@ -295,6 +315,18 @@ class User implements UserInterface, \Symfony\Component\Security\Core\User\Passw
                 $reservation->setBuyer(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNickname(): ?string
+    {
+        return $this->nickname;
+    }
+
+    public function setNickname(string $nickname): self
+    {
+        $this->nickname = $nickname;
 
         return $this;
     }

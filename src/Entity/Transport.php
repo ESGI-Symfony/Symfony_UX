@@ -6,6 +6,7 @@ use App\Repository\TransportRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: TransportRepository::class)]
 class Transport
@@ -16,6 +17,12 @@ class Transport
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'transport.name.not_blank')]
+    #[Assert\Length(
+        max: 255,
+        maxMessage: 'transport.name.max_length'
+    )]
+    #[Assert\Type(type: 'string', message: 'transport.name.type')]
     private ?string $name = null;
 
     #[ORM\ManyToMany(targetEntity: Address::class, mappedBy: 'transports')]

@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\UserLessorRequestRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserLessorRequestRepository::class)]
 class UserLessorRequest
@@ -15,12 +16,22 @@ class UserLessorRequest
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message: 'user_lessor.motivation.not_blank')]
+    #[Assert\Type(type: 'string', message: 'user_lessor.motivation.type')]
     private ?string $motivation = null;
 
     #[ORM\Column(length: 10)]
+    #[Assert\NotBlank(message: 'user_lessor.status.not_blank')]
+    #[Assert\Length(
+        max: 10,
+        maxMessage: 'user_lessor.status.max_length'
+    )]
+    #[Assert\Type(type: 'string', message: 'user_lessor.status.type')]
     private ?string $status = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message: 'user_lessor.refusing_reason.not_blank')]
+    #[Assert\Type(type: 'string', message: 'user_lessor.refusing_reason.type')]
     private ?string $refusing_reason = null;
 
     #[ORM\ManyToOne(inversedBy: 'userLessorRequests')]
