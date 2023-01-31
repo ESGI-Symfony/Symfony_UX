@@ -1,0 +1,30 @@
+@import "variables";
+
+.input {
+	&:focus-visible {
+		outline: transparent;
+	}
+
+	::placeholder {
+		color: $vega;
+	}
+}
+
+.input-group {
+	background-color: $procyon;
+	border: 1px solid $rigel;
+	border-radius: 20px;
+	display: flex;
+	flex-direction: row;
+
+	.input {
+		background: transparent;
+		border: none;
+		padding: $spacing-default $spacing-lg;
+	}
+
+	.icon-container {
+		padding: $spacing-default $spacing-lg;
+		color: $dark-matter;
+	}
+}

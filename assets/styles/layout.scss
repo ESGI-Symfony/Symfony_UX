@@ -1,0 +1,14 @@
+@import "variables";
+
+.flex {
+	display: flex;
+	gap: $spacing-default;
+
+	&-column {
+		flex-direction: column;
+	}
+
+	&-row {
+		flex-direction: row;
+	}
+}

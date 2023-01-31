@@ -1,0 +1,59 @@
+@import "variables";
+
+.btn {
+	cursor: pointer;
+	display: flex;
+	gap: $spacing-default;
+	padding: $spacing-default $spacing-lg;
+	border-radius: $spacing-lg;
+	border: none;
+	background-color: transparent;
+	transition: .2s background-color, .2s color;
+	align-items: center;
+
+	&-primary {
+		background-color: $alnitak;
+		color: $dark-matter;
+
+		&:hover {
+			background-color: darken($alnitak, 10%);
+		}
+	}
+
+	&-secondary {
+		background-color: $procyon;
+		color: $dark-matter;
+
+		&:hover {
+			background-color: darken($procyon, 10%);
+		}
+	}
+
+	&-text {
+		color: $procyon;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	&-outline-primary {
+		border: solid 1px $alnitak;
+		color: $alnitak;
+
+		&:hover {
+			background-color: $alnitak;
+			color: $dark-matter;
+		}
+	}
+
+	&-outline-secondary {
+		border: solid 1px $procyon;
+		color: $procyon;
+
+		&:hover {
+			background-color: $procyon;
+			color: $dark-matter;
+		}
+	}
+}

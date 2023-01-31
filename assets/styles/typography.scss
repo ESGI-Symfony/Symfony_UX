@@ -1,0 +1,35 @@
+@import "variables";
+
+h1, .h1 {
+	font-size: $fs-900;
+}
+
+h2, .h2 {
+	font-size: $fs-800;
+}
+
+h3, .h3 {
+	font-size: $fs-700;
+}
+
+h4, .h4 {
+	font-size: $fs-600;
+}
+
+h5, .h5 {
+	font-size: $fs-500;
+}
+
+h6, .h6 {
+	font-size: $fs-400;
+}
+
+.lead {
+	font-size: $fs-300;
+}
+
+// Everything else to $fs-200
+
+small, .small {
+	font-size: $fs-100;
+}
