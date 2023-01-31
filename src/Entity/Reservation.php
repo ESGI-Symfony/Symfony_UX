@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ReservationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
 class Reservation
@@ -15,12 +16,21 @@ class Reservation
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotBlank(message: 'reservation.date_begin.not_blank')]
+    #[Assert\Date(message: 'reservation.date_begin.date')]
     private ?\DateTimeInterface $date_begin = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotBlank(message: 'reservation.date_end.not_blank')]
+    #[Assert\Date(message: 'reservation.date_end.date')]
     private ?\DateTimeInterface $date_end = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Length(
+        max: 255,
+        maxMessage: 'reservation.payment_token.max_length'
+    )]
+    #[Assert\Type(type: 'string', message: 'reservation.payment_token.type')]
     private ?string $payment_token = null;
 
     #[ORM\ManyToOne(inversedBy: 'reservations')]

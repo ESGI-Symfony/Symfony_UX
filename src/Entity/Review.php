@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ReviewRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ReviewRepository::class)]
 class Review
@@ -15,10 +16,23 @@ class Review
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message: 'review.comment.not_blank')]
+    #[Assert\Length(
+        max: 10000,
+        maxMessage: 'review.comment.max_length'
+    )]
+    #[Assert\Type(type: 'string', message: 'review.comment.type')]
     private ?string $comment = null;
 
     #[ORM\Column]
-    private ?int $mark = null;
+    #[Assert\NotNull(message: 'review.rating.not_null')]
+    #[Assert\Type(type: 'int', message: 'review.rating.type')]
+    #[Assert\Range(
+        notInRangeMessage: 'review.rating.range',
+        min: 0,
+        max: 5,
+    )]
+    private ?int $rating = null;
 
     #[ORM\ManyToOne(inversedBy: 'reviews')]
     #[ORM\JoinColumn(nullable: false)]
@@ -45,14 +59,14 @@ class Review
         return $this;
     }
 
-    public function getMark(): ?int
+    public function getRating(): ?int
     {
-        return $this->mark;
+        return $this->rating;
     }
 
-    public function setMark(int $mark): self
+    public function setRating(int $rating): self
     {
-        $this->mark = $mark;
+        $this->rating = $rating;
 
         return $this;
     }

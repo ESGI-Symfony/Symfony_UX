@@ -2,9 +2,11 @@
 
 namespace App\Entity;
 
+use App\Enums\ReportTypes;
 use App\Repository\ReportRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ReportRepository::class)]
 class Report
@@ -15,10 +17,26 @@ class Report
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message: 'report.comment.not_blank')]
+    #[Assert\Type(type: 'string', message: 'report.comment.type')]
+    #[Assert\Length(
+        max: 10000,
+        maxMessage: 'report.comment.max_length'
+    )]
     private ?string $comment = null;
 
-    #[ORM\Column(length: 100)]
-    private ?string $type = null;
+    #[ORM\Column(length: 20)]
+    #[Assert\NotBlank(message: 'report.type.not_blank')]
+    #[Assert\Type(type: 'string', message: 'report.type.type')]
+    #[Assert\Length(
+        max: 20,
+        maxMessage: 'report.type.max_length'
+    )]
+    #[Assert\Choice(
+        callback: [ReportTypes::class, 'getValues'],
+        message: 'report.type.choice'
+    )]
+    private ?ReportTypes $type = null;
 
     #[ORM\ManyToOne(inversedBy: 'reports')]
     #[ORM\JoinColumn(nullable: false)]

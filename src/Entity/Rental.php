@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: RentalRepository::class)]
 class Rental
@@ -17,27 +18,55 @@ class Rental
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'rental.name.not_blank')]
+    #[Assert\Length(
+        max: 255,
+        maxMessage: 'rental.name.max_length'
+    )]
+    #[Assert\Type(type: 'string', message: 'rental.name.type')]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message: 'rental.description.not_blank')]
+    #[Assert\Length(
+        max: 10000,
+        maxMessage: 'rental.description.max_length'
+    )]
+    #[Assert\Type(type: 'string', message: 'rental.description.type')]
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Assert\NotNull(message: 'rental.price.not_null')]
+    #[Assert\Type(type: 'float', message: 'rental.price.type')]
+    #[Assert\Positive(message: 'rental.price.positive')]
     private ?float $price = null;
 
     #[ORM\Column]
+    #[Assert\NotNull(message: 'rental.max_capacity.not_null')]
+    #[Assert\Type(type: 'int', message: 'rental.max_capacity.type')]
+    #[Assert\Positive(message: 'rental.max_capacity.positive')]
     private ?int $max_capacity = null;
 
     #[ORM\Column]
+    #[Assert\NotNull(message: 'rental.room_count.not_null')]
+    #[Assert\Type(type: 'int', message: 'rental.room_count.type')]
+    #[Assert\Positive(message: 'rental.room_count.positive')]
     private ?int $room_count = null;
 
     #[ORM\Column]
+    #[Assert\NotNull(message: 'rental.bathroom_count.not_null')]
+    #[Assert\Type(type: 'int', message: 'rental.bathroom_count.type')]
+    #[Assert\Positive(message: 'rental.bathroom_count.positive')]
     private ?int $bathroom_count = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotBlank(message: 'rental.date_begin.not_blank')]
+    #[Assert\Date(message: 'rental.date_begin.date')]
     private ?\DateTimeInterface $date_begin = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotBlank(message: 'rental.date_end.not_blank')]
+    #[Assert\Date(message: 'rental.date_end.date')]
     private ?\DateTimeInterface $date_end = null;
 
     #[ORM\ManyToOne(inversedBy: 'rentals')]

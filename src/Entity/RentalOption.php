@@ -6,6 +6,7 @@ use App\Repository\RentalOptionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: RentalOptionRepository::class)]
 class RentalOption
@@ -16,6 +17,12 @@ class RentalOption
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'rental_option.name.not_blank')]
+    #[Assert\Type(type: 'string', message: 'rental_option.name.type')]
+    #[Assert\Length(
+        max: 255,
+        maxMessage: 'rental_option.name.max_length'
+    )]
     private ?string $name = null;
 
     #[ORM\ManyToMany(targetEntity: Rental::class, mappedBy: 'options')]

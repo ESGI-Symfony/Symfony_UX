@@ -35,7 +35,7 @@ class Address
     private ?string $celestial_object = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message: 'address.longitude.not_blank')]
+    #[Assert\NotNull(message: 'address.longitude.not_null')]
     #[Assert\Type(type: 'float', message: 'address.longitude.type')]
     #[Assert\Range(
         notInRangeMessage: 'address.longitude.range',
@@ -45,7 +45,7 @@ class Address
     private ?float $longitude = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message: 'address.latitude.not_blank')]
+    #[Assert\NotNull(message: 'address.latitude.not_null')]
     #[Assert\Type(type: 'float', message: 'address.latitude.type')]
     #[Assert\Range(
         notInRangeMessage: 'address.latitude.range',
