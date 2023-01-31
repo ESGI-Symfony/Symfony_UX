@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -31,6 +33,36 @@ class User implements UserInterface, \Symfony\Component\Security\Core\User\Passw
 
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
+
+    #[ORM\Column(length: 150, nullable: true)]
+    private ?string $firstname = null;
+
+    #[ORM\Column(length: 150, nullable: true)]
+    private ?string $lastname = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $lessor_number = null;
+
+    #[ORM\OneToMany(mappedBy: 'lessor', targetEntity: UserLessorRequest::class, orphanRemoval: true)]
+    private Collection $userLessorRequests;
+
+    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Rental::class, orphanRemoval: true)]
+    private Collection $rentals;
+
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Review::class)]
+    private Collection $reviews;
+
+    #[ORM\OneToMany(mappedBy: 'buyer', targetEntity: Reservation::class)]
+    private Collection $reservations;
+
+
+    public function __construct()
+    {
+        $this->userLessorRequests = new ArrayCollection();
+        $this->rentals = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
+        $this->reservations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -107,6 +139,162 @@ class User implements UserInterface, \Symfony\Component\Security\Core\User\Passw
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(?string $firstname): self
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
+
+    public function setLastname(?string $lastname): self
+    {
+        $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getLessorNumber(): ?int
+    {
+        return $this->lessor_number;
+    }
+
+    public function setLessorNumber(?int $lessor_number): self
+    {
+        $this->lessor_number = $lessor_number;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, UserLessorRequest>
+     */
+    public function getUserLessorRequests(): Collection
+    {
+        return $this->userLessorRequests;
+    }
+
+    public function addUserLessorRequest(UserLessorRequest $userLessorRequest): self
+    {
+        if (!$this->userLessorRequests->contains($userLessorRequest)) {
+            $this->userLessorRequests->add($userLessorRequest);
+            $userLessorRequest->setLessor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserLessorRequest(UserLessorRequest $userLessorRequest): self
+    {
+        if ($this->userLessorRequests->removeElement($userLessorRequest)) {
+            // set the owning side to null (unless already changed)
+            if ($userLessorRequest->getLessor() === $this) {
+                $userLessorRequest->setLessor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Rental>
+     */
+    public function getRentals(): Collection
+    {
+        return $this->rentals;
+    }
+
+    public function addRental(Rental $rental): self
+    {
+        if (!$this->rentals->contains($rental)) {
+            $this->rentals->add($rental);
+            $rental->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRental(Rental $rental): self
+    {
+        if ($this->rentals->removeElement($rental)) {
+            // set the owning side to null (unless already changed)
+            if ($rental->getOwner() === $this) {
+                $rental->setOwner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Review>
+     */
+    public function getReviews(): Collection
+    {
+        return $this->reviews;
+    }
+
+    public function addReview(Review $review): self
+    {
+        if (!$this->reviews->contains($review)) {
+            $this->reviews->add($review);
+            $review->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReview(Review $review): self
+    {
+        if ($this->reviews->removeElement($review)) {
+            // set the owning side to null (unless already changed)
+            if ($review->getAuthor() === $this) {
+                $review->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Reservation>
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(Reservation $reservation): self
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations->add($reservation);
+            $reservation->setBuyer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation): self
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getBuyer() === $this) {
+                $reservation->setBuyer(null);
+            }
+        }
 
         return $this;
     }
