@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-trait EnumHelperTrait
+trait EnumHelper
 {
     public static function getValues(): array
     {
