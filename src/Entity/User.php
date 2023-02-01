@@ -39,7 +39,7 @@ class User implements UserInterface, \Symfony\Component\Security\Core\User\Passw
     private ?string $nickname = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'user.password.not_blank')]
+//    #[Assert\NotBlank(message: 'user.password.not_blank')]
     #[Assert\Length(
         max: 255,
         maxMessage: 'user.password.max_length'
@@ -51,7 +51,7 @@ class User implements UserInterface, \Symfony\Component\Security\Core\User\Passw
     private array $roles = [];
 
     #[ORM\Column(type: 'boolean')]
-    #[Assert\NotBlank(message: 'user.is_verified.not_blank')]
+//    #[Assert\NotBlank(message: 'user.is_verified.not_blank')]
     #[Assert\Type(type: 'boolean', message: 'user.password.type')]
     private $isVerified = false;
 
