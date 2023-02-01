@@ -36,11 +36,11 @@ class Review
 
     #[ORM\ManyToOne(inversedBy: 'reviews')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Rental $rental = null;
+    private ?User $author = null;
 
     #[ORM\ManyToOne(inversedBy: 'reviews')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $author = null;
+    private ?Reservation $Reservation = null;
 
     public function getId(): ?int
     {
@@ -71,18 +71,6 @@ class Review
         return $this;
     }
 
-    public function getRental(): ?Rental
-    {
-        return $this->rental;
-    }
-
-    public function setRental(?Rental $rental): self
-    {
-        $this->rental = $rental;
-
-        return $this;
-    }
-
     public function getAuthor(): ?User
     {
         return $this->author;
@@ -91,6 +79,18 @@ class Review
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getReservation(): ?Reservation
+    {
+        return $this->Reservation;
+    }
+
+    public function setReservation(?Reservation $Reservation): self
+    {
+        $this->Reservation = $Reservation;
 
         return $this;
     }

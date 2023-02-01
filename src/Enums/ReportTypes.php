@@ -4,7 +4,7 @@ namespace App\Enums;
 
 enum ReportTypes: string
 {
-    use EnumHelper;
+    use EnumHelpers;
     // abusive behavior of the owner, unavailable, etc.
     case Owner = 'owner_behavior';
 
