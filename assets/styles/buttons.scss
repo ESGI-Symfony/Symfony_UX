@@ -3,9 +3,9 @@
 .btn {
 	cursor: pointer;
 	display: flex;
-	gap: $spacing-default;
-	padding: $spacing-default $spacing-lg;
-	border-radius: $spacing-lg;
+	gap: $spacing-100;
+	padding: $spacing-100 $spacing-200;
+	border-radius: $spacing-200;
 	border: none;
 	background-color: transparent;
 	transition: .2s background-color, .2s color;

@@ -1,14 +1,39 @@
 @import "variables";
 
-.flex {
-	display: flex;
-	gap: $spacing-default;
+.gap {
+	&-100 {
+		gap: $spacing-100;
+	}
 
+	&-200 {
+		gap: $spacing-200;
+	}
+
+	&-300 {
+		gap: $spacing-300;
+	}
+
+	&-400 {
+		gap: $spacing-400;
+	}
+
+	&-500 {
+		gap: $spacing-500;
+	}
+
+	&-600 {
+		gap: $spacing-600;
+	}
+}
+
+.flex {
 	&-column {
+		display: flex;
 		flex-direction: column;
 	}
 
 	&-row {
+		display: flex;
 		flex-direction: row;
 	}
 }

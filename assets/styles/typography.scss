@@ -2,26 +2,32 @@
 
 h1, .h1 {
 	font-size: $fs-900;
+	font-weight: bold;
 }
 
 h2, .h2 {
 	font-size: $fs-800;
+	font-weight: bold;
 }
 
 h3, .h3 {
 	font-size: $fs-700;
+	font-weight: bold;
 }
 
 h4, .h4 {
 	font-size: $fs-600;
+	font-weight: bold;
 }
 
 h5, .h5 {
 	font-size: $fs-500;
+	font-weight: bold;
 }
 
 h6, .h6 {
 	font-size: $fs-400;
+	font-weight: bold;
 }
 
 // Everything else to $fs-300

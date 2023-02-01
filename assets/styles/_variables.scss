@@ -7,8 +7,12 @@ $sun: #FEEEBC;
 $pollux: #FCD0A1;
 $betelgeuse: #F59879;
 
-$spacing-default: 10px;
-$spacing-lg: 20px;
+$spacing-100: 8px;
+$spacing-200: 16px;
+$spacing-300: 24px;
+$spacing-400: 32px;
+$spacing-500: 48px;
+$spacing-600: 64px;
 
 @function rem($px) {
 	@return calc($px / 16) + rem;

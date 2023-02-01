@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "923e084fd7be6b066697ba115f844dfd",
+    "content-hash": "40e8e393295123715e0580347e455658",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -7548,6 +7548,45 @@
             "time": "2023-01-04T12:46:15+00:00"
         },
         {
+            "name": "twbs/bootstrap-icons",
+            "version": "v1.10.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twbs/icons.git",
+                "reference": "817d780a476dbb24b269a89ba56ff1d0d4125132"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twbs/icons/zipball/817d780a476dbb24b269a89ba56ff1d0d4125132",
+                "reference": "817d780a476dbb24b269a89ba56ff1d0d4125132",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Otto",
+                    "email": "markdotto@gmail.com"
+                }
+            ],
+            "description": "Official open source SVG icon library for Bootstrap",
+            "homepage": "https://icons.getbootstrap.com/",
+            "keywords": [
+                "bootstrap",
+                "icon font",
+                "icons",
+                "svg"
+            ],
+            "support": {
+                "issues": "https://github.com/twbs/icons/issues",
+                "source": "https://github.com/twbs/icons/tree/v1.10.3"
+            },
+            "time": "2022-12-27T05:46:02+00:00"
+        },
+        {
             "name": "twig/extra-bundle",
             "version": "v3.4.0",
             "source": {
@@ -7759,6 +7798,51 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.11.0"
             },
             "time": "2022-06-03T18:03:27+00:00"
+        },
+        {
+            "name": "whatwedo/twig-bootstrap-icons",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/whatwedo/TwigBootstrapIcons.git",
+                "reference": "c5338a41f0a21f6fcfe361ea1db93248737fc262"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/whatwedo/TwigBootstrapIcons/zipball/c5338a41f0a21f6fcfe361ea1db93248737fc262",
+                "reference": "c5338a41f0a21f6fcfe361ea1db93248737fc262",
+                "shasum": ""
+            },
+            "require": {
+                "twbs/bootstrap-icons": "^1.0",
+                "twig/twig": "^2.12|^3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5",
+                "whatwedo/php-coding-standard": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "whatwedo\\TwigBootstrapIcons\\": "src/",
+                    "whatwedo\\TwigBootstrapIcons\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "whatwedo GmbH",
+                    "email": "welove@whatwedo.ch"
+                }
+            ],
+            "support": {
+                "issues": "https://github.com/whatwedo/TwigBootstrapIcons/issues",
+                "source": "https://github.com/whatwedo/TwigBootstrapIcons/tree/v1.1.0"
+            },
+            "time": "2022-09-08T12:18:37+00:00"
         }
     ],
     "packages-dev": [

@@ -1,5 +1,25 @@
 {% extends 'front/base.html.twig' %}
 
 {% block body %}
-    {{ message }}
+    <div class="flex-column gap-600">
+        <div class="flex-column gap-200">
+            {{ "home.good_evening" | trans }}
+            <h4>{{ "home.explore_universe" | trans }}</h4>
+            <div class="input-group">
+                <input class="input" placeholder="{{ "home.where_you_going" | trans }}" />
+            </div>
+        </div>
+        <button class="btn btn-primary">
+            <i class="bi-alarm"></i>
+        </button>
+        <div class="flex-column gap-200">
+            <h4>{{ "home.exclusive_package" | trans }}</h4>
+            <div class="flex-row gap-200">
+                <div class="badge">All</div>
+                <div class="badge badge-primary">Sol</div>
+                <div class="badge">Andromeda</div>
+                <div class="badge">Mars</div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
