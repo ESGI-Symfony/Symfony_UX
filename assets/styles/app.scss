@@ -6,7 +6,7 @@
 @import "input";
 
 html, body {
-    font-size: $fs-200;
+    font-size: $fs-300;
 }
 
 * {
@@ -29,13 +29,4 @@ h1 {
     text-transform: uppercase;
     font-weight: 900;
     letter-spacing: 0.5em;
-}
-
-.background-image {
-    position: absolute;
-    top: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -10;
-    background: url("../home_cat.png");
 }
