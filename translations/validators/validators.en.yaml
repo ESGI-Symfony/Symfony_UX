@@ -51,14 +51,6 @@ rental:
     type: 'The bathroom count must be an integer.'
     positive: 'The bathroom count must be greater than 0.'
 
-  date_begin:
-    not_blank: 'The begin rental date cannot be blank.'
-    date: 'The begin rental date must be a valid date.'
-
-  date_end:
-    not_blank: 'The end rental date cannot be blank.'
-    date: 'The end rental date must be a valid date.'
-
 rental_option:
   name:
     not_blank: 'The rental option name cannot be blank.'
