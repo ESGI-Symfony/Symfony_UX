@@ -51,16 +51,6 @@ class Rental
     #[Assert\Positive(message: 'rental.bathroom_count.positive')]
     private ?int $bathroom_count = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Assert\NotBlank(message: 'rental.date_begin.not_blank')]
-    #[Assert\Date(message: 'rental.date_begin.date')]
-    private ?\DateTimeInterface $date_begin = null;
-
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Assert\NotBlank(message: 'rental.date_end.not_blank')]
-    #[Assert\Date(message: 'rental.date_end.date')]
-    private ?\DateTimeInterface $date_end = null;
-
     #[ORM\ManyToOne(inversedBy: 'rentals')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Address $address = null;
@@ -159,30 +149,6 @@ class Rental
     public function setBathroomCount(int $bathroom_count): self
     {
         $this->bathroom_count = $bathroom_count;
-
-        return $this;
-    }
-
-    public function getDateBegin(): ?\DateTimeInterface
-    {
-        return $this->date_begin;
-    }
-
-    public function setDateBegin(\DateTimeInterface $date_begin): self
-    {
-        $this->date_begin = $date_begin;
-
-        return $this;
-    }
-
-    public function getDateEnd(): ?\DateTimeInterface
-    {
-        return $this->date_end;
-    }
-
-    public function setDateEnd(\DateTimeInterface $date_end): self
-    {
-        $this->date_end = $date_end;
 
         return $this;
     }
