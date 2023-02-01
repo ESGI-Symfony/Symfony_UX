@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enums\RentalTypes;
 use App\Repository\RentalRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -16,15 +17,6 @@ class Rental
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'rental.name.not_blank')]
-    #[Assert\Length(
-        max: 255,
-        maxMessage: 'rental.name.max_length'
-    )]
-    #[Assert\Type(type: 'string', message: 'rental.name.type')]
-    private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]
     #[Assert\NotBlank(message: 'rental.description.not_blank')]
@@ -83,35 +75,32 @@ class Rental
     #[ORM\OneToMany(mappedBy: 'rental', targetEntity: Report::class, orphanRemoval: true)]
     private Collection $reports;
 
-    #[ORM\OneToMany(mappedBy: 'rental', targetEntity: Review::class, orphanRemoval: true)]
-    private Collection $reviews;
-
     #[ORM\OneToMany(mappedBy: 'rental', targetEntity: Reservation::class)]
     private Collection $reservations;
+
+    #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(message: 'rental.type.not_blank')]
+    #[Assert\Type(type: 'string', message: 'rental.type.type')]
+    #[Assert\Length(
+        max: 20,
+        maxMessage: 'rental.type.max_length'
+    )]
+    #[Assert\Choice(
+        callback: [RentalTypes::class, 'getValues'],
+        message: 'rental.type.choice'
+    )]
+    private ?RentalTypes $rent_type = null;
 
     public function __construct()
     {
         $this->options = new ArrayCollection();
         $this->reports = new ArrayCollection();
-        $this->reviews = new ArrayCollection();
         $this->reservations = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
     }
 
     public function getDescription(): ?string
@@ -277,36 +266,6 @@ class Rental
     }
 
     /**
-     * @return Collection<int, Review>
-     */
-    public function getReviews(): Collection
-    {
-        return $this->reviews;
-    }
-
-    public function addReview(Review $review): self
-    {
-        if (!$this->reviews->contains($review)) {
-            $this->reviews->add($review);
-            $review->setRental($this);
-        }
-
-        return $this;
-    }
-
-    public function removeReview(Review $review): self
-    {
-        if ($this->review->removeElement($review)) {
-            // set the owning side to null (unless already changed)
-            if ($review->getRental() === $this) {
-                $review->setRental(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, Reservation>
      */
     public function getReservations(): Collection
@@ -332,6 +291,18 @@ class Rental
                 $reservation->setRental(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRentType(): ?string
+    {
+        return $this->rent_type;
+    }
+
+    public function setRentType(string $rent_type): self
+    {
+        $this->rent_type = $rent_type;
 
         return $this;
     }

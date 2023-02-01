@@ -20,10 +20,11 @@ address:
     range: 'Latitude must be between {{ min }} and {{ max }}.'
 
 rental:
-  name:
-    not_blank: 'The rental name cannot be blank.'
-    max_length: 'The rental name cannot be longer than {{ limit }} characters.'
-    type: 'The rental name must be a string.'
+  type:
+    not_blank: 'The rental type cannot be blank.'
+    max_length: 'The rental type cannot be longer than {{ limit }} characters.'
+    type: 'The rental type must be a string.'
+    choice: 'The rental type must be one of {{ choices }}.'
 
   description:
     not_blank: 'The rental description cannot be blank.'
