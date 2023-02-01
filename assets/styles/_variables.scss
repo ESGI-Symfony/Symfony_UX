@@ -1,0 +1,37 @@
+$dark-matter: #000000;
+$alnitak: #6990C5;
+$rigel: #94B4DD;
+$vega: #CCD5E6;
+$procyon: #EFEEF6;
+$sun: #FEEEBC;
+$pollux: #FCD0A1;
+$betelgeuse: #F59879;
+
+$spacing-default: 10px;
+$spacing-lg: 20px;
+
+@function rem($px) {
+	@return calc($px / 16) + rem;
+}
+
+// Font size
+$fs-100: rem(12);
+$fs-200: rem(14);
+$fs-300: rem(16);
+$fs-400: rem(18);
+$fs-500: rem(20);
+$fs-600: rem(24);
+$fs-700: rem(30);
+$fs-800: rem(36);
+$fs-900: rem(48);
+
+// Font weight
+$fw-thin: 100;
+$fw-extra-light: 200;
+$fw-light: 300;
+$fw-regular: 400;
+$fw-medium: 500;
+$fw-semi-bold: 600;
+$fw-bold: 700;
+$fw-extra-bold: 800;
+$fw-black: 900;

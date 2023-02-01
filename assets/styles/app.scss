@@ -1,0 +1,32 @@
+@import "reset";
+@import "variables";
+@import "buttons";
+@import "layout";
+@import "typography";
+@import "input";
+
+html, body {
+    font-size: $fs-300;
+}
+
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: $dark-matter;
+    color: $procyon;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+a {
+    color: $alnitak;
+}
+
+h1 {
+    font-family: 'Unbounded', cursive;
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: 0.5em;
+}
