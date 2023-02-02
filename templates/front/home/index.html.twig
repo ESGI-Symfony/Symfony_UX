@@ -1,5 +1,60 @@
 {% extends 'front/base.html.twig' %}
 
 {% block body %}
-    {{ message }}
+    {{ component('navbar', {
+        item1: "home" | trans,
+        item2: "bookings" | trans,
+        item3: "housings" | trans,
+        item4: "account" | trans,
+    }) }}
+    <main class="container">
+        <div class="flex-column gap-600">
+            <div class="flex-column gap-200">
+                {{ "home.good_evening" | trans }}
+                <h4>{{ "home.explore_universe" | trans }}</h4>
+                <div class="input-group">
+                    <input class="input" placeholder="{{ "home.where_you_going" | trans }}" />
+                </div>
+            </div>
+
+            <div class="flex-column gap-200">
+                <h4>{{ "home.exclusive_package" | trans }}</h4>
+                <div class="flex-row gap-200">
+                    <div class="badge">All</div>
+                    <div class="badge badge-primary">Sol</div>
+                    <div class="badge">Andromeda</div>
+                    <div class="badge">Mars</div>
+                </div>
+
+                <div class="flex-row gap-200 scroll-horizontal py-300">
+                    {% for i in 0..10 %}
+                        <div class="card">
+                            <img class="image" src="{{ asset('images/saturn.jpg') }}">
+
+                            <div class="content">
+                                <h4>Space station - Saturn</h4>
+
+                                <div class="body">
+                                    Accedat huc suavitas quaedam oportet sermonum atque morum, haudquaquam...
+                                </div>
+
+                                <div class="footer">
+                                    <div class="features">
+                                        <span>Features</span>
+
+                                        <div class="icons">
+                                            {{ bootstrap_icon("train-front") }}
+                                            {{ bootstrap_icon("radioactive") }}
+                                        </div>
+                                    </div>
+
+                                    <button class="btn btn-primary">Book・100€</button>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </main>
 {% endblock %}

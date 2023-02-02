@@ -13,18 +13,21 @@
 .input-group {
 	background-color: $procyon;
 	border: 1px solid $rigel;
-	border-radius: 20px;
+	border-radius: 5px;
 	display: flex;
 	flex-direction: row;
+	gap: $spacing-100;
 
 	.input {
 		background: transparent;
 		border: none;
-		padding: $spacing-default $spacing-lg;
+		font-size: $fs-300;
+		padding: $spacing-200;
+		width: 100%;
 	}
 
 	.icon-container {
-		padding: $spacing-default $spacing-lg;
+		padding: $spacing-100 $spacing-200;
 		color: $dark-matter;
 	}
 }

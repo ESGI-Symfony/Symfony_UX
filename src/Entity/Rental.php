@@ -203,30 +203,6 @@ class Rental
         return $this;
     }
 
-    public function getDateBegin(): ?\DateTimeInterface
-    {
-        return $this->date_begin;
-    }
-
-    public function setDateBegin(\DateTimeInterface $date_begin): self
-    {
-        $this->date_begin = $date_begin;
-
-        return $this;
-    }
-
-    public function getDateEnd(): ?\DateTimeInterface
-    {
-        return $this->date_end;
-    }
-
-    public function setDateEnd(\DateTimeInterface $date_end): self
-    {
-        $this->date_end = $date_end;
-
-        return $this;
-    }
-
     public function getOwner(): ?user
     {
         return $this->owner;

@@ -1,14 +1,81 @@
 @import "variables";
 
-.flex {
-	display: flex;
-	gap: $spacing-default;
+$spacings: (50: $spacing-50, 100: $spacing-100, 200: $spacing-200, 300: $spacing-300, 400: $spacing-400, 500: $spacing-500, 600: $spacing-600);
+$prefixes: (
+	"gap": "gap",
+	"p": "padding",
+	"pt": "padding-top",
+	"pb": "padding-bottom",
+	"ps": "padding-left",
+	"pe": "padding-right",
+	"m": "margin",
+	"mt": "margin-top",
+	"mb": "margin-bottom",
+	"ms": "margin-left",
+	"me": "margin-right",
+);
 
+@each $name, $spacing in $spacings {
+	@each $class, $property in $prefixes {
+		.#{$class}-#{$name} {
+			#{$property}: $spacing;
+		}
+	}
+
+	.px-#{$name}  {
+		padding-left: $spacing;
+		padding-right: $spacing;
+	}
+
+	.py-#{$name}  {
+		padding-top: $spacing;
+		padding-bottom: $spacing;
+	}
+
+	.mx-#{$name}  {
+		margin-left: $spacing;
+		margin-right: $spacing;
+	}
+
+	.my-#{$name}  {
+		margin-top: $spacing;
+		margin-bottom: $spacing;
+	}
+}
+
+.flex {
 	&-column {
+		display: flex;
 		flex-direction: column;
 	}
 
 	&-row {
+		display: flex;
 		flex-direction: row;
 	}
+}
+
+.justify-space-around {
+	justify-content: space-around;
+}
+
+.justify-center {
+	justify-content: center;
+}
+
+.align-center {
+	align-items: center;
+}
+
+.full-width {
+	width: 100vw;
+}
+
+.container {
+	padding: $spacing-300;
+}
+
+.scroll-horizontal {
+	overflow-x: auto;
+	width: auto;
 }

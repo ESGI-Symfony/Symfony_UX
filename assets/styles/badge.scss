@@ -1,0 +1,13 @@
+@import "variables";
+
+.badge {
+	padding: 4px 8px;
+	border-radius: 20px;
+	font-size: $fs-100;
+	white-space: nowrap;
+
+	&-primary {
+		background-color: $alnitak;
+		color: $dark-matter;
+	}
+}
