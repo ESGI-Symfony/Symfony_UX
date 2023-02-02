@@ -1,70 +1,91 @@
 @import "variables";
+@import "breakpoints";
 
 $spacings: (50: $spacing-50, 100: $spacing-100, 200: $spacing-200, 300: $spacing-300, 400: $spacing-400, 500: $spacing-500, 600: $spacing-600);
 $prefixes: (
-	"gap": "gap",
-	"p": "padding",
-	"pt": "padding-top",
-	"pb": "padding-bottom",
-	"ps": "padding-left",
-	"pe": "padding-right",
-	"m": "margin",
-	"mt": "margin-top",
-	"mb": "margin-bottom",
-	"ms": "margin-left",
-	"me": "margin-right",
+        "gap": "gap",
+        "p": "padding",
+        "pt": "padding-top",
+        "pb": "padding-bottom",
+        "ps": "padding-left",
+        "pe": "padding-right",
+        "m": "margin",
+        "mt": "margin-top",
+        "mb": "margin-bottom",
+        "ms": "margin-left",
+        "me": "margin-right",
 );
 
 @each $name, $spacing in $spacings {
-	@each $class, $property in $prefixes {
-		.#{$class}-#{$name} {
-			#{$property}: $spacing;
-		}
-	}
+  @each $class, $property in $prefixes {
+    .#{$class}-#{$name} {
+      #{$property}: $spacing;
+    }
+  }
 
-	.px-#{$name} {
-		padding-left: $spacing;
-		padding-right: $spacing;
-	}
+  .px-#{$name} {
+    padding-left: $spacing;
+    padding-right: $spacing;
+  }
 
-	.py-#{$name} {
-		padding-top: $spacing;
-		padding-bottom: $spacing;
-	}
+  .py-#{$name} {
+    padding-top: $spacing;
+    padding-bottom: $spacing;
+  }
 
-	.mx-#{$name} {
-		margin-left: $spacing;
-		margin-right: $spacing;
-	}
+  .mx-#{$name} {
+    margin-left: $spacing;
+    margin-right: $spacing;
+  }
 
-	.my-#{$name} {
-		margin-top: $spacing;
-		margin-bottom: $spacing;
-	}
+  .my-#{$name} {
+    margin-top: $spacing;
+    margin-bottom: $spacing;
+  }
 }
 
 .flex {
-	&-column {
-		display: flex;
-		flex-direction: column;
-	}
+  &-column {
+    display: flex;
+    flex-direction: column;
+  }
 
-	&-row {
-		display: flex;
-		flex-direction: row;
-	}
+  &-row {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &-grow {
+    flex-grow: 1;
+  }
+
+  &-wrap {
+    flex-wrap: wrap;
+  }
 }
 
 .justify-space-around {
-	justify-content: space-around;
+  justify-content: space-around;
 }
 
 .justify-center {
-	justify-content: center;
+  justify-content: center;
 }
 
 .align-center {
-	align-items: center;
+  align-items: center;
+}
+
+.align-start {
+  align-items: flex-start;
+}
+
+.align-end {
+  align-items: flex-end;
+}
+
+.align-stretch {
+  align-items: stretch;
 }
 
 .justify-space-between {
@@ -72,17 +93,46 @@ $prefixes: (
 }
 
 .full-width {
-	width: 100vw;
+  width: 100vw;
+}
+
+.max-width {
+  max-width: 350px;
+}
+
+.max-width-cat {
+  display: none;
+  @include medium {
+    display: block;
+    z-index: -10;
+    position: absolute;
+    bottom: 70px;
+    right: 70px;
+    overflow: hidden;
+  }
+
+}
+
+.white-space-no-wrap {
+  white-space: nowrap;
 }
 
 .container {
-	padding: $spacing-300;
-	flex-grow: 1;
-	overflow-x: hidden;
-	overflow-y: auto;
+  padding: $spacing-300;
+  flex-grow: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .scroll-horizontal {
-	overflow-x: auto;
-	width: auto;
+  overflow-x: auto;
+  width: auto;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+.w-100 {
+  width: 100%;
 }

@@ -1,34 +1,54 @@
-{% extends 'base.html.twig' %}
+{% extends 'front/base.html.twig' %}
 
 {% block title %}Log in!{% endblock %}
 
-{% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+{% block main %}
+    <div class="flex-row h-100">
+        <form method="post" class="h-100 flex-column align-center justify-center max-width align-end">
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+            {% if app.user %}
+                <div class="mb-3">
+                    You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                </div>
+            {% endif %}
+            <div class="flex-column align-stretch gap-300">
+                <h4 class="h4 mb-3 font-weight-normal">Sign in now</h4>
+                <span class="h6 small">Please sign in to continue our app</span>
+                <div class="flex-grow gap-300">
+                    <div class="input-group">
+                        <input class="input" placeholder="{{ "login.email_example" | trans }}" type="email"
+                               value="{{ last_username }}" name="email" id="inputEmail" class="form-control"
+                               autocomplete="email" required autofocus>
+                    </div>
+                </div>
+                <div class="flex-grow gap-300">
+                    <div class="input-group">
+                        <input class="input" placeholder="{{ "login.password" | trans }}" type="password"
+                               name="password" id="inputPassword" class="form-control"
+                               autocomplete="current-password" required>
+                        <div class="icon-container">
+                            {{ bootstrap_icon("eye-slash") }}
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                <a href="{{ path('app_forgot_password_request') }}">Forgot password ?</a>
+                <div class="flex-row justify-center">
+                    <button class="btn btn-primary" type="submit">{{ bootstrap_icon("rocket-takeoff") }} Sign in
+                    </button>
+                </div>
+                <div class="flex-row flex-wrap gap-300">
+                    <span class="white-space-no-wrap">Doesn't have an account yet ?</span>
+                    <a class="white-space-no-wrap" href="{{ path('app_register') }}">Sign up</a>
+                </div>
+            </div>
+        </form>
+
+        <div class="flex-grow max-width-cat">
+            <img class="" src="{{ asset('images/space_cat.png') }}">
         </div>
-    {% endif %}
-
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-
-    <button class="btn btn-primary" type="submit">
-        Sign in
-    </button>
-
-    <a href="{{ path('app_register') }}">Register</a>
-    <a href="{{ path('app_forgot_password_request') }}">Forgot password</a>
-</form>
+    </div>
 {% endblock %}
