@@ -7,6 +7,7 @@
 @import "badge";
 @import "card";
 @import "navbarComponent";
+@import "category";
 
 html, body {
     font-size: $fs-300;
@@ -21,6 +22,10 @@ body {
     color: $procyon;
     margin: 0;
     font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: linear-gradient(167.95deg, #000000 0%, #02043C 58.4%, #390F40 86.52%, #450050 100%);
 }
 
 a {

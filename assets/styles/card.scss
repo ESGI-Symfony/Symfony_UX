@@ -1,6 +1,6 @@
 @import "variables";
 
-.card {
+.card-large {
 	background-color: $procyon;
 	border-radius: 15px;
 	padding: $spacing-100;
@@ -26,6 +26,64 @@
 			@extend small;
 			flex-grow: 1;
 		}
+
+		.footer {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			gap: $spacing-100;
+
+			.features {
+				font-size: $fs-100;
+				display: flex;
+				flex-direction: column;
+				gap: $spacing-50;
+
+				.icons {
+					gap: $spacing-100;
+					display: flex;
+				}
+			}
+		}
+	}
+}
+
+.card-small {
+	min-width: 300px;
+	background-color: $procyon;
+	border-radius: 15px;
+	padding: $spacing-100;
+	color: $dark-matter;
+	gap: $spacing-100;
+	display: flex;
+	flex-direction: row;
+
+	.header {
+		display: flex;
+		flex-direction: column;
+		gap: $spacing-100;
+
+		.image {
+			height: 50px;
+			width: 50px;
+			align-self: 1/1;
+			border-radius: 15px;
+			object-fit: cover;
+		}
+
+		.rating {
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			gap: $spacing-100;
+		}
+	}
+
+	.content {
+		display: flex;
+		flex-direction: column;
+		gap: $spacing-100;
+		flex-grow: 1;
 
 		.footer {
 			display: flex;
