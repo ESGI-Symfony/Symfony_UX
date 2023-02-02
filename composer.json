@@ -42,6 +42,7 @@
         "symfony/string": "6.1.*",
         "symfony/translation": "6.1.*",
         "symfony/twig-bundle": "6.1.*",
+        "symfony/ux-twig-component": "^2.7",
         "symfony/validator": "6.1.*",
         "symfony/web-link": "6.1.*",
         "symfony/webpack-encore-bundle": "^1.16",
@@ -49,7 +50,8 @@
         "symfonycasts/reset-password-bundle": "^1.16",
         "symfonycasts/verify-email-bundle": "^1.13",
         "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|^3.0"
+        "twig/twig": "^2.12|^3.0",
+        "whatwedo/twig-bootstrap-icons": "^1.1"
     },
     "config": {
         "allow-plugins": {
