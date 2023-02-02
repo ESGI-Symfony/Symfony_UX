@@ -1,0 +1,39 @@
+{% for housing in computed.housings %}
+
+  <div class="card-small">
+    <div class="header">
+      <img class="image" src="{{ asset('images/saturn.jpg') }}">
+      <div class="rating">
+        4
+        {{ bootstrap_icon("star-fill") }}
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="flex-row gap-100">
+        {{ bootstrap_icon("geo-alt") }}
+        Saturn
+      </div>
+
+      <h4>{{ housing.name }}</h4>
+
+      <div class="body">
+        {{ housing.description }}
+      </div>
+
+      <div class="footer">
+        <div class="features">
+          <span>Features</span>
+
+          <div class="icons">
+            {{ bootstrap_icon("train-front") }}
+            {{ bootstrap_icon("radioactive") }}
+          </div>
+        </div>
+
+        <button class="btn btn-primary">Book・100€</button>
+      </div>
+    </div>
+  </div>
+
+{% endfor %}

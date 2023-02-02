@@ -1,0 +1,25 @@
+{% for housing in computed.housings %}
+
+  <div class="minimal-large flex-column">
+    <div class="header">
+      <img class="image" src="{{ asset('images/saturn.jpg') }}">
+    </div>
+
+  <div class="content flex-column gap-100">
+    <div class="flex-row justify-space-between">
+      <div class="flex-row gap-100">
+        {{ bootstrap_icon("geo-alt") }}
+        Saturn
+      </div>
+      <div class="rating">
+        4
+        <i>{{ bootstrap_icon("star-fill") }}</i>
+      </div>
+    </div>
+
+    <h4>{{ housing.name }}</h4>
+
+  </div>
+</div>
+
+{% endfor %}
