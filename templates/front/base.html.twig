@@ -24,6 +24,13 @@
         {% for flash in app.flashes('error') %}
             <div class="alert alert-danger">{{ flash }}</div>
         {% endfor %}
+        {{ component('header') }}
         {% block body %}{% endblock %}
+        {{ component('navbar', {
+            item1: "home" | trans,
+            item2: "bookings" | trans,
+            item3: "housings" | trans,
+            item4: "account" | trans,
+        }) }}
     </body>
 </html>
