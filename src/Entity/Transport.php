@@ -25,12 +25,13 @@ class Transport
     #[Assert\Type(type: 'string', message: 'transport.name.type')]
     private ?string $name = null;
 
-    #[ORM\ManyToMany(targetEntity: Address::class, mappedBy: 'transports')]
-    private Collection $addresses;
+
+    #[ORM\ManyToMany(targetEntity: Rental::class, mappedBy: 'transports')]
+    private Collection $rentals;
 
     public function __construct()
     {
-        $this->addresses = new ArrayCollection();
+        $this->rentals = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -51,27 +52,27 @@ class Transport
     }
 
     /**
-     * @return Collection<int, Address>
+     * @return Collection<int, Rental>
      */
-    public function getAddresses(): Collection
+    public function getRentals(): Collection
     {
-        return $this->addresses;
+        return $this->rentals;
     }
 
-    public function addAddress(Address $address): self
+    public function addRental(Rental $rental): self
     {
-        if (!$this->addresses->contains($address)) {
-            $this->addresses->add($address);
-            $address->addTransport($this);
+        if (!$this->rentals->contains($rental)) {
+            $this->rentals->add($rental);
+            $rental->addTransport($this);
         }
 
         return $this;
     }
 
-    public function removeAddress(Address $address): self
+    public function removeRental(Rental $rental): self
     {
-        if ($this->addresses->removeElement($address)) {
-            $address->removeTransport($this);
+        if ($this->rentals->removeElement($rental)) {
+            $rental->removeTransport($this);
         }
 
         return $this;

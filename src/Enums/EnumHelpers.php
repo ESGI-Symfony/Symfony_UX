@@ -6,6 +6,6 @@ trait EnumHelpers
 {
     public static function getValues(): array
     {
-        return array_column(ReportTypes::cases(), 'value');
+        return array_column(self::cases(), 'value');
     }
 }

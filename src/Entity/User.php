@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -26,7 +27,7 @@ class User implements UserInterface, \Symfony\Component\Security\Core\User\Passw
         max: 255,
         maxMessage: 'user.email.max_length'
     )]
-    #[Assert\Email(message: 'address.email.type')]
+    #[Assert\Email(message: 'user.email.type')]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
@@ -87,6 +88,12 @@ class User implements UserInterface, \Symfony\Component\Security\Core\User\Passw
     #[ORM\OneToMany(mappedBy: 'buyer', targetEntity: Reservation::class)]
     private Collection $reservations;
 
+    #[ORM\Column(type: Types::GUID)]
+    private ?string $uuid = null;
+
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Report::class)]
+    private Collection $reports;
+
 
     public function __construct()
     {
@@ -94,6 +101,7 @@ class User implements UserInterface, \Symfony\Component\Security\Core\User\Passw
         $this->rentals = new ArrayCollection();
         $this->reviews = new ArrayCollection();
         $this->reservations = new ArrayCollection();
+        $this->reports = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -346,5 +354,52 @@ class User implements UserInterface, \Symfony\Component\Security\Core\User\Passw
     {
         $this->plainPassword = $plainPassword;
         return $this;
+    }
+
+    public function getUuid(): ?string
+    {
+        return $this->uuid;
+    }
+
+    public function setUuid(string $uuid): self
+    {
+        $this->uuid = $uuid;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Report>
+     */
+    public function getReports(): Collection
+    {
+        return $this->reports;
+    }
+
+    public function addReport(Report $report): self
+    {
+        if (!$this->reports->contains($report)) {
+            $this->reports->add($report);
+            $report->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReport(Report $report): self
+    {
+        if ($this->reports->removeElement($report)) {
+            // set the owning side to null (unless already changed)
+            if ($report->getAuthor() === $this) {
+                $report->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function isLessor(): bool
+    {
+        return in_array('ROLE_LESSOR', $this->getRoles());
     }
 }

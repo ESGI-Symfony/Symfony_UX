@@ -42,6 +42,10 @@ class Report
     #[ORM\JoinColumn(nullable: false)]
     private ?Rental $rental = null;
 
+    #[ORM\ManyToOne(inversedBy: 'reports')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $author = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,12 +63,12 @@ class Report
         return $this;
     }
 
-    public function getType(): ?string
+    public function getType(): ?ReportTypes
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(ReportTypes $type): self
     {
         $this->type = $type;
 
@@ -79,6 +83,18 @@ class Report
     public function setRental(?Rental $rental): self
     {
         $this->rental = $rental;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }
