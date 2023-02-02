@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enums\UserLessorRequestStatus;
 use App\Repository\UserLessorRequestRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -27,9 +28,13 @@ class UserLessorRequest
         maxMessage: 'user_lessor.status.max_length'
     )]
     #[Assert\Type(type: 'string', message: 'user_lessor.status.type')]
-    private ?string $status = null;
+    #[Assert\Choice(
+        callback: [UserLessorRequestStatus::class, 'getValues'],
+        message: 'user_lessor.status.choice'
+    )]
+    private ?UserLessorRequestStatus $status = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     #[Assert\NotBlank(message: 'user_lessor.refusing_reason.not_blank')]
     #[Assert\Type(type: 'string', message: 'user_lessor.refusing_reason.type')]
     private ?string $refusing_reason = null;
@@ -55,12 +60,12 @@ class UserLessorRequest
         return $this;
     }
 
-    public function getStatus(): ?string
+    public function getStatus(): ?UserLessorRequestStatus
     {
         return $this->status;
     }
 
-    public function setStatus(string $status): self
+    public function setStatus(UserLessorRequestStatus $status): self
     {
         $this->status = $status;
 

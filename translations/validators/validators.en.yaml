@@ -1,4 +1,4 @@
-address:
+rental:
   system:
     not_blank: 'The system name cannot be blank.'
     max_length: 'The system name cannot be longer than {{ limit }} characters.'
@@ -19,7 +19,6 @@ address:
     type: 'The latitude must be a float.'
     range: 'Latitude must be between {{ min }} and {{ max }}.'
 
-rental:
   type:
     not_blank: 'The rental type cannot be blank.'
     max_length: 'The rental type cannot be longer than {{ limit }} characters.'
@@ -142,4 +141,5 @@ user_lessor:
     not_blank: 'The status cannot be blank.'
     max_length: 'The status cannot be longer than {{ limit }} characters.'
     type: 'The status must be a string.'
+    choice: 'The status must be one of {{ choices }}.'
 
