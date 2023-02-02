@@ -28,8 +28,8 @@ class ReservationFixtures extends Fixture implements DependentFixtureInterface
         $users = $manager->getRepository(User::class)->findAll();
 
         foreach ($rentals as $rental) {
-            $begin = $faker->dateTimeBetween($rental->getDateBegin(), $rental->getDateEnd());
-            $end = $faker->dateTimeBetween($begin, $rental->getDateEnd());
+            $begin = $faker->dateTimeBetween('now', '+1 year');
+            $end = $faker->dateTimeBetween($begin, '+1 year');
 
             $object = (new Reservation())
                 ->setRental($rental)

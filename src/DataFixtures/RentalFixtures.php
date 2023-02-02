@@ -42,8 +42,6 @@ class RentalFixtures extends Fixture implements DependentFixtureInterface
                 ->setRoomCount($faker->numberBetween(1, 10))
                 ->setBathroomCount($faker->numberBetween(1, 4))
                 ->setPrice($faker->numberBetween(1, 10000))
-                ->setDateBegin($dateBegin)
-                ->setDateEnd($dateEnd)
                 ->setRentType($faker->randomElement(RentalTypes::cases()))
 
                 ->setSystem($faker->randomElement(Systems::getValues()))

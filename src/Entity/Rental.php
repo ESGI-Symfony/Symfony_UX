@@ -53,16 +53,6 @@ class Rental
     #[Assert\Positive(message: 'rental.bathroom_count.positive')]
     private ?int $bathroom_count = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Assert\NotBlank(message: 'rental.date_begin.not_blank')]
-    #[Assert\Date(message: 'rental.date_begin.date')]
-    private ?\DateTimeInterface $date_begin = null;
-
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Assert\NotBlank(message: 'rental.date_end.not_blank')]
-    #[Assert\Date(message: 'rental.date_end.date')]
-    private ?\DateTimeInterface $date_end = null;
-
     #[ORM\ManyToOne(inversedBy: 'rentals')]
     #[ORM\JoinColumn(nullable: false)]
     private ?user $owner = null;
