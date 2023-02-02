@@ -1,6 +1,12 @@
 {% extends 'front/base.html.twig' %}
 
 {% block body %}
+    {{ component('navbar', {
+    item1: "home" | trans,
+    item2: "bookings" | trans,
+    item3: "housings" | trans,
+    item4: "account" | trans,
+    }) }}
     <main class="container">
         <div class="flex-column gap-600">
             <div class="flex-column gap-200">

@@ -55,6 +55,18 @@ $prefixes: (
 	}
 }
 
+.justify-space-around {
+	justify-content: space-around;
+}
+
+.align-center {
+	align-items: center;
+}
+
+.full-width {
+	width: 100vw;
+}
+
 .container {
 	padding: $spacing-300;
 }

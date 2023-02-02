@@ -1,0 +1,17 @@
+@import "breakpoints";
+
+.navbar {
+  font-size: $fs-100;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+
+  @include medium {
+    display: none;
+  }
+}
+
+.gap-icon {
+  gap: 8px;
+}
