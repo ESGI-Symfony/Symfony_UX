@@ -5,6 +5,7 @@
 @import "typography";
 @import "input";
 @import "badge";
+@import "card";
 
 html, body {
     font-size: $fs-300;
@@ -23,11 +24,4 @@ body {
 
 a {
     color: $alnitak;
-}
-
-h1 {
-    font-family: 'Unbounded', cursive;
-    text-transform: uppercase;
-    font-weight: 900;
-    letter-spacing: 0.5em;
 }

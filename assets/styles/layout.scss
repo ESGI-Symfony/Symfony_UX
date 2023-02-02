@@ -1,28 +1,45 @@
 @import "variables";
 
-.gap {
-	&-100 {
-		gap: $spacing-100;
+$spacings: (50: $spacing-50, 100: $spacing-100, 200: $spacing-200, 300: $spacing-300, 400: $spacing-400, 500: $spacing-500, 600: $spacing-600);
+$prefixes: (
+	"gap": "gap",
+	"p": "padding",
+	"pt": "padding-top",
+	"pb": "padding-bottom",
+	"ps": "padding-left",
+	"pe": "padding-right",
+	"m": "margin",
+	"mt": "margin-top",
+	"mb": "margin-bottom",
+	"ms": "margin-left",
+	"me": "margin-right",
+);
+
+@each $name, $spacing in $spacings {
+	@each $class, $property in $prefixes {
+		.#{$class}-#{$name} {
+			#{$property}: $spacing;
+		}
 	}
 
-	&-200 {
-		gap: $spacing-200;
+	.px-#{$name}  {
+		padding-left: $spacing;
+		padding-right: $spacing;
 	}
 
-	&-300 {
-		gap: $spacing-300;
+	.py-#{$name}  {
+		padding-top: $spacing;
+		padding-bottom: $spacing;
 	}
 
-	&-400 {
-		gap: $spacing-400;
+	.mx-#{$name}  {
+		margin-left: $spacing;
+		margin-right: $spacing;
 	}
 
-	&-500 {
-		gap: $spacing-500;
-	}
-
-	&-600 {
-		gap: $spacing-600;
+	.my-#{$name}  {
+		margin-top: $spacing;
+		margin-bottom: $spacing;
 	}
 }
 
@@ -36,4 +53,13 @@
 		display: flex;
 		flex-direction: row;
 	}
+}
+
+.container {
+	padding: $spacing-300;
+}
+
+.scroll-horizontal {
+	overflow-x: auto;
+	width: auto;
 }

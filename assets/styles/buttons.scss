@@ -6,6 +6,7 @@
 	gap: $spacing-100;
 	padding: $spacing-100 $spacing-200;
 	border-radius: $spacing-200;
+	white-space: nowrap;
 	border: none;
 	background-color: transparent;
 	transition: .2s background-color, .2s color;
