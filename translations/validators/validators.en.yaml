@@ -123,11 +123,11 @@ user:
 
   password:
     not_blank: 'The password cannot be blank.'
+    min_length: 'The password must be at least {{ limit }} characters.'
     max_length: 'The password cannot be longer than {{ limit }} characters.'
     type: 'The password must be a string.'
 
   is_verified:
-    not_blank: 'The is_verified status cannot be blank.'
     type: 'The is_verified status must be a boolean.'
 
   firstname:

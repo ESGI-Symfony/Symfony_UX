@@ -39,7 +39,6 @@ class User implements UserInterface, \Symfony\Component\Security\Core\User\Passw
     private ?string $nickname = null;
 
     #[ORM\Column(length: 255)]
-//    #[Assert\NotBlank(message: 'user.password.not_blank')]
     #[Assert\Length(
         max: 255,
         maxMessage: 'user.password.max_length'
@@ -47,13 +46,14 @@ class User implements UserInterface, \Symfony\Component\Security\Core\User\Passw
     #[Assert\Type(type: 'string', message: 'user.password.type')]
     private ?string $password = null;
 
+    private ?string $plainPassword = null;
+
     #[ORM\Column]
     private array $roles = [];
 
-    #[ORM\Column(type: 'boolean')]
-//    #[Assert\NotBlank(message: 'user.is_verified.not_blank')]
+    #[ORM\Column(type: 'boolean', options: ['default' => false])]
     #[Assert\Type(type: 'boolean', message: 'user.password.type')]
-    private $isVerified = false;
+    private bool $isVerified = false;
 
     #[ORM\Column(length: 150, nullable: true)]
     #[Assert\Type(type: 'string', message: 'user.firstname.type')]
@@ -328,6 +328,23 @@ class User implements UserInterface, \Symfony\Component\Security\Core\User\Passw
     {
         $this->nickname = $nickname;
 
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param string|null $plainPassword
+     */
+    public function setPlainPassword(?string $plainPassword): self
+    {
+        $this->plainPassword = $plainPassword;
         return $this;
     }
 }
