@@ -1,12 +1,6 @@
 {% extends 'front/base.html.twig' %}
 
 {% block body %}
-    {{ component('navbar', {
-        item1: "home" | trans,
-        item2: "bookings" | trans,
-        item3: "housings" | trans,
-        item4: "account" | trans,
-    }) }}
     <main class="container">
         <div class="flex-column gap-600">
             <div class="flex-column gap-200">
@@ -14,11 +8,15 @@
                 <h4>{{ "home.explore_universe" | trans }}</h4>
                 <div class="input-group">
                     <input class="input" placeholder="{{ "home.where_you_going" | trans }}" />
+                    <div class="icon-container">
+                    {{ bootstrap_icon("search") }}
+                    </div>
                 </div>
             </div>
 
             <div class="flex-column gap-200">
                 <h4>{{ "home.exclusive_package" | trans }}</h4>
+
                 <div class="flex-row gap-200">
                     <div class="badge">All</div>
                     <div class="badge badge-primary">Sol</div>
@@ -26,13 +24,24 @@
                     <div class="badge">Mars</div>
                 </div>
 
-                <div class="flex-row gap-200 scroll-horizontal py-300">
+                <div class="flex-row gap-200 scroll-horizontal">
                     {% for i in 0..10 %}
-                        <div class="card">
-                            <img class="image" src="{{ asset('images/saturn.jpg') }}">
+                        <div class="card-small">
+                            <div class="header">
+                                <img class="image" src="{{ asset('images/saturn.jpg') }}">
+                                <div class="rating">
+                                    4
+                                    {{ bootstrap_icon("star-fill") }}
+                                </div>
+                            </div>
 
                             <div class="content">
-                                <h4>Space station - Saturn</h4>
+                                <div class="flex-row gap-100">
+                                    {{ bootstrap_icon("geo-alt") }}
+                                    Saturn
+                                </div>
+
+                                <h4>Space station</h4>
 
                                 <div class="body">
                                     Accedat huc suavitas quaedam oportet sermonum atque morum, haudquaquam...
@@ -45,6 +54,7 @@
                                         <div class="icons">
                                             {{ bootstrap_icon("train-front") }}
                                             {{ bootstrap_icon("radioactive") }}
+                                            +9
                                         </div>
                                     </div>
 
@@ -55,6 +65,26 @@
                     {% endfor %}
                 </div>
             </div>
+
+            <div class="flex-column gap-200">
+                <h4>{{ "home.explore_categories" | trans }}</h4>
+
+                <div class="flex-row gap-200 scroll-horizontal">
+                    {% for i in 0..10 %}
+                        <div class="category">
+                            <img class="icon" src="{{ asset("images/saturn_icon.png") }}" />
+                            <span>Rings</span>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </main>
+
+    {{ component('navbar', {
+        item1: "home" | trans,
+        item2: "bookings" | trans,
+        item3: "housings" | trans,
+        item4: "account" | trans,
+    }) }}
 {% endblock %}

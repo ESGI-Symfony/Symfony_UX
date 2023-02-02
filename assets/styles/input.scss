@@ -27,6 +27,9 @@
 	}
 
 	.icon-container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		padding: $spacing-100 $spacing-200;
 		color: $dark-matter;
 	}

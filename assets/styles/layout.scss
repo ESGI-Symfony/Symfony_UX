@@ -22,22 +22,22 @@ $prefixes: (
 		}
 	}
 
-	.px-#{$name}  {
+	.px-#{$name} {
 		padding-left: $spacing;
 		padding-right: $spacing;
 	}
 
-	.py-#{$name}  {
+	.py-#{$name} {
 		padding-top: $spacing;
 		padding-bottom: $spacing;
 	}
 
-	.mx-#{$name}  {
+	.mx-#{$name} {
 		margin-left: $spacing;
 		margin-right: $spacing;
 	}
 
-	.my-#{$name}  {
+	.my-#{$name} {
 		margin-top: $spacing;
 		margin-bottom: $spacing;
 	}
@@ -73,6 +73,9 @@ $prefixes: (
 
 .container {
 	padding: $spacing-300;
+	flex-grow: 1;
+	overflow-x: hidden;
+	overflow-y: auto;
 }
 
 .scroll-horizontal {
