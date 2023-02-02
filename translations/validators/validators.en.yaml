@@ -51,14 +51,6 @@ rental:
     type: 'The bathroom count must be an integer.'
     positive: 'The bathroom count must be greater than 0.'
 
-  date_begin:
-    not_blank: 'The begin rental date cannot be blank.'
-    date: 'The begin rental date must be a valid date.'
-
-  date_end:
-    not_blank: 'The end rental date cannot be blank.'
-    date: 'The end rental date must be a valid date.'
-
 rental_option:
   name:
     not_blank: 'The rental option name cannot be blank.'
@@ -123,11 +115,11 @@ user:
 
   password:
     not_blank: 'The password cannot be blank.'
+    min_length: 'The password must be at least {{ limit }} characters.'
     max_length: 'The password cannot be longer than {{ limit }} characters.'
     type: 'The password must be a string.'
 
   is_verified:
-    not_blank: 'The is_verified status cannot be blank.'
     type: 'The is_verified status must be a boolean.'
 
   firstname:
