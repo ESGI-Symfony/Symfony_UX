@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230202115000 extends AbstractMigration
+final class Version20230203111520 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,7 +20,7 @@ final class Version20230202115000 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE rental (id INT NOT NULL, owner_id INT NOT NULL, description TEXT NOT NULL, price DOUBLE PRECISION NOT NULL, max_capacity INT NOT NULL, room_count INT NOT NULL, bathroom_count INT NOT NULL, date_begin DATE NOT NULL, date_end DATE NOT NULL, rent_type VARCHAR(50) NOT NULL, system VARCHAR(255) NOT NULL, celestial_object VARCHAR(255) NOT NULL, longitude DOUBLE PRECISION NOT NULL, latitude DOUBLE PRECISION NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE rental (id INT NOT NULL, owner_id INT NOT NULL, description TEXT NOT NULL, price DOUBLE PRECISION NOT NULL, max_capacity INT NOT NULL, room_count INT NOT NULL, bathroom_count INT NOT NULL, rent_type VARCHAR(50) NOT NULL, system VARCHAR(255) NOT NULL, celestial_object VARCHAR(255) NOT NULL, longitude DOUBLE PRECISION NOT NULL, latitude DOUBLE PRECISION NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_1619C27D7E3C61F9 ON rental (owner_id)');
         $this->addSql('CREATE TABLE rental_rental_option (rental_id INT NOT NULL, rental_option_id INT NOT NULL, PRIMARY KEY(rental_id, rental_option_id))');
         $this->addSql('CREATE INDEX IDX_32244FF5A7CF2329 ON rental_rental_option (rental_id)');
@@ -43,9 +43,21 @@ final class Version20230202115000 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_794381C6F675F31B ON review (author_id)');
         $this->addSql('CREATE INDEX IDX_794381C6B83297E7 ON review (reservation_id)');
         $this->addSql('CREATE TABLE transport (id INT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
-        $this->addSql('CREATE TABLE "user" (id INT NOT NULL, email VARCHAR(255) NOT NULL, nickname VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, roles JSON NOT NULL, is_verified BOOLEAN DEFAULT false NOT NULL, firstname VARCHAR(150) DEFAULT NULL, lastname VARCHAR(150) DEFAULT NULL, lessor_number INT DEFAULT NULL, uuid UUID NOT NULL, PRIMARY KEY(id))');
-        $this->addSql('CREATE TABLE user_lessor_request (id INT NOT NULL, lessor_id INT NOT NULL, motivation TEXT NOT NULL, status VARCHAR(10) NOT NULL, refusing_reason TEXT DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE "user" (id INT NOT NULL, email VARCHAR(255) NOT NULL, nickname VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, roles JSON NOT NULL, is_verified BOOLEAN DEFAULT false NOT NULL, firstname VARCHAR(150) DEFAULT NULL, lastname VARCHAR(150) DEFAULT NULL, lessor_number INT DEFAULT NULL, uuid UUID NOT NULL, phone VARCHAR(42) DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE user_lessor_request (id INT NOT NULL, lessor_id INT NOT NULL, motivation TEXT NOT NULL, status VARCHAR(10) DEFAULT \'pending\' NOT NULL, refusing_reason TEXT DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_EF9AB304D737E9B1 ON user_lessor_request (lessor_id)');
+        $this->addSql('CREATE TABLE messenger_messages (id BIGSERIAL NOT NULL, body TEXT NOT NULL, headers TEXT NOT NULL, queue_name VARCHAR(190) NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, available_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, delivered_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE INDEX IDX_75EA56E0FB7336F0 ON messenger_messages (queue_name)');
+        $this->addSql('CREATE INDEX IDX_75EA56E0E3BD61CE ON messenger_messages (available_at)');
+        $this->addSql('CREATE INDEX IDX_75EA56E016BA31DB ON messenger_messages (delivered_at)');
+        $this->addSql('CREATE OR REPLACE FUNCTION notify_messenger_messages() RETURNS TRIGGER AS $$
+            BEGIN
+                PERFORM pg_notify(\'messenger_messages\', NEW.queue_name::text);
+                RETURN NEW;
+            END;
+        $$ LANGUAGE plpgsql;');
+        $this->addSql('DROP TRIGGER IF EXISTS notify_trigger ON messenger_messages;');
+        $this->addSql('CREATE TRIGGER notify_trigger AFTER INSERT OR UPDATE ON messenger_messages FOR EACH ROW EXECUTE PROCEDURE notify_messenger_messages();');
         $this->addSql('ALTER TABLE rental ADD CONSTRAINT FK_1619C27D7E3C61F9 FOREIGN KEY (owner_id) REFERENCES "user" (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE rental_rental_option ADD CONSTRAINT FK_32244FF5A7CF2329 FOREIGN KEY (rental_id) REFERENCES rental (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE rental_rental_option ADD CONSTRAINT FK_32244FF518241A60 FOREIGN KEY (rental_option_id) REFERENCES rental_option (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
@@ -89,5 +101,6 @@ final class Version20230202115000 extends AbstractMigration
         $this->addSql('DROP TABLE transport');
         $this->addSql('DROP TABLE "user"');
         $this->addSql('DROP TABLE user_lessor_request');
+        $this->addSql('DROP TABLE messenger_messages');
     }
 }
