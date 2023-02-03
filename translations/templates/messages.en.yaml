@@ -24,6 +24,6 @@ go_to_profile: Go to your profile
 back_to_home: Back to home
 your_rentals: Your rentals
 
-login :
-  password: Password
-  email_example: example@gmail.com
+password: Password
+email_example: example@gmail.com
+nickname: Nickname
