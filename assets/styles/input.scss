@@ -18,6 +18,10 @@
 	flex-direction: row;
 	gap: $spacing-100;
 
+	&.input-error {
+		border: 1px solid $betelgeuse;
+	}
+
 	.input {
 		background: transparent;
 		border: none;
@@ -31,7 +35,6 @@
 		color: black;
 		border: none;
 		display: flex;
-
 	}
 
 	.icon-container {
@@ -41,4 +44,8 @@
 		padding: $spacing-100 $spacing-200;
 		color: $dark-matter;
 	}
+}
+
+.input-error-message {
+	color: $betelgeuse;
 }
