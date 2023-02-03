@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230203111520 extends AbstractMigration
+final class Version20230203112534 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,6 +20,15 @@ final class Version20230203111520 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
+        $this->addSql('CREATE SEQUENCE rental_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE rental_option_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE report_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE reservation_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE reset_password_request_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE review_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE transport_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE "user_id_seq" INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE user_lessor_request_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE TABLE rental (id INT NOT NULL, owner_id INT NOT NULL, description TEXT NOT NULL, price DOUBLE PRECISION NOT NULL, max_capacity INT NOT NULL, room_count INT NOT NULL, bathroom_count INT NOT NULL, rent_type VARCHAR(50) NOT NULL, system VARCHAR(255) NOT NULL, celestial_object VARCHAR(255) NOT NULL, longitude DOUBLE PRECISION NOT NULL, latitude DOUBLE PRECISION NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_1619C27D7E3C61F9 ON rental (owner_id)');
         $this->addSql('CREATE TABLE rental_rental_option (rental_id INT NOT NULL, rental_option_id INT NOT NULL, PRIMARY KEY(rental_id, rental_option_id))');
@@ -77,6 +86,15 @@ final class Version20230203111520 extends AbstractMigration
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE SCHEMA public');
+        $this->addSql('DROP SEQUENCE rental_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE rental_option_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE report_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE reservation_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE reset_password_request_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE review_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE transport_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE "user_id_seq" CASCADE');
+        $this->addSql('DROP SEQUENCE user_lessor_request_id_seq CASCADE');
         $this->addSql('ALTER TABLE rental DROP CONSTRAINT FK_1619C27D7E3C61F9');
         $this->addSql('ALTER TABLE rental_rental_option DROP CONSTRAINT FK_32244FF5A7CF2329');
         $this->addSql('ALTER TABLE rental_rental_option DROP CONSTRAINT FK_32244FF518241A60');
