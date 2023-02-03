@@ -73,5 +73,10 @@ class UserController extends AbstractController
         ]);
     }
 
+    #[Route(path: '/bookings', name: 'bookings')]
+    public function bookings(): Response
+    {
+        return $this->render('front/profile/tenant/bookings.html.twig');
+    }
 
 }

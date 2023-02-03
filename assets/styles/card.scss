@@ -129,7 +129,7 @@
 }
 
 .booking-card {
-	min-width: 300px;
+	min-width: 200px;
 	background-color: $procyon;
 	border-radius: 15px;
 	padding: $spacing-200;
@@ -165,5 +165,17 @@
 		> i {
 			color: $betelgeuse;
 		}
+	}
+
+	.background-text {
+		padding: $spacing-100 $spacing-200;
+		border-radius: $spacing-200;
+		white-space: nowrap;
+		border: none;
+		font-family: 'Poppins', sans-serif;
+		font-size: $fs-300;
+		text-decoration: none;
+		background-color: $betelgeuse;
+		color: $dark-matter;
 	}
 }

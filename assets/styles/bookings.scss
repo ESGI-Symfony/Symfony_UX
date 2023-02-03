@@ -1,0 +1,27 @@
+@import "variables";
+
+.booking-template {
+
+  @include medium {
+    .cards {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+
+  .background-text {
+    padding: $spacing-100 $spacing-200;
+    border-radius: $spacing-200;
+    white-space: nowrap;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: $fs-300;
+    text-decoration: none;
+    background-color: $betelgeuse;
+    color: $dark-matter;
+  }
+
+  > h4 > span {
+    color: $pollux;
+  }
+}

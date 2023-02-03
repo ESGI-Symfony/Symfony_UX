@@ -1,0 +1,29 @@
+{% extends 'front/base.html.twig' %}
+
+{% block main %}
+    <div class="booking-template flex-column gap-300">
+        <h4 class="mb-300 text-center"><span>3</span> {{ 'bookings' | trans }}</h4>
+        <div class="flex-row align-center gap-200">
+            <div>On going</div>
+            <div class="background-text">Passed</div>
+        </div>
+        <div class="flex-column gap-400">
+            <div class="flex-column gap-200">
+                <div class="date">
+                    January 2019
+                </div>
+                <div class="flex-column gap-200 scroll-horizontal cards">
+                    {{ component('booking-card') }}
+                </div>
+            </div>
+            <div class="flex-column gap-200">
+                <div class="date">
+                    Juin 2018
+                </div>
+                <div class="flex-column gap-200 scroll-horizontal cards">
+                    {{ component('booking-card') }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
