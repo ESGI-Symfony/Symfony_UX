@@ -21,8 +21,7 @@ class UserLessorRequest
     #[Assert\Type(type: 'string', message: 'user_lessor.motivation.type')]
     private ?string $motivation = null;
 
-    #[ORM\Column(length: 10)]
-    #[Assert\NotBlank(message: 'user_lessor.status.not_blank')]
+    #[ORM\Column(length: 10, options: ['default' => UserLessorRequestStatus::Pending])]
     #[Assert\Length(
         max: 10,
         maxMessage: 'user_lessor.status.max_length'
@@ -35,7 +34,6 @@ class UserLessorRequest
     private ?UserLessorRequestStatus $status = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    #[Assert\NotBlank(message: 'user_lessor.refusing_reason.not_blank')]
     #[Assert\Type(type: 'string', message: 'user_lessor.refusing_reason.type')]
     private ?string $refusing_reason = null;
 

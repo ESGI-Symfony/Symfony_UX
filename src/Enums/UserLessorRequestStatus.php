@@ -7,7 +7,7 @@ enum UserLessorRequestStatus: string
 {
     use EnumHelpers;
 
-    case validated = 'validated';
-    case pending = 'pending';
-    case rejected = 'rejected';
+    case Validated = 'validated';
+    case Pending = 'pending';
+    case Rejected = 'rejected';
 }

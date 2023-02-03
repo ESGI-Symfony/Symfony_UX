@@ -1,0 +1,40 @@
+{% extends 'front/base.html.twig' %}
+
+{% block body %}
+    <main class="container column-400 justify-center mx-auto">
+        <h4 class="mb-300 text-center"> {{ 'become_lessor_stylized' | trans | raw }}</h4>
+        <p class="mb-300 text-center">{{ 'add_your_rental_tip' | trans }}</p>
+        {{ form_start(form) }}
+
+        <div class="flex-column gap-200 mb-300">
+            {{ form_label(form.motivation) }}
+            <div class="input-group">
+                {{ form_widget(form.motivation, {'attr': {
+                    'class': 'input',
+                    'rows': 8
+                }}) }}
+            </div>
+            {{ form_label(form.firstname) }}
+            <div class="input-group">
+                {{ form_widget(form.firstname, {'attr': {'class': 'input'}}) }}
+            </div>
+            {{ form_label(form.lastname) }}
+            <div class="input-group">
+                {{ form_widget(form.lastname, {'attr': {'class': 'input'}}) }}
+            </div>
+            {{ form_label(form.phone) }}
+            <div class="input-group">
+                {{ form_widget(form.phone, {'attr': {'class': 'input'}}) }}
+            </div>
+            {{ form_label(form.lessor_number) }}
+            <div class="input-group">
+                {{ form_widget(form.lessor_number, {'attr': {'class': 'input'}}) }}
+            </div>
+        </div>
+{#        {{ form_errors(form) }}#}
+{#        TODO#}
+        <button class="btn btn-primary ms-auto">{{ bootstrap_icon('rocket') }} {{ 'become_lessor' | trans }}</button>
+
+        {{ form_end(form) }}
+    </main>
+{% endblock %}

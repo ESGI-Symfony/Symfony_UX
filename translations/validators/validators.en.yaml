@@ -92,7 +92,6 @@ review:
     type: 'The rating must be an integer.'
     range: 'The rating must be between {{ min }} and {{ max }}.'
   refusing_reason:
-    not_blank: 'The refusing reason cannot be blank.'
     type: 'The refusing reason must be a string.'
 
 transport:

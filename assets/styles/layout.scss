@@ -44,6 +44,17 @@ $prefixes: (
   }
 }
 
+.mx-auto {
+	margin-left: auto;
+	margin-right: auto;
+}
+.me-auto {
+	margin-right: auto;
+}
+.ms-auto {
+	margin-left: auto;
+}
+
 .flex {
   &-column {
     display: flex;
@@ -92,6 +103,10 @@ $prefixes: (
 	justify-content: space-between;
 }
 
+.text-center {
+	text-align: center;
+}
+
 .full-width {
   width: 100vw;
 }
@@ -127,6 +142,24 @@ $prefixes: (
 .scroll-horizontal {
   overflow-x: auto;
   width: auto;
+}
+
+.highlight {
+	color: $sun;
+}
+
+.separator {
+	display: block;
+	width: 100%;
+	border-bottom: 1px solid $sun;
+}
+
+.column-400 {
+	max-width: 400px;
+}
+
+.width-fit-content {
+	width: fit-content;
 }
 
 .h-100 {
