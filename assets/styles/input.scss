@@ -26,6 +26,14 @@
 		width: 100%;
 	}
 
+	.label {
+		background: transparent;
+		color: black;
+		border: none;
+		display: flex;
+
+	}
+
 	.icon-container {
 		display: flex;
 		align-items: center;

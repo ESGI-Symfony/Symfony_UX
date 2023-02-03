@@ -4,3 +4,7 @@ home:
   where_you_going: Where are you going?
   exclusive_package: Exclusive Packages
   explore_categories: Explore categories
+
+login :
+  password: Password
+  email_example: example@gmail.com
