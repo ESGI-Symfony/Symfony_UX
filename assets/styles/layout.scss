@@ -13,7 +13,7 @@ $prefixes: (
         "mt": "margin-top",
         "mb": "margin-bottom",
         "ms": "margin-left",
-        "mr": "margin-right",
+        "me": "margin-right",
 );
 
 @each $name, $spacing in $spacings {
