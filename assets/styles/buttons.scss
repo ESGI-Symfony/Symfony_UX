@@ -11,6 +11,8 @@
 	background-color: transparent;
 	transition: .2s background-color, .2s color;
 	align-items: center;
+	font-family: 'Poppins', sans-serif;
+	font-size: $fs-300;
 	text-decoration: none;
 
 	&-primary {

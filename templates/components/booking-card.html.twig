@@ -1,0 +1,38 @@
+{% for housing in computed.housings %}
+
+<div class="booking-card">
+  <div class="header">
+    <img class="image" src="{{ asset('images/saturn.jpg') }}">
+  </div>
+
+  <div class="content">
+    <div class="flex-row gap-100">
+      {{ bootstrap_icon("geo-alt") }}
+      Saturn
+    </div>
+
+    <h4>Cottage</h4>
+
+    <div class="body">
+      From 23-06-2019 to 23-01-2300
+    </div>
+
+    {% if housing.rating %}
+      <div class="rating">
+        {% for i in 1..housing.rating %}
+          <i>{{ bootstrap_icon("star-fill") }}</i>
+        {% endfor %}
+        {% for i in 1..5-housing.rating %}
+          <i>{{ bootstrap_icon("star") }}</i>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div>
+        <button class="btn btn-primary">{{ bootstrap_icon("chevron-right") }} {{ "add_review" | trans }}</button>
+      </div>
+    {% endif %}
+
+  </div>
+</div>
+
+{% endfor %}

@@ -8,17 +8,13 @@
 @import "card";
 @import "navbarComponent";
 @import "category";
+@import "headerComponent";
 
 html, body {
     font-size: $fs-300;
 }
 
-* {
-    font-family: 'Poppins', sans-serif;
-}
-
 body {
-    background-color: $dark-matter;
     color: $procyon;
     margin: 0;
     font-family: 'Poppins', sans-serif;
