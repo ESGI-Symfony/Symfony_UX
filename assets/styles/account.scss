@@ -5,4 +5,22 @@
   span {
     color: $sun;
   }
+  
+  .edit-account {
+    cursor: pointer;
+  }
+
+  .font-bold {
+    font-weight: $fw-bold;
+    font-size: $fs-400;
+  }
+
+  .more-informations {
+    color: $rigel;
+  }
+
+  hr {
+    width: 75%;
+    border-color: $sun;
+  }
 }

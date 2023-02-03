@@ -1,17 +1,47 @@
 {% extends 'front/base.html.twig' %}
 
 {% block main %}
-    <div class="flex-column gap-300 account">
-        <div class="flex-column align-center justify-center gap-300">
+    <div class="flex-column account gap-400">
+        <div class="flex-column align-center justify-center gap-200">
             <div class="flex-row align-center justify-center gap-200">
                 <div>
                     <h4 class="text-center">Hello <span>Norbert</span></h4>
                 </div>
-                <div>{{ bootstrap_icon("pencil") }}</div>
+                <div class="edit-account">{{ bootstrap_icon("pencil") }}</div>
             </div>
             <div>
                 norbert.gloupurp@galactimail.mars
             </div>
+            <div class="notification notification-send">
+                {{ bootstrap_icon("rocket-takeoff") }}{{ 'pending_request_lessor_message' | trans }}
+            </div>
         </div>
+        <div class="flex-column gap-200">
+            <div class="flex-row justify-space-between">
+                <div class="font-bold">
+                    <span>3</span> {{ 'bookings' | trans }}
+                </div>
+                <div class="more-informations">{{ 'see_more' | trans }}</div>
+            </div>
+            {{ component('booking-card') }}
+        </div>
+        <div class="flex-column gap-200">
+            <div class="flex-row justify-space-between">
+                <div class="font-bold">
+                    <span>3</span> {{ 'rentals' | trans }}
+                </div>
+                <div class="more-informations">{{ 'see_more' | trans }}</div>
+            </div>
+            {{ component('booking-card') }}
+        </div>
+
+        <hr>
+
+        <div class="flex-column align-center gap-300">
+            <div>{{ 'terms_of_sales' | trans }}</div>
+            <div>{{ 'data_privacy' | trans }}</div>
+            <div class="btn btn-outline-primary">{{ 'logout' | trans }}</div>
+        </div>
+
     </div>
 {% endblock %}
