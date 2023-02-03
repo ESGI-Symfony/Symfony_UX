@@ -127,3 +127,43 @@
 		}
 	}
 }
+
+.booking-card {
+	min-width: 300px;
+	background-color: $procyon;
+	border-radius: 15px;
+	padding: $spacing-200;
+	color: $dark-matter;
+	gap: $spacing-100;
+	display: flex;
+	flex-direction: row;
+
+	.header {
+		display: flex;
+		flex-direction: column;
+		gap: $spacing-100;
+
+		.image {
+			height: 100px;
+			width: 100px;
+			align-self: 1/1;
+			border-radius: 15px;
+			object-fit: cover;
+		}
+
+	}
+
+	.content {
+		display: flex;
+		flex-direction: column;
+		gap: $spacing-100;
+		flex-grow: 1;
+	}
+
+	.rating {
+
+		> i {
+			color: $betelgeuse;
+		}
+	}
+}
