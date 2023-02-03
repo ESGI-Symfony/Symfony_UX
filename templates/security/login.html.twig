@@ -4,7 +4,7 @@
 
 {% block main %}
     <div class="flex-row h-100">
-        <form method="post" class="h-100 flex-column align-center justify-center max-width align-end">
+        <form method="post" class="h-100 w-100 flex-column align-center justify-center max-width align-end">
             {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
@@ -19,14 +19,14 @@
                 <span class="h6 small">Please sign in to continue our app</span>
                 <div class="flex-grow gap-300">
                     <div class="input-group">
-                        <input class="input" placeholder="{{ "login.email_example" | trans }}" type="email"
+                        <input class="input" placeholder="{{ "email_example" | trans }}" type="email"
                                value="{{ last_username }}" name="email" id="inputEmail" class="form-control"
                                autocomplete="email" required autofocus>
                     </div>
                 </div>
                 <div class="flex-grow gap-300">
                     <div class="input-group">
-                        <input class="input" placeholder="{{ "login.password" | trans }}" type="password"
+                        <input class="input" placeholder="{{ "password" | trans }}" type="password"
                                name="password" id="inputPassword" class="form-control"
                                autocomplete="current-password" required>
                         <div class="icon-container">

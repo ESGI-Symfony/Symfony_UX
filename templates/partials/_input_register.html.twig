@@ -1,0 +1,7 @@
+{% set attr = attr is defined ? attr : [] %}
+<div class="flex-column gap-100">
+    <div class="input-group">
+        {{ form_widget(input, {'attr': {'class': 'input text-area-none'}|merge(attr) }) }}
+    </div>
+</div>
+{{ form_errors(input) }}
