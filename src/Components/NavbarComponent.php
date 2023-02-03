@@ -7,8 +7,11 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 #[AsTwigComponent('navbar')]
 class NavbarComponent
 {
-    public string $item1;
-    public string $item2;
-    public string $item3;
-    public string $item4;
+    public array $items = [
+        ['name' => 'home', 'path' => '', 'icon' => 'house'],
+        ['name' => 'bookings', 'path' => '', 'icon' => 'calendar-event'],
+        ['name' => '', 'path' => '', 'icon' => 'search'],
+        ['name' => 'housings', 'path' => 'front_app_profile_rentals', 'icon' => 'buildings'],
+        ['name' => 'account', 'path' => '', 'icon' => 'person'],
+    ];
 }

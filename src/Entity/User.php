@@ -94,6 +94,9 @@ class User implements UserInterface, \Symfony\Component\Security\Core\User\Passw
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Report::class)]
     private Collection $reports;
 
+    #[ORM\Column(length: 42, nullable: true)]
+    private ?string $phone = null;
+
 
     public function __construct()
     {
@@ -401,5 +404,17 @@ class User implements UserInterface, \Symfony\Component\Security\Core\User\Passw
     public function isLessor(): bool
     {
         return in_array('ROLE_LESSOR', $this->getRoles());
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(?string $phone): self
+    {
+        $this->phone = $phone;
+
+        return $this;
     }
 }

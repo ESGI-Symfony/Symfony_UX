@@ -4,3 +4,22 @@ home:
   where_you_going: Where are you going?
   exclusive_package: Exclusive Packages
   explore_categories: Explore categories
+
+motivation: Motivation
+firstname: Firstname
+lastname: Lastname
+phone: Phone
+lessor_number: Lessor number
+your_motivation_explained: Explain your project in few lines, present yourself, talk about what type of customer you would like
+your_name: Your name
+your_last_name: Your last name
+your_galactic_phone: Your galactic phone
+your_lessor_number: Your lessor number
+add_your_rental_tip: To add your rentals, we need to get in touch first
+become_lessor_stylized: Become <span class="highlight">lessor</span>
+become_lessor: Become lessor
+we_come_back_to_you: We come back to you
+we_come_back_to_you_explained: Huston, we’ve got your information. Frequently check your profile to follow your request’s status
+go_to_profile: Go to your profile
+back_to_home: Back to home
+your_rentals: Your rentals

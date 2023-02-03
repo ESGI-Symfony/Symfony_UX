@@ -12,7 +12,7 @@ $prefixes: (
 	"mt": "margin-top",
 	"mb": "margin-bottom",
 	"ms": "margin-left",
-	"me": "margin-right",
+	"mr": "margin-right",
 );
 
 @each $name, $spacing in $spacings {
@@ -43,6 +43,17 @@ $prefixes: (
 	}
 }
 
+.mx-auto {
+	margin-left: auto;
+	margin-right: auto;
+}
+.mr-auto {
+	margin-right: auto;
+}
+.ml-auto {
+	margin-left: auto;
+}
+
 .flex {
 	&-column {
 		display: flex;
@@ -67,6 +78,10 @@ $prefixes: (
 	align-items: center;
 }
 
+.text-center {
+	text-align: center;
+}
+
 .full-width {
 	width: 100vw;
 }
@@ -81,4 +96,22 @@ $prefixes: (
 .scroll-horizontal {
 	overflow-x: auto;
 	width: auto;
+}
+
+.highlight {
+	color: $sun;
+}
+
+.separator {
+	display: block;
+	width: 100%;
+	border-bottom: 1px solid $sun;
+}
+
+.column-400 {
+	max-width: 400px;
+}
+
+.width-fit-content {
+	width: fit-content;
 }

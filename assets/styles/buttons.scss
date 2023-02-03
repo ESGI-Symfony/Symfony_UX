@@ -11,6 +11,7 @@
 	background-color: transparent;
 	transition: .2s background-color, .2s color;
 	align-items: center;
+	text-decoration: none;
 
 	&-primary {
 		background-color: $alnitak;
