@@ -5,9 +5,23 @@
 	border-radius: 20px;
 	font-size: $fs-100;
 	white-space: nowrap;
+	display: flex;
+	align-items: center;
 
 	&-primary {
 		background-color: $alnitak;
 		color: $dark-matter;
 	}
+
+	&-secondary {
+		font-size: $fs-300;
+		background-color: $betelgeuse;
+		color: $dark-matter;
+	}
+
+	&-secondary-small {
+		background-color: $betelgeuse;
+		color: $dark-matter;
+	}
+
 }
