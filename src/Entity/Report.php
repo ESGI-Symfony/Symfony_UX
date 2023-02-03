@@ -36,7 +36,7 @@ class Report
         callback: [ReportTypes::class, 'getValues'],
         message: 'report.type.choice'
     )]
-    private ?ReportTypes $type = null;
+    private ?string $type = null;
 
     #[ORM\ManyToOne(inversedBy: 'reports')]
     #[ORM\JoinColumn(nullable: false)]
@@ -65,12 +65,12 @@ class Report
 
     public function getType(): ?ReportTypes
     {
-        return $this->type;
+        return ReportTypes::from($this->type);
     }
 
     public function setType(ReportTypes $type): self
     {
-        $this->type = $type;
+        $this->type = $type->value;
 
         return $this;
     }

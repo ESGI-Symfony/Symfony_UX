@@ -1,0 +1,7 @@
+{% set attr = attr is defined ? attr : [] %}
+
+{{ form_label(input) }}
+<div class="input-group">
+    {{ form_widget(input, {'attr': {'class': 'input'}|merge(attr) }) }}
+</div>
+{{ form_errors(input) }}

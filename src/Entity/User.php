@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -62,6 +63,7 @@ class User implements UserInterface, \Symfony\Component\Security\Core\User\Passw
         max: 150,
         maxMessage: 'user.firstname.max_length'
     )]
+    #[Assert\NotBlank(message: 'user.firstname.not_blank', groups: ['lessor'])]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 150, nullable: true)]
@@ -70,10 +72,12 @@ class User implements UserInterface, \Symfony\Component\Security\Core\User\Passw
         max: 150,
         maxMessage: 'user.lastname.max_length'
     )]
+    #[Assert\NotBlank(message: 'user.lastname.not_blank', groups: ['lessor'])]
     private ?string $lastname = null;
 
     #[ORM\Column(nullable: true)]
     #[Assert\Type(type: 'number', message: 'user.lessor_number.type')]
+    #[Assert\NotBlank(message: 'user.firstname.not_blank', groups: ['lessor'])]
     private ?int $lessor_number = null;
 
     #[ORM\OneToMany(mappedBy: 'lessor', targetEntity: UserLessorRequest::class, orphanRemoval: true)]
@@ -95,6 +99,7 @@ class User implements UserInterface, \Symfony\Component\Security\Core\User\Passw
     private Collection $reports;
 
     #[ORM\Column(length: 42, nullable: true)]
+    #[Assert\NotBlank(message: 'user.phone.not_blank', groups: ['lessor'])]
     private ?string $phone = null;
 
 
