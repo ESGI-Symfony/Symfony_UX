@@ -123,13 +123,19 @@ user:
   firstname:
     max_length: 'The firstname cannot be longer than {{ limit }} characters.'
     type: 'The firstname must be a string.'
+    not_blank: 'The firstname cannot be blank.'
 
   lastname:
     max_length: 'The lastname cannot be longer than {{ limit }} characters.'
     type: 'The lastname must be a string.'
+    not_blank: 'The lastname cannot be blank.'
 
   lessor_number:
     type: 'The lessor number must be a number.'
+    not_blank: 'The lessor number cannot be blank.'
+
+  phone:
+    not_blank: 'The phone number cannot be blank.'
 
 user_lessor:
   motivation:

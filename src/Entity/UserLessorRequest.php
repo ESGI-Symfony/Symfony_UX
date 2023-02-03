@@ -31,7 +31,7 @@ class UserLessorRequest
         callback: [UserLessorRequestStatus::class, 'getValues'],
         message: 'user_lessor.status.choice'
     )]
-    private ?UserLessorRequestStatus $status = null;
+    private ?string $status = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     #[Assert\Type(type: 'string', message: 'user_lessor.refusing_reason.type')]
@@ -39,6 +39,8 @@ class UserLessorRequest
 
     #[ORM\ManyToOne(inversedBy: 'userLessorRequests')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\Valid]
+    #[Assert\Type(type: User::class)]
     private ?user $lessor = null;
 
     public function getId(): ?int
@@ -60,12 +62,12 @@ class UserLessorRequest
 
     public function getStatus(): ?UserLessorRequestStatus
     {
-        return $this->status;
+        return UserLessorRequestStatus::from($this->status);
     }
 
     public function setStatus(UserLessorRequestStatus $status): self
     {
-        $this->status = $status;
+        $this->status = $status->value;
 
         return $this;
     }

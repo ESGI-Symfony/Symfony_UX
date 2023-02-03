@@ -77,7 +77,7 @@ class Rental
         callback: [RentalTypes::class, 'getValues'],
         message: 'rental.type.choice'
     )]
-    private ?RentalTypes $rent_type = null;
+    private ?string $rent_type = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'rental.system.not_blank')]
@@ -291,12 +291,12 @@ class Rental
 
     public function getRentType(): ?RentalTypes
     {
-        return $this->rent_type;
+        return RentalTypes::from($this->rent_type);
     }
 
     public function setRentType(RentalTypes $rent_type): self
     {
-        $this->rent_type = $rent_type;
+        $this->rent_type = $rent_type->value;
 
         return $this;
     }

@@ -49,20 +49,15 @@ class UserController extends AbstractController
         }
 
         $lessorRequest = new UserLessorRequest;
-        $form = $this->createForm(LessorRequestFormType::class, $lessorRequest);
+        $lessorRequest->setStatus(UserLessorRequestStatus::Pending)
+            ->setLessor($user);
+        $form = $this->createForm(LessorRequestFormType::class, $lessorRequest, [
+            'validation_groups' => ['lessor']
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setFirstname($form->get('firstname')->getData());
-            $user->setLastname($form->get('lastname')->getData());
-            $user->setPhone($form->get('phone')->getData());
-            $user->setLessorNumber($form->get('lessor_number')->getData());
-            $entityManager->persist($user);
-
-            $lessorRequest->setLessor($user)
-                ->setStatus(UserLessorRequestStatus::Pending);
             $entityManager->persist($lessorRequest);
-
             $entityManager->flush();
 
             return $this->render('front/profile/lessor/become_lessor_success.html.twig');

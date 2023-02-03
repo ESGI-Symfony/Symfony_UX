@@ -22,33 +22,8 @@ class LessorRequestFormType extends AbstractType
                 ],
                 'required' => true,
             ])
-            ->add('firstname', TextType::class, [
-                'mapped' => false,
-                'attr' => [
-                    'placeholder' => 'your_name',
-                ],
-                'required' => true,
-            ])
-            ->add('lastname', TextType::class, [
-                'mapped' => false,
-                'attr' => [
-                    'placeholder' => 'your_last_name',
-                ],
-                'required' => true,
-            ])
-            ->add('phone', TextType::class, [
-                'mapped' => false,
-                'attr' => [
-                    'placeholder' => 'your_galactic_phone',
-                ],
-                'required' => true,
-            ])
-            ->add('lessor_number', NumberType::class, [
-                'mapped' => false,
-                'attr' => [
-                    'placeholder' => 'your_lessor_number',
-                ],
-                'required' => true,
+            ->add('lessor', LessorProfileFormType::class, [
+                'data_class' => User::class,
             ])
         ;
     }
