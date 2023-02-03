@@ -23,6 +23,12 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class UserController extends AbstractController
 {
 
+    #[Route(path: '/account', name: 'account')]
+    public function account(): Response
+    {
+        return $this->render('front/profile/account.html.twig');
+    }
+
     #[Route(path: '/rentals', name: 'rentals')]
     public function rentals(): Response
     {
@@ -76,6 +82,7 @@ class UserController extends AbstractController
     #[Route(path: '/bookings', name: 'bookings')]
     public function bookings(): Response
     {
+
         return $this->render('front/profile/tenant/bookings.html.twig');
     }
 

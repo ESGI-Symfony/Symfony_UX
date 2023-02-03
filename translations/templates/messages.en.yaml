@@ -24,6 +24,9 @@ go_to_profile: Go to your profile
 back_to_home: Back to home
 your_rentals: Your rentals
 bookings: bookings
+on_going: On going
+passed: Passed
+hello: Hello
 
 login :
   password: Password
