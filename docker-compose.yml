@@ -20,6 +20,22 @@ services:
       start_period: 30s
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER:-symfony}:${POSTGRES_PASSWORD:-ChangeMe}@database:5432/${POSTGRES_DB:-app}?serverVersion=${POSTGRES_VERSION:-13}
+      MAILER_DSN: ${MAILER_DSN}
+
+  messenger:
+    build:
+      context: .
+      target: app_messenger
+      args:
+        SYMFONY_VERSION: ${SYMFONY_VERSION:-}
+        STABILITY: ${STABILITY:-stable}
+    depends_on:
+      - database
+      - php
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-symfony}:${POSTGRES_PASSWORD:-ChangeMe}@database:5432/${POSTGRES_DB:-app}?serverVersion=${POSTGRES_VERSION:-13}
+      MAILER_DSN: ${MAILER_DSN}
 
   node:
     build:

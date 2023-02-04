@@ -160,6 +160,10 @@ RUN set -eux; \
 
 RUN rm -f .env.local.php
 
+FROM app_php AS app_messenger
+
+CMD php bin/console messenger:consume async -vv
+
 # Nginx image
 FROM nginx:${NGINX_VERSION}-alpine AS app_nginx
 
