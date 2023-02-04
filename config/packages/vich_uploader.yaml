@@ -1,0 +1,13 @@
+vich_uploader:
+    db_driver: orm
+
+    metadata:
+        type: attribute
+
+    mappings:
+        rentals:
+            uri_prefix: /images/rentals
+            upload_destination: '%kernel.project_dir%/public/images/rentals'
+            namer:
+                service: Vich\UploaderBundle\Naming\PropertyNamer
+                options: { property: 'uuid' }

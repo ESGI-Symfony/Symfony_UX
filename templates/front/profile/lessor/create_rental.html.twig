@@ -1,0 +1,39 @@
+{% extends 'front/base.html.twig' %}
+
+{% block main %}
+    <section class="flex-column mx-auto justify-center column-700">
+        <h4 class="mb-300 text-center mx-auto"> {{ 'create_a_rental_stylized' | trans | raw }}</h4>
+        {{ form_start(form) }}
+        <div class="flex-column gap-200 mb-300">
+            <h6><span class="highlight me-100">{{ bootstrap_icon('rocket-takeoff') }}</span>{{ 'rental_information' | trans }}</h6>
+            {{ include('partials/_input.html.twig', {input: form.rent_type}) }}
+            {{ include('partials/_input.html.twig', {input: form.description, attr: {'rows': 8}}) }}
+            {{ include('partials/_input.html.twig', {input: form.max_capacity}) }}
+            {{ include('partials/_input.html.twig', {input: form.price}) }}
+
+            <div class="flex-row gap-400 justify-space-between">
+                <div class="flex-column gap-200 w-100">
+                    {{ include('partials/_input.html.twig', {input: form.room_count}) }}
+                </div>
+                <div class="flex-column gap-200 w-100">
+                    {{ include('partials/_input.html.twig', {input: form.bathroom_count}) }}
+                </div>
+            </div>
+
+            {{ include('partials/_input.html.twig', {input: form.imageFile}) }}
+
+
+            <h6><span class="highlight me-100">{{ bootstrap_icon('geo-alt') }}</span>{{ 'address' | trans }}</h6>
+            {{ include('partials/_input.html.twig', {input: form.system}) }}
+            {{ include('partials/_input.html.twig', {input: form.celestial_object}) }}
+            {{ include('partials/_input.html.twig', {input: form.longitude}) }}
+            {{ include('partials/_input.html.twig', {input: form.latitude}) }}
+
+            <h6><span class="highlight me-100">{{ bootstrap_icon('lightning-charge') }}</span>{{ 'miscellaneous' | trans }}</h6>
+            {{ include('partials/_input_checkboxes.html.twig', {input: form.options}) }}
+            {{ include('partials/_input_checkboxes.html.twig', {input: form.transports}) }}
+            <button class="btn btn-primary ms-auto">{{ bootstrap_icon('rocket-takeoff') }} {{ 'become_lessor' | trans }}</button>
+        </div>
+        {{ form_end(form) }}
+    </section>
+{% endblock %}

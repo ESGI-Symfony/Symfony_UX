@@ -49,3 +49,17 @@
 .input-error-message {
 	color: $betelgeuse;
 }
+
+
+.checkboxes-input {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px 16px;
+	border: solid 1px;
+	border-radius: 5px;
+	padding: 10px;
+
+	label, input {
+		cursor: pointer;
+	}
+}

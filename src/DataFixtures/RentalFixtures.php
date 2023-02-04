@@ -13,6 +13,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
+use Symfony\Component\Uid\Uuid;
 
 class RentalFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -43,6 +44,7 @@ class RentalFixtures extends Fixture implements DependentFixtureInterface
                 ->setBathroomCount($faker->numberBetween(1, 4))
                 ->setPrice($faker->numberBetween(1, 10000))
                 ->setRentType($faker->randomElement(RentalTypes::cases()))
+                ->setUuid($faker->uuid)
 
                 ->setSystem($faker->randomElement(Systems::getValues()))
                 ->setLongitude($faker->longitude)

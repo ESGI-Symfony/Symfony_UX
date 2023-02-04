@@ -43,12 +43,12 @@ rental:
   room_count:
     not_null: 'The room count cannot be null.'
     type: 'The room count must be an integer.'
-    positive: 'The room count must be greater than 0.'
+    positive: 'The room count must be greater or equal than 0.'
 
   bathroom_count:
     not_null: 'The bathroom count cannot be null.'
     type: 'The bathroom count must be an integer.'
-    positive: 'The bathroom count must be greater than 0.'
+    positive: 'The bathroom count must be greater or equal than 0.'
 
 rental_option:
   name:

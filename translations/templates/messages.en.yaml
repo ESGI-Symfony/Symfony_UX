@@ -23,6 +23,12 @@ we_come_back_to_you_explained: Huston, we’ve got your information. Frequently 
 go_to_profile: Go to your profile
 back_to_home: Back to home
 your_rentals: Your rentals
+create_a_rental_stylized: Create a <span class="highlight">rental</span>
+rental_information: Rental information
+address: Address
+miscellaneous: Miscellaneous
+delete_image: Delete image
+download_image: Download image
 
 password: Password
 email_example: example@gmail.com

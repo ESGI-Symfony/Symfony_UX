@@ -1,7 +1,7 @@
 {% extends 'front/base.html.twig' %}
 
-{% block body %}
-    <main class="container flex-column column-400 mx-auto text-center justify-center align-center">
+{% block main %}
+    <section class="flex-column column-400 mx-auto text-center justify-center align-center">
         <h4 class="mb-300 text-center"> {{ 'we_come_back_to_you' | trans }}</h4>
         <span class="separator"></span>
         <p class="mt-300"> {{ 'we_come_back_to_you_explained' | trans }}</p>
@@ -9,5 +9,5 @@
         <a href="{{ path('front_app_home') }}" class="text-decoration-none">
             <button class="btn btn-secondary mt-300 width-fit-content">{{ 'back_to_home' | trans }}</button>
         </a>
-    </main>
+    </section>
 {% endblock %}

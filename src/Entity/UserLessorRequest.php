@@ -62,11 +62,14 @@ class UserLessorRequest
 
     public function getStatus(): ?UserLessorRequestStatus
     {
-        return UserLessorRequestStatus::from($this->status);
+        return $this->status ? UserLessorRequestStatus::from($this->status) : null;
     }
 
-    public function setStatus(UserLessorRequestStatus $status): self
+    public function setStatus(UserLessorRequestStatus|string $status): self
     {
+        if (is_string($status)) {
+            $status = UserLessorRequestStatus::from($status);
+        }
         $this->status = $status->value;
 
         return $this;
