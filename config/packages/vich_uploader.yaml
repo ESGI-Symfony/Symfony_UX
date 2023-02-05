@@ -7,7 +7,7 @@ vich_uploader:
     mappings:
         rentals:
             uri_prefix: /images/rentals
-            upload_destination: '%kernel.project_dir%/public/images/rentals'
+            upload_destination: '%kernel.project_dir%/public/images/storage/rentals'
             namer:
                 service: Vich\UploaderBundle\Naming\PropertyNamer
                 options: { property: 'uuid' }

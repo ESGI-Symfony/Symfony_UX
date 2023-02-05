@@ -3,15 +3,12 @@
 namespace App\Entity;
 
 use App\Enums\RentalTypes;
-use App\FakeApi\CelestialObjects;
-use App\FakeApi\Systems;
 use App\Repository\RentalRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\Uid\Uuid;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation\Uploadable;
 use Vich\UploaderBundle\Mapping\Annotation\UploadableField;
@@ -85,15 +82,6 @@ class Rental
     private ?string $rent_type = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'rental.system.not_blank')]
-    #[Assert\Length(
-        max: 255,
-        maxMessage: 'rental.system.max_length'
-    )]
-    #[Assert\Type(type: 'string', message: 'rental.system.type')]
-    private ?string $system = null;
-
-    #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'rental.celestial_object.not_blank')]
     #[Assert\Length(
         max: 255,
@@ -133,6 +121,7 @@ class Rental
         maxSizeMessage: 'The file is too large ({{ size }} {{ suffix }}). Allowed maximum size is {{ limit }} {{ suffix }}.',
         mimeTypesMessage: 'Please upload a png or jpeg image',
     )]
+    #[Assert\NotNull(message: 'rental.image.not_null')]
     private ?File $imageFile = null;
 
     #[ORM\Column(type: Types::GUID)]

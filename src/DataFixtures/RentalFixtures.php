@@ -8,7 +8,6 @@ use App\Entity\Transport;
 use App\Entity\User;
 use App\Enums\RentalTypes;
 use App\FakeApi\CelestialObjects;
-use App\FakeApi\Systems;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -35,8 +34,6 @@ class RentalFixtures extends Fixture implements DependentFixtureInterface
         $users = array_filter($manager->getRepository(User::class)->findAll(), fn(User $user) => $user->isLessor());
 
         for ($i = 0; $i < 100; $i++) {
-            $dateBegin = $faker->dateTimeBetween('now', '+1 year');
-            $dateEnd = $faker->dateTimeBetween($dateBegin, '+1 year');
             $object = (new Rental())
                 ->setDescription($faker->paragraph)
                 ->setMaxCapacity($faker->numberBetween(1, 10))
@@ -46,7 +43,6 @@ class RentalFixtures extends Fixture implements DependentFixtureInterface
                 ->setRentType($faker->randomElement(RentalTypes::cases()))
                 ->setUuid($faker->uuid)
 
-                ->setSystem($faker->randomElement(Systems::getValues()))
                 ->setLongitude($faker->longitude)
                 ->setLatitude($faker->latitude)
                 ->setCelestialObject($faker->randomElement(CelestialObjects::getValues()))

@@ -19,7 +19,7 @@
 	gap: $spacing-100;
 
 	&.input-error {
-		border: 1px solid $betelgeuse;
+		border: 2px solid $betelgeuse;
 	}
 
 	.input {
@@ -61,5 +61,34 @@
 
 	label, input {
 		cursor: pointer;
+	}
+}
+
+.input-image {
+	position: relative;
+	width: fit-content;
+
+	.input {
+		opacity: 0;
+		position: absolute;
+		top: 0;
+		right: 0;
+		left: 0;
+		bottom: 0;
+		cursor: pointer;
+	}
+
+	&.input-error {
+		.btn {
+			border: 2px solid $betelgeuse;
+		}
+	}
+
+	.input-image-preview {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		max-width: 150px;
+		max-height: 150px;
 	}
 }

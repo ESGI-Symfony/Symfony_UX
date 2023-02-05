@@ -39,7 +39,7 @@ class UserController extends AbstractController
         return $this->render('front/profile/lessor/rentals.html.twig');
     }
 
-    #[Route(path: '/create-rental', name: 'create-rental', methods: ['GET', 'POST'])]
+    #[Route(path: '/rentals/create', name: 'create-rental', methods: ['GET', 'POST'])]
     public function createRental(Request $request, EntityManagerInterface $entityManager): Response
     {
         $this->denyAccessUnlessGranted(UserVoter::CREATE_RENTALS, $this->getUser());

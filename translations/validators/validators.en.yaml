@@ -1,9 +1,4 @@
 rental:
-  system:
-    not_blank: 'The system name cannot be blank.'
-    max_length: 'The system name cannot be longer than {{ limit }} characters.'
-    type: 'The system name must be a string.'
-
   celestial_object:
     not_blank: 'The celestial object name cannot be blank.'
     max_length: 'The celestial object name cannot be longer than {{ limit }} characters.'
@@ -49,6 +44,9 @@ rental:
     not_null: 'The bathroom count cannot be null.'
     type: 'The bathroom count must be an integer.'
     positive: 'The bathroom count must be greater or equal than 0.'
+
+  image:
+    not_null: 'The image cannot be null.'
 
 rental_option:
   name:
