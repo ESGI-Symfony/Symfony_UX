@@ -3,16 +3,18 @@
 namespace App\Entity;
 
 use App\Enums\RentalTypes;
-use App\FakeApi\CelestialObjects;
-use App\FakeApi\Systems;
 use App\Repository\RentalRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation\Uploadable;
+use Vich\UploaderBundle\Mapping\Annotation\UploadableField;
 
 #[ORM\Entity(repositoryClass: RentalRepository::class)]
+#[Uploadable]
 class Rental
 {
     #[ORM\Id]
@@ -44,13 +46,13 @@ class Rental
     #[ORM\Column]
     #[Assert\NotNull(message: 'rental.room_count.not_null')]
     #[Assert\Type(type: 'int', message: 'rental.room_count.type')]
-    #[Assert\Positive(message: 'rental.room_count.positive')]
+    #[Assert\PositiveOrZero(message: 'rental.room_count.positive')]
     private ?int $room_count = null;
 
     #[ORM\Column]
     #[Assert\NotNull(message: 'rental.bathroom_count.not_null')]
     #[Assert\Type(type: 'int', message: 'rental.bathroom_count.type')]
-    #[Assert\Positive(message: 'rental.bathroom_count.positive')]
+    #[Assert\PositiveOrZero(message: 'rental.bathroom_count.positive')]
     private ?int $bathroom_count = null;
 
     #[ORM\ManyToOne(inversedBy: 'rentals')]
@@ -78,15 +80,6 @@ class Rental
         message: 'rental.type.choice'
     )]
     private ?string $rent_type = null;
-
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'rental.system.not_blank')]
-    #[Assert\Length(
-        max: 255,
-        maxMessage: 'rental.system.max_length'
-    )]
-    #[Assert\Type(type: 'string', message: 'rental.system.type')]
-    private ?string $system = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'rental.celestial_object.not_blank')]
@@ -119,6 +112,20 @@ class Rental
 
     #[ORM\ManyToMany(targetEntity: Transport::class, inversedBy: 'rentals')]
     private Collection $transports;
+
+    private ?string $image = null;
+    #[UploadableField(mapping: 'rentals', fileNameProperty: 'image')]
+    #[Assert\File(
+        maxSize: '2M',
+        mimeTypes: ['image/jpeg', 'image/png'],
+        maxSizeMessage: 'The file is too large ({{ size }} {{ suffix }}). Allowed maximum size is {{ limit }} {{ suffix }}.',
+        mimeTypesMessage: 'Please upload a png or jpeg image',
+    )]
+    #[Assert\NotNull(message: 'rental.image.not_null')]
+    private ?File $imageFile = null;
+
+    #[ORM\Column(type: Types::GUID)]
+    private ?string $uuid = null;
 
     public function __construct()
     {
@@ -291,11 +298,14 @@ class Rental
 
     public function getRentType(): ?RentalTypes
     {
-        return RentalTypes::from($this->rent_type);
+        return $this->rent_type ? RentalTypes::from($this->rent_type) : null;
     }
 
-    public function setRentType(RentalTypes $rent_type): self
+    public function setRentType(RentalTypes|string $rent_type): self
     {
+        if (is_string($rent_type)) {
+            $rent_type = RentalTypes::from($rent_type);
+        }
         $this->rent_type = $rent_type->value;
 
         return $this;
@@ -369,6 +379,50 @@ class Rental
     public function removeTransport(Transport $transport): self
     {
         $this->transports->removeElement($transport);
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string|null $image
+     */
+    public function setImage(?string $image): void
+    {
+        $this->image = $image;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param File|null $imageFile
+     */
+    public function setImageFile(?File $imageFile): void
+    {
+        $this->imageFile = $imageFile;
+    }
+
+    public function getUuid(): ?string
+    {
+        return $this->uuid;
+    }
+
+    public function setUuid(string $uuid): self
+    {
+        $this->uuid = $uuid;
 
         return $this;
     }
