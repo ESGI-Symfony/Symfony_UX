@@ -1,13 +1,24 @@
 version: "3.4"
 
+networks:
+  traefik:
+    external: true
+
 # Production environment override
 services:
   php:
     environment:
       APP_SECRET: ${APP_SECRET}
-      MERCURE_JWT_SECRET: ${CADDY_MERCURE_JWT_SECRET}
 
-  caddy:
-    environment:
-      MERCURE_PUBLISHER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET}
-      MERCURE_SUBSCRIBER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET}
+  nginx:
+    expose:
+      - 80/tcp
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.challenge.rule=Host(`challenge.esgi.quozul.dev`)"
+      - "traefik.http.routers.challenge.entrypoints=websecure"
+      - "traefik.http.routers.challenge.tls.certresolver=myresolver"
+      - "traefik.http.services.challenge.loadbalancer.server.port=80"
+      - "traefik.docker.network=traefik"
+    networks:
+      - traefik
