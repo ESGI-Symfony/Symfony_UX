@@ -9,9 +9,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/rental/{id}', name: 'app_rental_', requirements: ['id' => '\d+'])]
-class BookController extends AbstractController
+class RentalController extends AbstractController
 {
-    #[Route('/overview', name: 'overview')]
+    #[Route('/overview', name: '_overview')]
     public function index(Rental $rental, Request $request): Response
     {
         $search = $request->query->get('search', '');
@@ -19,6 +19,7 @@ class BookController extends AbstractController
         return $this->render('front/rental/index.html.twig', [
             'rental' => $rental,
             'search' => $search,
+            'selectedTab' => 'overview',
         ]);
     }
 
@@ -31,6 +32,7 @@ class BookController extends AbstractController
             'rental' => $rental,
             'transports' => $rental->getTransports(),
             'search' => $search,
+            'selectedTab' => 'access',
         ]);
     }
 
@@ -42,6 +44,7 @@ class BookController extends AbstractController
         return $this->render('front/rental/reviews.html.twig', [
             'rental' => $rental,
             'search' => $search,
+            'selectedTab' => 'reviews',
         ]);
     }
 }

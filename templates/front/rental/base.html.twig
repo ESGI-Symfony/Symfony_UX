@@ -9,7 +9,46 @@
         </div>
 
         <div class="container bg-procyon color-dark-matter rounded-top-400">
-            {% block main %}{% endblock %}
+            <div class="flex-column gap-200">
+                <div class="flex-row justify-space-between">
+                    <div class="flex-column gap-100">
+                        <div class="flex-row gap-100">
+                            {{ bootstrap_icon("geo-alt") }}
+                            <span>{{ rental.celestialObject | trans }}</span>
+                        </div>
+
+                        <h4>{{ rental.rentType.value | trans }}</h4>
+                    </div>
+
+                    <div class="flex-column gap-100 align-end">
+                        <h6 class="color-alnitak">{{ rental.price }}€</h6>
+
+                        <small>{{ "estimated" | trans }}</small>
+                    </div>
+                </div>
+
+                <div class="flex-row">
+                    <div class="flex-grow flex-row gap-200 align-center">
+                        <a class="badge{% if selectedTab == 'overview' %} badge-primary{% endif %}" href="/rental/{{ rental.id }}/overview">
+                            {{ "overview" | trans }}
+                        </a>
+
+                        <a class="badge{% if selectedTab == 'access' %} badge-primary{% endif %}" href="/rental/{{ rental.id }}/access">
+                            {{ "access" | trans }}
+                        </a>
+
+                        <a class="badge{% if selectedTab == 'reviews' %} badge-primary{% endif %}" href="/rental/{{ rental.id }}/reviews">
+                            {{ "reviews" | trans }}
+                        </a>
+                    </div>
+
+                    <div class="badge">
+                        {{ bootstrap_icon("flag") }}
+                    </div>
+                </div>
+
+                {% block main %}{% endblock %}
+            </div>
         </div>
     </main>
 

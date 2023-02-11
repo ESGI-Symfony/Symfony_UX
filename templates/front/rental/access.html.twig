@@ -1,58 +1,15 @@
 {% extends 'front/rental/base.html.twig' %}
 
-{% block title %}{{ rental.celestialObject }} in {{ rental.system }} - Spacebnb{% endblock %}
+{% block title %}{{ rental.celestialObject }} in {{ rental.celestialObject }} - Spacebnb{% endblock %}
 
 {% block main %}
-    <div class="flex-column gap-200">
-        <div class="flex-row justify-space-between">
-            <div class="flex-column gap-100">
-                <div class="flex-row gap-100">
-                    {{ bootstrap_icon("geo-alt") }}
-                    <span>{{ rental.system }}</span>
-                </div>
+    <div class="flex-column gap-100">
+        <h5>{{ "access" | trans }}</h5>
 
-                <h4>{{ rental.celestialObject }}</h4>
-            </div>
-
-            <div class="flex-column gap-100 align-end">
-                <h6 class="color-alnitak">{{ rental.price }}€</h6>
-
-                <small>{{ "estimated" | trans }}</small>
-            </div>
-        </div>
-
-        <div class="flex-row">
-            <div class="flex-grow flex-row gap-200 align-center">
-                <a class="badge" href="/rental/{{ rental.id }}/overview">
-                    {{ "overview" | trans }}
-                </a>
-
-                <a class="badge badge-primary" href="/rental/{{ rental.id }}/access">
-                    {{ "access" | trans }}
-                </a>
-
-                <a class="badge" href="/rental/{{ rental.id }}/reviews">
-                    {{ "reviews" | trans }}
-                </a>
-            </div>
-
-            <div class="badge">
-                {{ bootstrap_icon("flag") }}
-            </div>
-        </div>
-
-        <div class="flex-column gap-100">
-            <h5>{{ "access" | trans }}</h5>
-
-            <ul>
-                {% for transport in transports %}
-                    <li>{{ transport.name }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-
-        <div class="flex-row align-start">
-            <button class="btn btn-primary">{{ bootstrap_icon("rocket-takeoff") }} {{ "book_now" | trans }}</button>
-        </div>
+        <ul>
+            {% for transport in transports %}
+                <li>{{ transport.name }}</li>
+            {% endfor %}
+        </ul>
     </div>
 {% endblock %}
