@@ -2,25 +2,28 @@
 
 namespace App\Components;
 
+use App\Entity\Rental;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('details-card')]
 class DetailsCardComponent
 {
+    public Rental $rental;
+    public string $search = '';
 
-    public function getHousings(): array
+    /**
+     * @return string
+     */
+    public function getSearch(): string
     {
-        $housings = array(
-            array(
-                'name' => 'Mars',
-                'description' => 'Coucou je suis Mars',
-            ),
-            array(
-                'name' => 'Moon',
-                'description' => 'Coucou je suis Moon'
-            ),
-        );
+        return $this->search;
+    }
 
-        return $housings;
+    /**
+     * @return Rental
+     */
+    public function getRental(): Rental
+    {
+        return $this->rental;
     }
 }

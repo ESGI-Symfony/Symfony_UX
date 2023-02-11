@@ -5,6 +5,11 @@ home:
   exclusive_package: Exclusive Packages
   explore_categories: Explore categories
 
+search:
+  results_for: Results for
+  next: Next page
+  previous: Previous page
+
 motivation: Motivation
 firstname: Firstname
 lastname: Lastname
@@ -23,7 +28,17 @@ we_come_back_to_you_explained: Huston, we’ve got your information. Frequently 
 go_to_profile: Go to your profile
 back_to_home: Back to home
 your_rentals: Your rentals
+estimated: Estimated
 
 password: Password
 email_example: example@gmail.com
 nickname: Nickname
+reviews: Reviews
+overview: Overview
+access: Access
+description: Description
+book_now: Book now
+book: Book
+back: Back
+all: All
+results: Results

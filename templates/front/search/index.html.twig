@@ -1,0 +1,55 @@
+{% extends 'front/base.html.twig' %}
+
+{% block title %}Search{% endblock %}
+
+{% block main %}
+    <div class="flex-column gap-600">
+        <div class="flex-column gap-200">
+            {{ "home.good_evening" | trans }}
+            <h4>{{ "home.explore_universe" | trans }}</h4>
+            <form class="input-group" action="/search">
+                <input name="search" class="input" placeholder="{{ "home.where_you_going" | trans }}" value="{{ search }}" />
+                <div class="icon-container">
+                    {{ bootstrap_icon("search") }}
+                </div>
+            </form>
+        </div>
+
+        <div class="flex-column gap-200">
+            <h4>{{ "search.results_for" | trans }} <span class="highlight">{{ search }}</span></h4>
+            <small>{{ count }} {{ "results" | trans | lower }}</small>
+
+            <div class="flex-row gap-200">
+                <form>
+                    <input type="hidden" name="search" value="{{ search }}">
+                    <button name="system" value="" class="badge{% if selectedSystem == null %} badge-primary{% endif %}">{{ "all" | trans }}</button>
+                    {% for system in systems %}
+                        <button name="system" value="{{ system }}" class="badge{% if selectedSystem == system %} badge-primary{% endif %}">{{ system }}</button>
+                    {% endfor %}
+                </form>
+            </div>
+
+            {% for rental in rentals %}
+                {{ component('details-card', {rental: rental, search: search}) }}
+            {% endfor %}
+        </div>
+
+        <div class="flex-row gap-200">
+        {% if previous_page >= 0 %}
+            <form action="/search">
+                <input type="hidden" name="system" value="{{ selectedSystem }}">
+                <input type="hidden" name="search" value="{{ search }}">
+                <button class="btn btn-primary" name="page" value="{{ previous_page }}">{{ "search.previous" | trans }}</button>
+            </form>
+        {% endif %}
+
+        {% if hasMorePages %}
+        <form action="/search">
+            <input type="hidden" name="system" value="{{ selectedSystem }}">
+            <input type="hidden" name="search" value="{{ search }}">
+            <button class="btn btn-primary" name="page" value="{{ next_page }}">{{ "search.next" | trans }}</button>
+        </form>
+        {% endif %}
+        </div>
+    </div>
+{% endblock %}

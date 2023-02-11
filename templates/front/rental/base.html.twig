@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ component('header') }}
+
+    <main class="flex-column gap-200 flex-grow">
+        <div class="p-300">
+            <a href="/search?search={{ search }}" class="btn btn-text">{{ bootstrap_icon('arrow-left') }} {{ "back" | trans }}</a>
+        </div>
+
+        <div class="container bg-procyon color-dark-matter rounded-top-400">
+            {% block main %}{% endblock %}
+        </div>
+    </main>
+
+    {{ component('navbar') }}
+{% endblock %}

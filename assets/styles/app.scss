@@ -10,6 +10,7 @@
 @import "category";
 @import "headerComponent";
 @import "notification";
+@import "colors";
 
 html, body {
     font-size: $fs-300;
@@ -27,4 +28,8 @@ body {
 
 a {
     color: $alnitak;
+}
+
+ol, ul {
+    list-style: disc inside;
 }
