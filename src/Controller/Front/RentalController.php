@@ -3,6 +3,9 @@
 namespace App\Controller\Front;
 
 use App\Entity\Rental;
+use App\Entity\Reservation;
+use App\Repository\ReviewRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -42,6 +45,18 @@ class RentalController extends AbstractController
         $search = $request->query->get('search', '');
 
         return $this->render('front/rental/reviews.html.twig', [
+            'rental' => $rental,
+            'search' => $search,
+            'selectedTab' => 'reviews',
+        ]);
+    }
+
+    #[Route('/book', name: '_book')]
+    public function book(Request $request, Rental $rental): Response
+    {
+        $search = $request->query->get('search', '');
+
+        return $this->render('front/rental/book.html.twig', [
             'rental' => $rental,
             'search' => $search,
             'selectedTab' => 'reviews',

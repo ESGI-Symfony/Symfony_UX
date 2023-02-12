@@ -10,6 +10,6 @@
     </div>
 
     <div class="flex-row align-start">
-        <button class="btn btn-primary">{{ bootstrap_icon("rocket-takeoff") }} {{ "book_now" | trans }}</button>
+        <a href="/rental/{{ rental.id }}/book" class="btn btn-primary">{{ bootstrap_icon("rocket-takeoff") }} {{ "book_now" | trans }}</a>
     </div>
 {% endblock %}
