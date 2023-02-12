@@ -65,11 +65,14 @@ class Report
 
     public function getType(): ?ReportTypes
     {
-        return ReportTypes::from($this->type);
+        return $this->type ? ReportTypes::from($this->type) : null;
     }
 
-    public function setType(ReportTypes $type): self
+    public function setType(ReportTypes|string $type): self
     {
+        if (is_string($type)) {
+            $type = ReportTypes::from($type);
+        }
         $this->type = $type->value;
 
         return $this;

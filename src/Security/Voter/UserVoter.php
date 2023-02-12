@@ -10,12 +10,13 @@ class UserVoter extends Voter
 {
     public const BECOME_LESSOR = 'BECOME_LESSOR';
     public const RENTALS = 'RENTALS';
+    public const CREATE_RENTALS = 'CREATE_RENTALS';
 
     protected function supports(string $attribute, $subject): bool
     {
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
-        return in_array($attribute, [self::BECOME_LESSOR, self::RENTALS])
+        return in_array($attribute, [self::BECOME_LESSOR, self::RENTALS, self::CREATE_RENTALS])
             && $subject instanceof \App\Entity\User;
     }
 
@@ -40,7 +41,7 @@ class UserVoter extends Voter
         // ... (check conditions and return true to grant permission) ...
         return match ($attribute) {
             self::BECOME_LESSOR => !$user->isLessor(),
-            self::RENTALS => $user->isLessor(),
+            self::RENTALS, self::CREATE_RENTALS => $user->isLessor(),
             default => false,
         };
     }

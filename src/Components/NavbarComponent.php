@@ -11,7 +11,7 @@ class NavbarComponent
         ['name' => 'home', 'path' => '', 'icon' => 'house'],
         ['name' => 'bookings', 'path' => '', 'icon' => 'calendar-event'],
         ['name' => '', 'path' => '', 'icon' => 'search'],
-        ['name' => 'housings', 'path' => 'front_app_profile_rentals', 'icon' => 'buildings'],
+        ['name' => 'housings', 'path' => 'front_app_profile_rentals_index', 'icon' => 'buildings'],
         ['name' => 'account', 'path' => '', 'icon' => 'person'],
     ];
 }

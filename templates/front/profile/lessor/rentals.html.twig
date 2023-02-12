@@ -1,7 +1,13 @@
 {% extends 'front/base.html.twig' %}
 
-{% block body %}
-    <main class="container flex-column column-400 mx-auto text-center justify-center align-center">
+{% block main %}
+    <section class="flex-column column-400 mx-auto text-center justify-center align-center">
         <h4 class="mb-300 text-center"> {{ 'your_rentals' | trans }}</h4>
-    </main>
+        <a href="{{ path('front_app_profile_rentals_create') }}" class="text-decoration-none">
+            <button class="btn btn-primary mt-300 width-fit-content">
+                {{ bootstrap_icon('plus-circle') }}
+                {{ 'add_a_rental' | trans }}
+            </button>
+        </a>
+    </section>
 {% endblock %}
