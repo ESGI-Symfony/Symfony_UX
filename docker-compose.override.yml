@@ -3,6 +3,8 @@ version: "3.4"
 # Development environment override
 services:
   php:
+    env_file:
+      - .env.local
     build:
       target: app_php_dev
     volumes:
@@ -17,6 +19,10 @@ services:
     extra_hosts:
       # Ensure that host.docker.internal is correctly defined on Linux
       - host.docker.internal:host-gateway
+
+  messenger:
+    env_file:
+      - .env.local
 
   node:
     build:

@@ -51,7 +51,7 @@ class CheckVerifiedUserSubscriber implements EventSubscriberInterface
         // catch when a user tries to log with an unverified email, to resend a verification email
         $response = new RedirectResponse(
             $this->router->generate('app_verify_email_sent', [
-                    'id' => $event->getException()->getUser()->getId(),
+                    'uuid' => $event->getException()->getUser()->getUuid(),
                 ]
             )
         );
