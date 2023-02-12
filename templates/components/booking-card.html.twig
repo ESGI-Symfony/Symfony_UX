@@ -1,38 +1,40 @@
-{% for housing in computed.housings %}
-
-<div class="booking-card">
-  <div class="header">
-    <img class="image" src="{{ asset('images/saturn.jpg') }}">
-  </div>
-
-  <div class="content">
-    <div class="flex-row gap-100">
-      {{ bootstrap_icon("geo-alt") }}
-      Saturn
+<div class="booking-card flex-child-equals">
+    <div class="header">
+        <img class="image" src="{{ asset('images/saturn.jpg') }}">
     </div>
 
-    <h4>Cottage</h4>
+    <div class="content">
+        <div class="flex-row flex-wrap gap-100 align-center justify-space-between">
+            <div class="flex-row gap-100">
+                {{ bootstrap_icon("geo-alt") }}
+                <p>{{ rental.getCelestialObject() | trans }}</p>
+            </div>
+            <div class="card-chip">
+                {{ rental.getPrice() | number_format(2, ',', '.') }} €
+            </div>
+        </div>
+        <h4 class="mb-50">{{ rental.getRentType().value | trans }}</h4>
 
-    <div class="body">
-      From 23-06-2019 to 23-01-2300
+        {% if type.value is same as('booking') %}
+            <div>
+                <p>From 23-06-2019 to 23-01-2300 {# TODO #}</p>
+            </div>
+
+            {% if rental.getSumRating() %}
+                <div class="rating">
+                    {{ include('partials/_stars.html.twig', {rate: rental.getSumRating()}) }}
+                </div>
+            {% else %}
+                <div>
+                    <button class="btn btn-primary">{{ bootstrap_icon("chevron-right") }} {{ "add_review" | trans }}</button>
+                </div>
+            {% endif %}
+        {% endif %}
+
+        {% if type.value is same as('rental') %}
+            <p>{{ 'count_bookings' | trans({'%count%': rental.getReservations().count}) }}</p>
+        {% endif %}
+
+
     </div>
-
-    {% if housing.rating %}
-      <div class="rating">
-        {% for i in 1..housing.rating %}
-          <i>{{ bootstrap_icon("star-fill") }}</i>
-        {% endfor %}
-        {% for i in 1..5-housing.rating %}
-          <i>{{ bootstrap_icon("star") }}</i>
-        {% endfor %}
-      </div>
-    {% else %}
-      <div>
-        <button class="btn btn-primary">{{ bootstrap_icon("chevron-right") }} {{ "add_review" | trans }}</button>
-      </div>
-    {% endif %}
-
-  </div>
 </div>
-
-{% endfor %}
