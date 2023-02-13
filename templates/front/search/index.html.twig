@@ -43,19 +43,23 @@
 
         <div class="flex-row gap-200">
             {% if previous_page >= 0 %}
-                <form action="/search">
-                    <input type="hidden" name="object" value="{{ selectedObject }}">
-                    <input type="hidden" name="search" value="{{ search }}">
-                    <button class="btn btn-primary" name="page" value="{{ previous_page }}">{{ "search.previous" | trans }}</button>
-                </form>
+                <a class="btn btn-primary" href="{{ path('front_app_search', {
+                    'selectedObject': selectedObject,
+                    'search': search,
+                    'page': previous_page})
+                }}">
+                    {{ "search.previous" | trans }}
+                </a>
             {% endif %}
 
             {% if hasMorePages %}
-                <form action="/search">
-                    <input type="hidden" name="object" value="{{ selectedObject }}">
-                    <input type="hidden" name="search" value="{{ search }}">
-                    <button class="btn btn-primary" name="page" value="{{ next_page }}">{{ "search.next" | trans }}</button>
-                </form>
+                <a class="btn btn-primary" href="{{ path('front_app_search', {
+                    'selectedObject': selectedObject,
+                    'search': search,
+                    'page': next_page})
+                }}">
+                    {{ "search.next" | trans }}
+                </a>
             {% endif %}
         </div>
     </div>

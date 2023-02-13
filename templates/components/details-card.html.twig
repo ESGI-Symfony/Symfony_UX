@@ -29,7 +29,9 @@
         </div>
       </div>
 
-      <a class="btn btn-primary" href="/rental/{{ rental.id }}/overview?search={{ search }}">{{ "book" | trans }}・{{ rental.price }}€</a>
+      <a class="btn btn-primary" href="{{ path('front_rental_overview', {'id': rental.id}) }}">
+          {{ "book" | trans }}・{{ rental.price }}€
+      </a>
     </div>
   </div>
 </div>

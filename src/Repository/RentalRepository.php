@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Rental;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -37,6 +38,22 @@ class RentalRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function search(string $search, string $object): QueryBuilder
+    {
+        $queryBuilder = $this->createQueryBuilder('r')
+            ->where('(r.celestial_object LIKE :search')
+            ->orWhere('r.description LIKE :search')
+            ->orWhere('r.rent_type LIKE :search)')
+            ->setParameter('search', '%' . strtolower($search) . '%');
+
+        if (!empty($object)) {
+            $queryBuilder->andWhere('r.celestial_object = :celestial_object')
+                ->setParameter('celestial_object', $object);
+        }
+
+        return $queryBuilder;
     }
 
 //    /**

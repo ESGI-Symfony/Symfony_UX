@@ -9,15 +9,6 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 class DetailsCardComponent
 {
     public Rental $rental;
-    public string $search = '';
-
-    /**
-     * @return string
-     */
-    public function getSearch(): string
-    {
-        return $this->search;
-    }
 
     /**
      * @return Rental
