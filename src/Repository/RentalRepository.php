@@ -50,7 +50,7 @@ class RentalRepository extends ServiceEntityRepository
             ->addSelect('AVG(rev.review_mark) as sum_rating');
 
         foreach ($filters as $key => $value) {
-            $query->andWhere('r.' . $key . ' = :' . $key)
+            $query->andWhere("r.$key = :$key")
                 ->setParameter($key, $value);
         }
 
