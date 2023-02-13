@@ -1,0 +1,15 @@
+{% if rate|round(0, 'floor') %}
+    {% for i in 1..rate|round(0, 'floor') %}
+        <i>{{ bootstrap_icon("star-fill") }}</i>
+    {% endfor %}
+{% endif %}
+
+{% if rate matches '/\.[5]$/' %}
+    <i>{{ bootstrap_icon("star-half") }}</i>
+{% endif %}
+
+{% if 5-rate >= 1 %}
+    {% for i in 1..5-rate|round(0, 'ceil') %}
+        <i>{{ bootstrap_icon("star") }}</i>
+    {% endfor %}
+{% endif %}

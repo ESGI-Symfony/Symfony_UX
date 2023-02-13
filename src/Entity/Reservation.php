@@ -43,12 +43,15 @@ class Reservation
     #[ORM\JoinColumn(nullable: false)]
     private ?User $buyer = null;
 
-    #[ORM\OneToMany(mappedBy: 'Reservation', targetEntity: Review::class, orphanRemoval: true)]
-    private Collection $reviews;
+    #[ORM\Column(nullable: true)]
+    private ?int $review_mark = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $review_comment = null;
+
 
     public function __construct()
     {
-        $this->reviews = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -116,32 +119,26 @@ class Reservation
         return $this;
     }
 
-    /**
-     * @return Collection<int, Review>
-     */
-    public function getReviews(): Collection
+    public function getReviewMark(): ?int
     {
-        return $this->reviews;
+        return $this->review_mark;
     }
 
-    public function addReview(Review $review): self
+    public function setReviewMark(?int $review_mark): self
     {
-        if (!$this->reviews->contains($review)) {
-            $this->reviews->add($review);
-            $review->setReservation($this);
-        }
+        $this->review_mark = $review_mark;
 
         return $this;
     }
 
-    public function removeReview(Review $review): self
+    public function getReviewComment(): ?string
     {
-        if ($this->reviews->removeElement($review)) {
-            // set the owning side to null (unless already changed)
-            if ($review->getReservation() === $this) {
-                $review->setReservation(null);
-            }
-        }
+        return $this->review_comment;
+    }
+
+    public function setReviewComment(?string $review_comment): self
+    {
+        $this->review_comment = $review_comment;
 
         return $this;
     }
