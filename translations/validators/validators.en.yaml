@@ -47,6 +47,8 @@ rental:
 
   image:
     not_null: 'The image cannot be null.'
+    max_size: 'The file is too large ({{ size }} {{ suffix }}). Allowed maximum size is {{ limit }} {{ suffix }}.'
+    mime_types: 'The file is not a valid image ({{ type }}). Allowed mime types are {{ types }}.'
 
 rental_option:
   name:

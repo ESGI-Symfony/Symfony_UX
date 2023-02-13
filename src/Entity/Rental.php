@@ -118,8 +118,8 @@ class Rental
     #[Assert\File(
         maxSize: '2M',
         mimeTypes: ['image/jpeg', 'image/png'],
-        maxSizeMessage: 'The file is too large ({{ size }} {{ suffix }}). Allowed maximum size is {{ limit }} {{ suffix }}.',
-        mimeTypesMessage: 'Please upload a png or jpeg image',
+        maxSizeMessage: 'rental.image.max_size',
+        mimeTypesMessage: 'rental.image.mime_types',
     )]
     #[Assert\NotNull(message: 'rental.image.not_null')]
     private ?File $imageFile = null;

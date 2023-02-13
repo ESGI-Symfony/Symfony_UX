@@ -8,10 +8,10 @@ document.querySelectorAll('.input-image').forEach(input => {
     uploadImageInput.addEventListener('change', (event) => {
         if (!event.target.files[0]) return;
 
-        const FR = new FileReader();
-        FR.readAsDataURL(event.target.files[0]);
-        FR.addEventListener("load", () => {
-            imagePreview.src = FR.result;
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(event.target.files[0]);
+        fileReader.addEventListener("load", () => {
+            imagePreview.src = fileReader.result;
             imagePreview.classList.remove('hidden')
             inputButton.classList.add('hidden')
         })
