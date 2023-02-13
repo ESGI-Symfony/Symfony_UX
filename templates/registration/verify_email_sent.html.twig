@@ -5,7 +5,7 @@
 {% block body %}
     <p>A verify email has been sent to you, click on the verify link to validate your account</p>
     <a href="{{ path('app_verify_email_sent', {
-        'id': userId,
+        'uuid': userUuid,
         'resend': 'true',
     }) }}">Resend Verify Email</a>
 {% endblock %}

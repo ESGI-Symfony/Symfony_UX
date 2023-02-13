@@ -64,7 +64,7 @@ class RegistrationController extends AbstractController
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
 
-            return $this->redirectToRoute('app_verify_email_sent', ['id' => $user->getId()]);
+            return $this->redirectToRoute('app_verify_email_sent', ['uuid' => $user->getUuid()]);
         }
 
         return $this->render('registration/register.html.twig', [
@@ -110,8 +110,8 @@ class RegistrationController extends AbstractController
         return $this->redirectToRoute('front_app_home');
     }
 
-    #[Route('/verify/{id}/resend', name: 'app_verify_email_sent')]
-    public function resendVerifyEmail(Request $request, User $user): Response
+    #[Route('/verify/{uuid}/resend', name: 'app_verify_email_sent')]
+    public function resendVerifyEmail(User $user, Request $request): Response
     {
         if ($this->getUser()) {
             return $this->redirectToRoute('front_app_home');
@@ -133,7 +133,7 @@ class RegistrationController extends AbstractController
         }
 
         return $this->render('registration/verify_email_sent.html.twig', [
-            'userId' => $user->getId(),
+            'userUuid' => $user->getUuid(),
         ]);
     }
 }

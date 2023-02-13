@@ -30,13 +30,36 @@ back_to_home: Back to home
 your_rentals: Your rentals
 estimated: Estimated
 
+create_a_rental_stylized: Create a <span class="highlight">rental</span>
+rental_information: Rental information
+address: Address
+miscellaneous: Miscellaneous
+main_image: Main image
+rent_type: Rental type
+description: Description
+describe_your_rental: Describe your rental, your rooms, the environment, the activities, anything that can interest a buyer
+max_guests_available: Max guests available
+capacity: Capacity
+price_by_night: Price by night
+price: Price
+rooms: Rooms
+bathrooms: Bathrooms
+room_count: Number of rooms
+bathroom_count: Number of bathrooms
+rental_options: Rental options
+celestial_object: Celestial object
+longitude: Longitude
+latitude: Latitude
+transports: Transports
+add_my_rental: Add my rental
+add_an_image: Add an image
+add_a_rental: Add a rental
 password: Password
 email_example: example@gmail.com
 nickname: Nickname
 reviews: Reviews
 overview: Overview
 access: Access
-description: Description
 book_now: Book now
 book: Book
 back: Back
