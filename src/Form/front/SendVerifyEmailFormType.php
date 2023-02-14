@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\front;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UserFormType extends AbstractType
+class SendVerifyEmailFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
