@@ -18,6 +18,14 @@ class SendVerifyEmailFormType extends AbstractType
     {
         $builder
             ->add('email')
+            ->add('nickname')
+            ->add('password')
+            ->add('isVerified')
+            ->add('firstname')
+            ->add('lastname')
+            ->add('lessor_number')
+            ->add('uuid')
+            ->add('phone')
         ;
     }
 

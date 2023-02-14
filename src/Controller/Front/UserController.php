@@ -6,17 +6,15 @@ use App\Entity\User;
 use App\Entity\UserLessorRequest;
 use App\Enums\UserLessorRequestStatus;
 use App\Form\LessorRequestFormType;
+use App\Form\UserProfileFormType;
 use App\Repository\UserLessorRequestRepository;
 use App\Repository\UserRepository;
 use App\Security\Voter\UserVoter;
-use Couchbase\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 // this route is protected by the firewall
 #[Route(path: '/profile', name: 'app_profile_')]
@@ -27,6 +25,28 @@ class UserController extends AbstractController
     public function account(): Response
     {
         return $this->render('front/profile/account.html.twig');
+    }
+
+    #[Route(path: '/edit', name: 'edit')]
+    public function edit(Request $request, UserRepository $userRepository): Response
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+
+        $form = $this->createForm(UserProfileFormType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $userRepository->save($user, true);
+
+            return $this->redirectToRoute('app_profile_account', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('front/profile/edit_profile.html.twig', [
+            'user' => $user,
+            'form' => $form,
+        ]);
+
     }
 
     #[Route(path: '/rentals', name: 'rentals')]

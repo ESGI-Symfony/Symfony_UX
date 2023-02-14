@@ -15,9 +15,14 @@ your_name: Your name
 your_last_name: Your last name
 your_galactic_phone: Your galactic phone
 your_lessor_number: Your lessor number
+your_email: Your email
+your_password: Your password
+your_nickname: Your nickname
 add_your_rental_tip: To add your rentals, we need to get in touch first
 become_lessor_stylized: Become <span class="highlight">lessor</span>
 become_lessor: Become lessor
+save_my_profile: Save my profile
+back: back
 we_come_back_to_you: We come back to you
 we_come_back_to_you_explained: Huston, we’ve got your information. Frequently check your profile to follow your request’s status
 go_to_profile: Go to your profile
@@ -32,6 +37,7 @@ see_more: See more
 terms_of_sales: Terms of sales
 data_privacy: Data privacy
 logout: Logout
+my_profile: My <span class="highlight">profile</span>
 
 login :
   password: Password
