@@ -24,8 +24,8 @@ class UserFixtures extends Fixture
                 ->setNickname($faker->name)
                 ->setEmail($faker->email)
                 ->setPassword('$2y$13$a9kys5sCWtO1AuGGOnV3Ius7o5sJ96OjPn9Wru2C7NEQrKRwMFwHm') // pwd
-                ->setFirstName($faker->firstName)
-                ->setLastName($faker->lastName)
+                ->setFirstName($isLessor ? $faker->firstName : null)
+                ->setLastName($isLessor ? $faker->lastName : null)
                 ->setIsVerified(true)
                 ->setRoles($roles)
                 ->setLessorNumber($isLessor ? $faker->numberBetween(1000, 9999) : null)

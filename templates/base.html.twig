@@ -19,6 +19,11 @@
         {% block head %}{% endblock %}
     </head>
     <body>
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('back_app_home') }}" id="admin-button">
+                <button class="btn btn-outline-secondary">{{ bootstrap_icon('gear-fill') }}</button>
+            </a>
+        {% endif %}
         {% for flash in app.flashes('success') %}
             <div class="alert alert-success">{{ flash }}</div>
         {% endfor %}

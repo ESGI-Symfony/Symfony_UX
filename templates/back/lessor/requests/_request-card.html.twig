@@ -1,0 +1,12 @@
+<div class="card-small">
+    <div class="content">
+        <div>
+            <h5>{{ request.lessor.firstname }} {{ request.lessor.lastname }}</h5>
+            <p>{{ request.lessor.email }} - {{ request.lessor.phone }}</p>
+            <small>{{ request.lessor.lessorNumber }}</small>
+        </div>
+        <p class="card-text">{{ request.motivation }}</p>
+{#        <a href="{{ path('request_validate', {'id': request.id}) }}" class="btn btn-primary">Validate</a>#}
+{#        <a href="{{ path('request_refuse', {'id': request.id}) }}" class="btn btn-danger">Refuse</a>#}
+    </div>
+</div>

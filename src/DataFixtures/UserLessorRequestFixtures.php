@@ -23,6 +23,9 @@ class UserLessorRequestFixtures extends Fixture implements DependentFixtureInter
     {
         $faker = Factory::create();
         $users = $manager->getRepository(User::class)->findAll();
+        $users = array_filter($users, fn(User $user) => !$user->isLessor());
+        // get only a random subset of users (-1 to have at least one non-lessor user)
+        $users = array_slice($users, 0, $faker->numberBetween(0, count($users) - 1));
 
         foreach ($users as $user) {
             if($user->isLessor()) {
@@ -34,6 +37,11 @@ class UserLessorRequestFixtures extends Fixture implements DependentFixtureInter
                 ->setStatus($faker->randomElement(UserLessorRequestStatus::cases()))
                 ->setLessor($user)
             ;
+
+            $user->setPhone($faker->phoneNumber)
+                ->setLessorNumber($faker->numberBetween(1000, 9999))
+                ->setFirstName($faker->firstName)
+                ->setLastName($faker->lastName);
 
             $manager->persist($object);
         }
