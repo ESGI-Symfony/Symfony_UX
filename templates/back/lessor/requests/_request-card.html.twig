@@ -1,4 +1,6 @@
-<div class="card-small">
+{% set hide_actions = hide_actions is defined ? hide_actions : false %}
+
+<div class="card-small flex-column">
     <div class="content">
         <div>
             <h5>{{ request.lessor.firstname }} {{ request.lessor.lastname }}</h5>
@@ -6,7 +8,18 @@
             <small>{{ request.lessor.lessorNumber }}</small>
         </div>
         <p class="card-text">{{ request.motivation }}</p>
-{#        <a href="{{ path('request_validate', {'id': request.id}) }}" class="btn btn-primary">Validate</a>#}
-{#        <a href="{{ path('request_refuse', {'id': request.id}) }}" class="btn btn-danger">Refuse</a>#}
+        {% if not hide_actions %}
+            <div class="footer">
+                <a class="btn btn-outline-accent" href="{{ path('back_lessor_refuse', {'id': request.id}) }}">
+                    {{ bootstrap_icon('x-circle') }}
+                    Refuse
+                </a>
+
+                <a class="btn btn-outline-primary" href="{{ path('back_lessor_validate', {'id': request.id}) }}">
+                    {{ bootstrap_icon('check-circle') }}
+                    Validate
+                </a>
+            </div>
+        {% endif %}
     </div>
 </div>

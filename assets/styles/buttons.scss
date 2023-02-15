@@ -33,6 +33,15 @@
 		}
 	}
 
+	&-accent {
+		background-color: $betelgeuse;
+		color: $dark-matter;
+
+		&:hover {
+			background-color: darken($betelgeuse, 10%);
+		}
+	}
+
 	&-text {
 		color: $procyon;
 
@@ -57,6 +66,16 @@
 
 		&:hover {
 			background-color: $procyon;
+			color: $dark-matter;
+		}
+	}
+
+	&-outline-accent {
+		border: solid 1px $betelgeuse;
+		color: $betelgeuse;
+
+		&:hover {
+			background-color: $betelgeuse;
 			color: $dark-matter;
 		}
 	}

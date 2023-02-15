@@ -76,8 +76,8 @@ class User implements UserInterface, \Symfony\Component\Security\Core\User\Passw
     private ?string $lastname = null;
 
     #[ORM\Column(nullable: true)]
-    #[Assert\Type(type: 'number', message: 'user.lessor_number.type')]
-    #[Assert\NotBlank(message: 'user.firstname.not_blank', groups: ['lessor'])]
+    #[Assert\Type(type: 'int', message: 'user.lessor_number.type')]
+    #[Assert\NotBlank(message: 'user.lessor_number.not_blank', groups: ['lessor'])]
     private ?int $lessor_number = null;
 
     #[ORM\OneToMany(mappedBy: 'lessor', targetEntity: UserLessorRequest::class, orphanRemoval: true)]

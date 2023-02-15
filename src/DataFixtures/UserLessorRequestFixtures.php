@@ -23,11 +23,18 @@ class UserLessorRequestFixtures extends Fixture implements DependentFixtureInter
     {
         $faker = Factory::create();
         $users = $manager->getRepository(User::class)->findAll();
-        $users = array_filter($users, fn(User $user) => !$user->isLessor());
-        // get only a random subset of users (-1 to have at least one non-lessor user)
-        $users = array_slice($users, 0, $faker->numberBetween(0, count($users) - 1));
+        $userNonLessor = array_filter($users, fn(User $user) => !$user->isLessor());
 
-        foreach ($users as $user) {
+        if (count($userNonLessor) <= 1) {
+            // force at least one lessor
+            $lessor = $userNonLessor[0];
+            $lessor->setRoles(['ROLE_USER', 'ROLE_LESSOR']);
+        } else {
+            // get only a random subset of users (-1 to have at least one non-lessor user)
+            $userNonLessor = array_slice($userNonLessor, 1, $faker->numberBetween(0, count($userNonLessor) - 1));
+        }
+
+        foreach ($userNonLessor as $user) {
             if($user->isLessor()) {
                 continue;
             }
