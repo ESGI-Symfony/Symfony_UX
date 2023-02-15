@@ -1,4 +1,4 @@
-{% extends 'back/base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}User index{% endblock %}
 
@@ -14,6 +14,11 @@
                 <th>Password</th>
                 <th>Roles</th>
                 <th>IsVerified</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Lessor_number</th>
+                <th>Uuid</th>
+                <th>Phone</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -26,6 +31,11 @@
                 <td>{{ user.password }}</td>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
                 <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
+                <td>{{ user.firstname }}</td>
+                <td>{{ user.lastname }}</td>
+                <td>{{ user.lessorNumber }}</td>
+                <td>{{ user.uuid }}</td>
+                <td>{{ user.phone }}</td>
                 <td>
                     <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
                     <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
@@ -33,7 +43,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="12">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\front\ChangePasswordFormType;
-use App\Form\front\ResetPasswordRequestFormType;
+use App\Form\Front\ChangePasswordFormType;
+use App\Form\Front\ResetPasswordRequestFormType;
 use App\Security\AppCustomAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;

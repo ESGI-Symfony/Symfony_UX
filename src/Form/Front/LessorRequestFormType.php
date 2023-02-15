@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form\front;
+namespace App\Form\Front;
 
 use App\Entity\User;
 use App\Entity\UserLessorRequest;
