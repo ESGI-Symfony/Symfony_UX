@@ -1,6 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <nav>
+        <ul class="flex-row flex-wrap p-50 gap-100">
+            <li>
+                <a href="{{ path('back_user_index') }}" class="btn btn-secondary">
+                    {{ bootstrap_icon('people') }} Users
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('back_lessor_pending') }}" class="btn btn-secondary">
+                    {{ bootstrap_icon('rocket-takeoff') }} Lessor Requests
+                </a>
+            </li>
+        </ul>
+    </nav>
+
     <main class="container">
         {% block main %}{% endblock %}
     </main>
