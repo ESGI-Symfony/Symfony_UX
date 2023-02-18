@@ -3,16 +3,16 @@
 {% block main %}
     <div class="flex-column account gap-400">
         <div class="flex-column align-center justify-center gap-200">
-            <div class="flex-row align-center justify-center gap-200">
+            <div class="flex-row align-center justify-center">
                 <div>
-                    <h4 class="text-center">Hello <span>Norbert</span></h4>
+                    <h4 class="text-center">{{ 'hello' | trans }} <span>{{ user.firstname }}</span></h4>
                 </div>
                 <a href="{{ path('app_profile_edit') }}" class="text-decoration-none">
                     <button class="edit-account btn btn-text mx-auto">{{ bootstrap_icon('pencil') }}</button>
                 </a>
             </div>
             <div>
-                norbert.gloupurp@galactimail.mars
+                {{ user.email }}
             </div>
             <div class="notification notification-send">
                 {{ bootstrap_icon("rocket-takeoff") }}{{ 'pending_request_lessor_message' | trans }}
@@ -23,7 +23,9 @@
                 <div class="font-bold">
                     <span>3</span> {{ 'bookings' | trans }}
                 </div>
-                <div class="more-informations">{{ 'see_more' | trans }}</div>
+                <a href="{{ path('app_profile_bookings') }}" class="text-decoration-none">
+                    <div class="more-informations">{{ 'see_more' | trans }}</div>
+                </a>
             </div>
             {{ component('booking-card') }}
         </div>
@@ -32,7 +34,9 @@
                 <div class="font-bold">
                     <span>3</span> {{ 'rentals' | trans }}
                 </div>
-                <div class="more-informations">{{ 'see_more' | trans }}</div>
+                <a href="{{ path('app_profile_rentals') }}" class="text-decoration-none">
+                    <div class="more-informations">{{ 'see_more' | trans }}</div>
+                </a>
             </div>
             {{ component('booking-card') }}
         </div>
