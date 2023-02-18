@@ -3,6 +3,8 @@ version: "3.4"
 # Development environment override
 services:
   php:
+    env_file:
+      - .env.local
     build:
       target: app_php_dev
     volumes:
@@ -12,16 +14,39 @@ services:
       #  from the bind-mount for better performance by enabling the next line:
       #- /srv/app/vendor
     environment:
-      # See https://xdebug.org/docs/all_settings#mode 
+      # See https://xdebug.org/docs/all_settings#mode
       XDEBUG_MODE: "${XDEBUG_MODE:-off}"
     extra_hosts:
       # Ensure that host.docker.internal is correctly defined on Linux
       - host.docker.internal:host-gateway
 
-  caddy:
+  messenger:
+    env_file:
+      - .env.local
+
+  node:
+    build:
+      target: app_node_dev
+    volumes:
+      - ./:/srv/app
+
+  nginx:
     volumes:
       - ./public:/srv/app/public:ro
-      - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+    ports:
+      - "80:80"
+
+  adminer:
+    image: adminer
+    restart: always
+    depends_on:
+      - database
+    ports:
+      - 8080:8080
+    environment:
+      POSTGRES_USER: symfony
+      POSTGRES_PASSWORD: ChangeMe
+      POSTGRES_DB: app
 
 ###> symfony/mercure-bundle ###
 ###< symfony/mercure-bundle ###

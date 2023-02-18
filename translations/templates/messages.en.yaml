@@ -5,6 +5,10 @@ home:
   exclusive_package: Exclusive Packages
   explore_categories: Explore categories
 
+login :
+  password: Password
+  email_example: example@gmail.com
+
 motivation: Motivation
 firstname: Firstname
 lastname: Lastname
@@ -38,7 +42,36 @@ terms_of_sales: Terms of sales
 data_privacy: Data privacy
 logout: Logout
 my_profile: My <span class="highlight">profile</span>
-
-login :
-  password: Password
-  email_example: example@gmail.com
+create_a_rental_stylized: Create a <span class="highlight">rental</span>
+rental_information: Rental information
+address: Address
+miscellaneous: Miscellaneous
+main_image: Main image
+rent_type: Rental type
+description: Description
+describe_your_rental: Describe your rental, your rooms, the environment, the activities, anything that can interest a buyer
+max_guests_available: Max guests available
+capacity: Capacity
+price_by_night: Price by night
+price: Price
+rooms: Rooms
+bathrooms: Bathrooms
+room_count: Number of rooms
+bathroom_count: Number of bathrooms
+rental_options: Rental options
+celestial_object: Celestial object
+longitude: Longitude
+latitude: Latitude
+transports: Transports
+add_my_rental: Add my rental
+add_an_image: Add an image
+add_a_rental: Add a rental
+password: Password
+email_example: example@gmail.com
+nickname: Nickname
+count_bookings: '[0,1]%count% booking|[2,Inf[%count% bookings'
+count_bookings_stylized: '[0,1]<span class="highlight">%count%</span> booking|[2,Inf[<span class="highlight">%count%</span> bookings'
+count_rentals_stylized: '[0,1]<span class="highlight">%count%</span> rental|[2,Inf[<span class="highlight">%count%</span> rentals'
+refuse: Refuse
+refuse_this_rental: Refuse this rental
+refusing_reason: Refusing reason

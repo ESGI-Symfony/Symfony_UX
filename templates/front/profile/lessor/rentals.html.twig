@@ -1,7 +1,18 @@
 {% extends 'front/base.html.twig' %}
 
-{% block body %}
-    <main class="container flex-column column-400 mx-auto text-center justify-center align-center">
-        <h4 class="mb-300 text-center"> {{ 'your_rentals' | trans }}</h4>
-    </main>
+{% block main %}
+    <section class="flex-column gap-300 mx-auto text-center justify-center align-center">
+        <h4 class="text-center"> {{ 'count_rentals_stylized' | trans({'%count%': rentals.count}) | raw }}</h4>
+        <a href="{{ path('front_app_profile_rentals_create') }}" class="text-decoration-none">
+            <button class="btn btn-primary width-fit-content">
+                {{ bootstrap_icon('plus-circle') }}
+                {{ 'add_a_rental' | trans }}
+            </button>
+        </a>
+        <div class="flex-row-on-medium align-center flex-wrap gap-300 column-900 w-100">
+            {% for rental in rentals %}
+                {{ component('booking-card', {rental: rental, type: 'rental'}) }}
+            {% endfor %}
+        </div>
+    </section>
 {% endblock %}

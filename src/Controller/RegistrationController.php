@@ -12,6 +12,8 @@ use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mime\Address;
+use Symfony\Component\Uid\Uuid;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
@@ -29,10 +31,11 @@ class RegistrationController extends AbstractController
 
     #[Route('/register', name: 'app_register')]
     public function register(
-        Request $request,
+        Request                     $request,
         UserPasswordHasherInterface $userPasswordHasher,
-        EntityManagerInterface $entityManager
-    ): Response {
+        EntityManagerInterface      $entityManager
+    ): Response
+    {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -45,6 +48,8 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
+
+            $user->setUuid(Uuid::v4());
 
             $entityManager->persist($user);
             $entityManager->flush();
@@ -59,7 +64,7 @@ class RegistrationController extends AbstractController
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
 
-            return $this->redirectToRoute('app_verify_email_sent', ['id' => $user->getId()]);
+            return $this->redirectToRoute('app_verify_email_sent', ['uuid' => $user->getUuid()]);
         }
 
         return $this->render('registration/register.html.twig', [
@@ -69,12 +74,13 @@ class RegistrationController extends AbstractController
 
     #[Route('/verify/email', name: 'app_verify_email')]
     public function verifyUserEmail(
-        Request $request,
-        TranslatorInterface $translator,
-        UserRepository $userRepository,
+        Request                    $request,
+        TranslatorInterface        $translator,
+        UserRepository             $userRepository,
         UserAuthenticatorInterface $userAuthenticator,
-        AppCustomAuthenticator $authenticator
-    ): Response {
+        AppCustomAuthenticator     $authenticator
+    ): Response
+    {
         $id = $request->get('id');
 
         if (null === $id) {
@@ -104,8 +110,8 @@ class RegistrationController extends AbstractController
         return $this->redirectToRoute('front_app_home');
     }
 
-    #[Route('/verify/{id}/resend', name: 'app_verify_email_sent')]
-    public function resendVerifyEmail(Request $request, User $user): Response
+    #[Route('/verify/{uuid}/resend', name: 'app_verify_email_sent')]
+    public function resendVerifyEmail(User $user, Request $request): Response
     {
         if ($this->getUser()) {
             return $this->redirectToRoute('front_app_home');
@@ -127,7 +133,7 @@ class RegistrationController extends AbstractController
         }
 
         return $this->render('registration/verify_email_sent.html.twig', [
-            'userId' => $user->getId(),
+            'userUuid' => $user->getUuid(),
         ]);
     }
 }

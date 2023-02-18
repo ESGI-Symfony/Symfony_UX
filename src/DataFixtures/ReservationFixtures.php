@@ -30,16 +30,20 @@ class ReservationFixtures extends Fixture implements DependentFixtureInterface
         foreach ($rentals as $rental) {
             $begin = $faker->dateTimeBetween('now', '+1 year');
             $end = $faker->dateTimeBetween($begin, '+1 year');
+            $addReview = $faker->boolean();
 
-            $object = (new Reservation())
-                ->setRental($rental)
-                ->setPaymentToken($faker->uuid)
-                ->setBuyer($faker->randomElement($users))
-                ->setDateBegin($begin)
-                ->setDateEnd($end)
-            ;
-
-            $manager->persist($object);
+            for($i = 0; $i < $faker->numberBetween(0, 10); $i++) {
+                $object = (new Reservation())
+                    ->setRental($rental)
+                    ->setPaymentToken($faker->uuid)
+                    ->setBuyer($faker->randomElement($users))
+                    ->setDateBegin($begin)
+                    ->setDateEnd($end)
+                    ->setReviewMark($addReview ? $faker->numberBetween(0, 5) : null)
+                    ->setReviewComment($addReview ? $faker->paragraph : null)
+                ;
+                $manager->persist($object);
+            }
         }
 
         $manager->flush();

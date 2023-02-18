@@ -76,8 +76,8 @@ class User implements UserInterface, \Symfony\Component\Security\Core\User\Passw
     private ?string $lastname = null;
 
     #[ORM\Column(nullable: true)]
-    #[Assert\Type(type: 'number', message: 'user.lessor_number.type')]
-    #[Assert\NotBlank(message: 'user.firstname.not_blank', groups: ['lessor'])]
+    #[Assert\Type(type: 'int', message: 'user.lessor_number.type')]
+    #[Assert\NotBlank(message: 'user.lessor_number.not_blank', groups: ['lessor'])]
     private ?int $lessor_number = null;
 
     #[ORM\OneToMany(mappedBy: 'lessor', targetEntity: UserLessorRequest::class, orphanRemoval: true)]
@@ -85,9 +85,6 @@ class User implements UserInterface, \Symfony\Component\Security\Core\User\Passw
 
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Rental::class, orphanRemoval: true)]
     private Collection $rentals;
-
-    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Review::class)]
-    private Collection $reviews;
 
     #[ORM\OneToMany(mappedBy: 'buyer', targetEntity: Reservation::class)]
     private Collection $reservations;
@@ -107,7 +104,6 @@ class User implements UserInterface, \Symfony\Component\Security\Core\User\Passw
     {
         $this->userLessorRequests = new ArrayCollection();
         $this->rentals = new ArrayCollection();
-        $this->reviews = new ArrayCollection();
         $this->reservations = new ArrayCollection();
         $this->reports = new ArrayCollection();
     }
@@ -269,36 +265,6 @@ class User implements UserInterface, \Symfony\Component\Security\Core\User\Passw
             // set the owning side to null (unless already changed)
             if ($rental->getOwner() === $this) {
                 $rental->setOwner(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Review>
-     */
-    public function getReviews(): Collection
-    {
-        return $this->reviews;
-    }
-
-    public function addReview(Review $review): self
-    {
-        if (!$this->reviews->contains($review)) {
-            $this->reviews->add($review);
-            $review->setAuthor($this);
-        }
-
-        return $this;
-    }
-
-    public function removeReview(Review $review): self
-    {
-        if ($this->reviews->removeElement($review)) {
-            // set the owning side to null (unless already changed)
-            if ($review->getAuthor() === $this) {
-                $review->setAuthor(null);
             }
         }
 

@@ -1,7 +1,7 @@
 {% extends 'front/base.html.twig' %}
 
-{% block body %}
-    <main class="container column-400 justify-center mx-auto">
+{% block main %}
+    <section class="column-400 justify-center mx-auto">
         <h4 class="mb-300 text-center"> {{ 'become_lessor_stylized' | trans | raw }}</h4>
         <p class="mb-300 text-center">{{ 'add_your_rental_tip' | trans }}</p>
         {{ form_start(form) }}
@@ -13,8 +13,8 @@
             {{ include('partials/_input.html.twig', {input: form.lessor.phone}) }}
             {{ include('partials/_input.html.twig', {input: form.lessor.lessor_number}) }}
         </div>
-        <button class="btn btn-primary ms-auto">{{ bootstrap_icon('rocket') }} {{ 'become_lessor' | trans }}</button>
+        <button class="btn btn-primary ms-auto">{{ bootstrap_icon('rocket-takeoff') }} {{ 'become_lessor' | trans }}</button>
 
         {{ form_end(form) }}
-    </main>
+    </section>
 {% endblock %}

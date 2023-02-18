@@ -3,16 +3,21 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
-
     {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.nickname) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+    <div class="container h-150 flex-column align-center justify-center gap-300">
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+        <div class="flex-column align-center justify-center gap-300">
+            <h4 class="h4 mb-3 font-weight-normal">Sign up</h4>
+            <span class="h6 small">Please fill the details and create account</span>
+        </div>
+        {{ include('partials/_input_register.html.twig', {input: registrationForm.nickname}) }}
+        {{ include('partials/_input_register.html.twig', {input: registrationForm.email}) }}
+        {{ include('partials/_input_register.html.twig', {input: registrationForm.plainPassword}) }}
+        {{ include('partials/_input_checkbox.html.twig', {input: registrationForm.agreeTerms}) }}
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">{{ bootstrap_icon("rocket-takeoff") }} Sign up</button>
+        </div>
+        {{ form_end(registrationForm) }}
+    </div>
 {% endblock %}
+
