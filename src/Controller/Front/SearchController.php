@@ -19,7 +19,7 @@ class SearchController extends AbstractController
         $object = $request->query->get('object', '');
         $offset = $page * $size;
 
-        $query = $rental_repository->search($search, $object);
+        $query = $rental_repository->search($search, $object, true);
 
         $objects = $rental_repository->search($search, '')
             ->select('r.celestial_object')

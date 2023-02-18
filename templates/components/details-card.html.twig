@@ -1,10 +1,12 @@
 <div class="card-small">
   <div class="header">
     <img class="image" src="{{ asset('images/saturn.jpg') }}">
-    <div class="rating">
-      4
-      {{ bootstrap_icon("star-fill") }}
-    </div>
+    {% if rating != null %}
+      <div class="rating">
+        {{ rating }}
+        {{ bootstrap_icon("star-fill") }}
+      </div>
+    {% endif %}
   </div>
 
   <div class="content">
@@ -24,8 +26,11 @@
         <span>{{ "features" | trans }}</span>
 
         <div class="icons">
-          {{ bootstrap_icon("train-front") }}
-          {{ bootstrap_icon("radioactive") }}
+          {% for option in options %}
+            <span>
+              {{ option }}
+            </span>
+          {% endfor %}
         </div>
       </div>
 

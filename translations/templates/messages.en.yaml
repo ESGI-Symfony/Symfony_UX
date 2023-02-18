@@ -72,3 +72,4 @@ count_rentals_stylized: '[0,1]<span class="highlight">%count%</span> rental|[2,I
 refuse: Refuse
 refuse_this_rental: Refuse this rental
 refusing_reason: Refusing reason
+no_review_comment: No review comment

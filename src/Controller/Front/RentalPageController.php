@@ -3,6 +3,8 @@
 namespace App\Controller\Front;
 
 use App\Entity\Rental;
+use App\Entity\Reservation;
+use App\Repository\ReservationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -30,11 +32,14 @@ class RentalPageController extends AbstractController
     }
 
     #[Route('/reviews', name: 'reviews')]
-    public function reviews(Rental $rental): Response
+    public function reviews(Rental $rental, ReservationRepository $reservationRepository): Response
     {
+        $reservations = $reservationRepository->findBy(['rental' => $rental]);
+
         return $this->render('front/rental/reviews.html.twig', [
             'rental' => $rental,
             'selectedTab' => 'reviews',
+            'reservations' => $reservations,
         ]);
     }
 

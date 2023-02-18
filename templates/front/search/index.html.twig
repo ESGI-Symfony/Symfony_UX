@@ -37,7 +37,7 @@
             </div>
 
             {% for rental in rentals %}
-                {{ component('details-card', {rental: rental, search: search}) }}
+                {{ component('details-card', {rental: rental.0, rating: rental.sum_rating, options: [rental.options]}) }}
             {% endfor %}
         </div>
 
