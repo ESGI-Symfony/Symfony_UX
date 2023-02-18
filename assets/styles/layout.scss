@@ -172,6 +172,10 @@ $prefixes: (
   max-width: 700px;
 }
 
+.column-900 {
+  max-width: 900px;
+}
+
 .width-fit-content {
   width: fit-content;
 }
@@ -198,4 +202,30 @@ $prefixes: (
 
 .hidden {
   display: none;
+}
+
+.flex-row-on-medium {
+  display: flex;
+  flex-direction: column;
+  @include medium {
+    flex-direction: row;
+  }
+}
+.flex-column-on-medium {
+  display: flex;
+  flex-direction: row;
+  @include medium {
+    flex-direction: column;
+  }
+}
+
+.flex-child-equals {
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  flex: 1;
+  width: 100%;
+  @include medium {
+    max-width: 50%;
+  }
 }

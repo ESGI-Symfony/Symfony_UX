@@ -127,6 +127,8 @@ class Rental
     #[ORM\Column(type: Types::GUID)]
     private ?string $uuid = null;
 
+    private float $sum_rating = 0;
+
     public function __construct()
     {
         $this->options = new ArrayCollection();
@@ -424,6 +426,18 @@ class Rental
     {
         $this->uuid = $uuid;
 
+        return $this;
+    }
+
+    public function getSumRating(): ?float
+    {
+        return $this->sum_rating;
+    }
+
+    public function setSumRating(?float $sumRating): self
+    {
+        // round to half
+        $this->sum_rating = $sumRating ? round($sumRating*2)/2 : 0;
         return $this;
     }
 }

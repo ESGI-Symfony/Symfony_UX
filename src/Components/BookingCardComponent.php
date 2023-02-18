@@ -2,25 +2,20 @@
 
 namespace App\Components;
 
+use App\Entity\Rental;
+use App\Enums\BookingCardTypeComponent;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('booking-card')]
 class BookingCardComponent
 {
-
-    public function getHousings(): array
+    public Rental $rental;
+    public BookingCardTypeComponent $type;
+    public function mount(Rental $rental, string $type): void
     {
-        $housings = array(
-            array(
-                'name' => 'Mars',
-                'rating' => 3
-            ),
-            array(
-                'name' => 'Moon',
-                'rating' => null
-            ),
-        );
+        $this->rental = $rental;
 
-        return $housings;
+        // sadly, there's no twig core enum handling, so we need to convert the string to an enum
+        $this->type = BookingCardTypeComponent::from($type);
     }
 }

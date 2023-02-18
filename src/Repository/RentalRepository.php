@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Rental;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -54,6 +55,31 @@ class RentalRepository extends ServiceEntityRepository
         }
 
         return $queryBuilder;
+    }
+
+    public function getRentalsWithSumRating($filters): ArrayCollection
+    {
+        $query = $this->createQueryBuilder('r')
+            ->leftJoin('r.reservations', 'rev')
+            ->orderBy('r.id', 'ASC')
+            ->addSelect('AVG(rev.review_mark) as sum_rating');
+
+        foreach ($filters as $key => $value) {
+            $query->andWhere("r.$key = :$key")
+                ->setParameter($key, $value);
+        }
+
+        $results = $query->groupBy('r.id')
+            ->getQuery()
+            ->getResult();
+
+        $collection = new ArrayCollection();
+        foreach ($results as $result) {
+            $rental = $result[0];
+            $rental->setSumRating($result['sum_rating']);
+            $collection->add($rental);
+        }
+        return $collection;
     }
 
 //    /**

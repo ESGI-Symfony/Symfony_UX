@@ -8,6 +8,7 @@ use App\Entity\UserLessorRequest;
 use App\Enums\UserLessorRequestStatus;
 use App\Form\LessorRequestFormType;
 use App\Form\RentalFormType;
+use App\Repository\RentalRepository;
 use App\Repository\UserLessorRequestRepository;
 use App\Security\Voter\UserVoter;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,7 +23,7 @@ use Symfony\Component\Uid\Uuid;
 class RentalController extends AbstractController
 {
     #[Route(path: '/', name: 'index', methods: ['GET'])]
-    public function rentals(): Response
+    public function rentals(RentalRepository $rentalRepository): Response
     {
         if(!$this->isGranted(UserVoter::RENTALS, $this->getUser())) {
             if ($this->isGranted(UserVoter::BECOME_LESSOR, $this->getUser())) {
@@ -30,7 +31,13 @@ class RentalController extends AbstractController
             }
             return $this->redirectToRoute('app_home');
         }
-        return $this->render('front/profile/lessor/rentals.html.twig');
+
+        /** @var User $user */
+        $user = $this->getUser();
+
+        return $this->render('front/profile/lessor/rentals.html.twig', [
+            'rentals' => $rentalRepository->getRentalsWithSumRating(['owner' => $user]),
+        ]);
     }
 
     #[Route(path: '/create', name: 'create', methods: ['GET', 'POST'])]

@@ -13,6 +13,18 @@ class UserFixtures extends Fixture
     {
         $faker = Factory::create();
 
+        $object = (new User())
+            ->setNickname('admin')
+            ->setEmail('admin@admin.admin')
+            ->setPassword('$2y$13$a9kys5sCWtO1AuGGOnV3Ius7o5sJ96OjPn9Wru2C7NEQrKRwMFwHm') // pwd
+            ->setFirstName($faker->firstName)
+            ->setLastName($faker->lastName)
+            ->setIsVerified(true)
+            ->setRoles(['ROLE_USER', 'ROLE_ADMIN'])
+            ->setUuid($faker->uuid)
+        ;
+        $manager->persist($object);
+
         for ($i = 0; $i < 10; $i++) {
             $isLessor = $faker->boolean();
             $roles = ['ROLE_USER'];
@@ -24,8 +36,8 @@ class UserFixtures extends Fixture
                 ->setNickname($faker->name)
                 ->setEmail($faker->email)
                 ->setPassword('$2y$13$a9kys5sCWtO1AuGGOnV3Ius7o5sJ96OjPn9Wru2C7NEQrKRwMFwHm') // pwd
-                ->setFirstName($faker->firstName)
-                ->setLastName($faker->lastName)
+                ->setFirstName($isLessor ? $faker->firstName : null)
+                ->setLastName($isLessor ? $faker->lastName : null)
                 ->setIsVerified(true)
                 ->setRoles($roles)
                 ->setLessorNumber($isLessor ? $faker->numberBetween(1000, 9999) : null)

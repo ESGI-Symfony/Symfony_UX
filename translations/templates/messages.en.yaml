@@ -66,3 +66,9 @@ back: Back
 all: All
 results: Results
 features: Features
+count_bookings: '[0,1]%count% booking|[2,Inf[%count% bookings'
+count_bookings_stylized: '[0,1]<span class="highlight">%count%</span> booking|[2,Inf[<span class="highlight">%count%</span> bookings'
+count_rentals_stylized: '[0,1]<span class="highlight">%count%</span> rental|[2,Inf[<span class="highlight">%count%</span> rentals'
+refuse: Refuse
+refuse_this_rental: Refuse this rental
+refusing_reason: Refusing reason
