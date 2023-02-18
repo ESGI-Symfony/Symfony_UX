@@ -7,7 +7,7 @@ use App\Entity\User;
 use App\Entity\UserLessorRequest;
 use App\Enums\UserLessorRequestStatus;
 use App\Form\Front\RentalFormType;
-use App\Form\LessorRequestFormType;
+use App\Form\Front\LessorRequestFormType;
 use App\Repository\RentalRepository;
 use App\Repository\UserLessorRequestRepository;
 use App\Security\Voter\UserVoter;
