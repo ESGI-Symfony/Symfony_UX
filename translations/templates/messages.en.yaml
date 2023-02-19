@@ -5,6 +5,11 @@ home:
   exclusive_package: Exclusive Packages
   explore_categories: Explore categories
 
+search:
+  results_for: Results for
+  next: Next page
+  previous: Previous page
+
 motivation: Motivation
 firstname: Firstname
 lastname: Lastname
@@ -22,6 +27,9 @@ we_come_back_to_you: We come back to you
 we_come_back_to_you_explained: Huston, we’ve got your information. Frequently check your profile to follow your request’s status
 go_to_profile: Go to your profile
 back_to_home: Back to home
+your_rentals: Your rentals
+estimated: Estimated
+
 create_a_rental_stylized: Create a <span class="highlight">rental</span>
 rental_information: Rental information
 address: Address
@@ -49,14 +57,24 @@ add_a_rental: Add a rental
 password: Password
 email_example: example@gmail.com
 nickname: Nickname
+reviews: Reviews
+overview: Overview
+access: Access
+book_now: Book now
+book: Book
+back: Back
+all: All
+results: Results
+features: Features
 count_bookings: '[0,1]%count% booking|[2,Inf[%count% bookings'
 count_bookings_stylized: '[0,1]<span class="highlight">%count%</span> booking|[2,Inf[<span class="highlight">%count%</span> bookings'
 count_rentals_stylized: '[0,1]<span class="highlight">%count%</span> rental|[2,Inf[<span class="highlight">%count%</span> rentals'
 refuse: Refuse
 refuse_this_rental: Refuse this rental
 refusing_reason: Refusing reason
+no_review_comment: No review comment
 pay_your_reservation: Pay your reservation
-payment_succed: Payment succed
+payment_succeed: Payment succeed
 your_payment_successfully_ended: Your reservation was paid successfully, you can now enjoy your trip
 checkout_form: Checkout form
 pay_%amount%_%currency%: Pay %amount% %currency%
