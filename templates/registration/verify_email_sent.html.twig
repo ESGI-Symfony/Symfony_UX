@@ -1,11 +1,13 @@
-{% extends 'base.html.twig' %}
+{% extends 'front/base.html.twig' %}
 
 {% block title %}Verify email sended{% endblock %}
 
-{% block body %}
-    <p>A verify email has been sent to you, click on the verify link to validate your account</p>
-    <a href="{{ path('app_verify_email_sent', {
-        'uuid': userUuid,
-        'resend': 'true',
-    }) }}">Resend Verify Email</a>
+{% block main %}
+    <div class="h-100 flex-column align-center justify-center gap-300">
+        <p>A verify email has been sent to you, click on the verify link to validate your account</p>
+        <a href="{{ path('app_verify_email_sent', {
+            'uuid': userUuid,
+            'resend': 'true',
+        }) }}">Resend Verify Email</a>
+    </div>
 {% endblock %}

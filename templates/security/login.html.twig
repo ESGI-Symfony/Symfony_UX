@@ -5,9 +5,6 @@
 {% block main %}
     <div class="flex-row h-100">
         <form method="post" class="h-100 w-100 flex-column align-center justify-center max-width align-end">
-            {% if error %}
-                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            {% endif %}
 
             {% if app.user %}
                 <div class="mb-3">
@@ -29,10 +26,10 @@
                         <input class="input" placeholder="{{ "password" | trans }}" type="password"
                                name="password" id="inputPassword" class="form-control"
                                autocomplete="current-password" required>
-                        <div class="color-dark-matter password-toggle">
+                        <div class="color-dark-matter container-pwd password-toggle">
                             {{ bootstrap_icon('eye') }}
                         </div>
-                        <div class="color-dark-matter password-toggle-off">
+                        <div class="color-dark-matter container-pwd password-toggle-off">
                             {{ bootstrap_icon('eye-slash') }}
                         </div>
                     </div>
@@ -48,6 +45,12 @@
                     <a class="white-space-no-wrap" href="{{ path('app_register') }}">Sign up</a>
                 </div>
             </div>
+            <div class="p-200">
+            {% if error %}
+                <span class="alert alert-danger input-error-message">{{ error.messageKey|trans(error.messageData, 'security') }}</span>
+            {% endif %}
+            </div>
+
         </form>
 
         <div class="flex-grow max-width-cat">

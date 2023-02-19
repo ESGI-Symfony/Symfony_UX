@@ -149,11 +149,23 @@ $prefixes: (
   overflow-y: auto;
 }
 
+.container-pwd {
+  padding: $spacing-200;
+  flex-grow: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
 .container-password {
   padding: 10em;
   flex-grow: 1;
   overflow-x: hidden;
   overflow-y: auto;
+}
+
+.input-error-message{
+  align-items: center;
+  justify-content: center;
 }
 
 .scroll-horizontal {

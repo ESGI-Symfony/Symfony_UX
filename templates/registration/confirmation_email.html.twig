@@ -1,9 +1,29 @@
-<h1 class="h1 mb-3 text-center">Welcome to SpaceBnB !</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Votre sujet de courriel</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="font-family: Arial, sans-serif;">
 
-<p class="mb-300">
-    Please confirm your email address by clicking the following link: <br><br>
-    <a href="{{ signedUrl }}">Confirm my Email</a>.
-    This link will expire in {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
-    <br><br>
-    Thanks you for the registration !
-</p>
+<header style="background-color: #4285F4; color: white; padding: 10px;">
+    <h1 style="text-align: center; margin: 0;">Welcome to SpaceBnB !</h1>
+</header>
+
+<div style="padding: 20px;">
+    <p class="mb-300 align-center">
+        Please confirm your email address by clicking the following link: <br><br>
+        <a href="{{ signedUrl }}">Confirm my Email</a>.
+        This link will expire in {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
+        <br><br>
+        Thanks you for the registration !
+    </p>
+</div>
+
+<footer style="background-color: #4285F4; color: white; padding: 10px;">
+    <p style="text-align: center; margin: 0;">Copyright © 2023 SpaceBnB</p>
+</footer>
+
+</body>
+</html>
