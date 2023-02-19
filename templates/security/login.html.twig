@@ -29,9 +29,8 @@
                         <input class="input" placeholder="{{ "password" | trans }}" type="password"
                                name="password" id="inputPassword" class="form-control"
                                autocomplete="current-password" required>
-                        <div class="icon-container">
-                            {{ bootstrap_icon("eye-slash") }}
-                        </div>
+                        <i class="fa fa-eye password-toggle" aria-hidden="true"></i>
+                        <i class="fa fa-eye-slash password-toggle-off" aria-hidden="true"></i>
                     </div>
                 </div>
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
@@ -50,5 +49,24 @@
         <div class="flex-grow max-width-cat">
             <img class="" src="{{ asset('images/space_cat.png') }}">
         </div>
+
+        <script>
+            const eye = document.querySelector(".password-toggle");
+            const eyeOff = document.querySelector(".password-toggle-off");
+            const passwordField = document.querySelector("inputPassword");
+
+            eye.addEventListener("click", () => {
+                eye.style.display = "none";
+                eyeOff.style.display = "block";
+                passwordField.type = "text";
+            });
+
+            eyeOff.addEventListener("click", () => {
+                eyeOff.style.display = "none";
+                eye.style.display = "block";
+                passwordField.type = "password";
+            });
+        </script>
+
     </div>
 {% endblock %}

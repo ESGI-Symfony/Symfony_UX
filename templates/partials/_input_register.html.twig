@@ -4,4 +4,6 @@
         {{ form_widget(input, {'attr': {'class': 'input text-area-none'}|merge(attr) }) }}
     </div>
 </div>
-{{ form_errors(input) }}
+<div class="input-error-message">
+    {{ form_errors(input) }}
+</div>

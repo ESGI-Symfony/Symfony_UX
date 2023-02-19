@@ -149,6 +149,13 @@ $prefixes: (
   overflow-y: auto;
 }
 
+.container-password {
+  padding: 10em;
+  flex-grow: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
 .scroll-horizontal {
   overflow-x: auto;
   width: auto;
@@ -186,6 +193,10 @@ $prefixes: (
 
 .h-150 {
   height: 150%;
+}
+
+.h-300 {
+  height: 350%;
 }
 
 .w-100 {

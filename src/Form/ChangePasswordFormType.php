@@ -20,6 +20,7 @@ class ChangePasswordFormType extends AbstractType
                 'options' => [
                     'attr' => [
                         'autocomplete' => 'new-password',
+                        'placeholder' => 'New password',
                     ],
                 ],
                 'first_options' => [
@@ -34,17 +35,17 @@ class ChangePasswordFormType extends AbstractType
                             'max' => 4096,
                         ]),
                     ],
-                    'label' => 'New password',
                 ],
                 'second_options' => [
-                    'label' => 'Repeat Password',
+                    'attr' => ['autocomplete' => 'confirm-password',
+                        'placeholder' => 'Confirm password',
+                    ],
                 ],
                 'invalid_message' => 'The password fields must match.',
                 // Instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

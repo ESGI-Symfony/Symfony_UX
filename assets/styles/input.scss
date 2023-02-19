@@ -1,94 +1,99 @@
 @import "variables";
 
 .input {
-	&:focus-visible {
-		outline: transparent;
-	}
+  &:focus-visible {
+    outline: transparent;
+  }
 
-	::placeholder {
-		color: $vega;
-	}
+  ::placeholder {
+    color: $vega;
+  }
 }
 
 .input-group {
-	background-color: $procyon;
-	border: 1px solid $rigel;
-	border-radius: $spacing-50;
-	display: flex;
-	flex-direction: row;
-	gap: $spacing-100;
+  background-color: $procyon;
+  border: 1px solid $rigel;
+  border-radius: $spacing-50;
+  display: flex;
+  flex-direction: row;
+  gap: $spacing-100;
 
-	&.input-error {
-		border: 2px solid $betelgeuse;
-	}
+  &.input-error {
+    border: 2px solid $betelgeuse;
+  }
 
-	.input {
-		background: transparent;
-		border: none;
-		font-size: $fs-300;
-		padding: $spacing-200;
-		width: 100%;
-	}
+  .input {
+    background: transparent;
+    border: none;
+    font-size: $fs-300;
+    padding: $spacing-200;
+    width: 100%;
+  }
 
-	.label {
-		background: transparent;
-		color: black;
-		border: none;
-		display: flex;
-	}
+  .label {
+    background: transparent;
+    color: black;
+    border: none;
+    display: flex;
+  }
 
-	.icon-container {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		padding: $spacing-100 $spacing-200;
-		color: $dark-matter;
-	}
+  .icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-100 $spacing-200;
+    color: $dark-matter;
+  }
 }
 
 .input-error-message {
-	color: $betelgeuse;
+  color: $betelgeuse;
 }
 
 
 .checkboxes-input {
-	display: flex;
-	flex-wrap: wrap;
-	gap: $spacing-100 $spacing-200;
-	border: solid 1px;
-	border-radius: $spacing-50;
-	padding: $spacing-100;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-100 $spacing-200;
+  border: solid 1px;
+  border-radius: $spacing-50;
+  padding: $spacing-100;
 
-	label, input {
-		cursor: pointer;
-	}
+  label, input {
+    cursor: pointer;
+  }
 }
 
 .input-image {
-	position: relative;
-	width: fit-content;
+  position: relative;
+  width: fit-content;
 
-	.input {
-		opacity: 0;
-		position: absolute;
-		top: 0;
-		right: 0;
-		left: 0;
-		bottom: 0;
-		cursor: pointer;
-	}
+  .input {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    cursor: pointer;
+  }
 
-	&.input-error {
-		.btn {
-			border: 2px solid $betelgeuse;
-		}
-	}
+  &.input-error {
+    .btn {
+      border: 2px solid $betelgeuse;
+    }
+  }
 
-	.input-image-preview {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		max-width: 150px;
-		max-height: 150px;
-	}
+  .input-image-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-width: 150px;
+    max-height: 150px;
+  }
+}
+
+
+.password-toggle-off {
+  display: none;
 }
