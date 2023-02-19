@@ -4,8 +4,11 @@ namespace App\Controller\Front;
 
 use App\Entity\Rental;
 use App\Entity\Reservation;
+use App\Form\BookReservationFormType;
 use App\Repository\ReservationRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -44,11 +47,23 @@ class RentalPageController extends AbstractController
     }
 
     #[Route('/book', name: 'book')]
-    public function book(Rental $rental): Response
+    public function book(Rental $rental, Request $request, EntityManagerInterface $entityManager, ReservationRepository $reservationRepository): Response
     {
+        $reservation = new Reservation;
+        $form = $this->createForm(BookReservationFormType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($reservation);
+            $entityManager->flush();
+
+            return $this->render('front/profile/lessor/become_lessor_success.html.twig');
+        }
+
         return $this->render('front/rental/book.html.twig', [
+            'form' => $form->createView(),
             'rental' => $rental,
-            'selectedTab' => 'reviews',
+            'selectedTab' => 'book',
         ]);
     }
 }
