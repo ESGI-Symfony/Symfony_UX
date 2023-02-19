@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Reservation;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -12,10 +13,11 @@ class BookReservationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('date_begin')
-            ->add('date_end')
-            ->add('rental')
-            ->add('buyer')
+            ->add('date_begin', DateType::class, [
+                'widget' => 'choice',
+                'input'  => 'datetime_immutable'
+            ])
+            ->add('date_end', DateType::class)
         ;
     }
 
