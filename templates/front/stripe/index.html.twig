@@ -5,13 +5,12 @@
 {% block main %}
     <form class="column-400 mx-auto flex-column gap-200" id='checkout-form' method='post' action="{{ path('front_app_stripe_charge', {id: reservation.id}) }}">
         <input type='hidden' name='stripeToken' id='stripe-token-id'>
-        <label for="card-element">{{ 'checkout_form' | trans }}</label>
-        <div id="card-element"></div>
+        <label for="stripe-card-element">{{ 'checkout_form' | trans }}</label>
+        <div id="stripe-card-element"></div>
         <button
                 id='pay-btn'
                 class="btn btn-primary ms-auto"
-                type="button"
-                onclick="createToken()">
+                type="button">
             {{ 'pay_%amount%_%currency%' | trans({'%amount%': reservation.totalPrice, '%currency%': '€'}) }}
         </button>
         <p id="error-stripe-message"></p>
@@ -20,42 +19,5 @@
     <section>
         {# TODO Show reservation card #}
     </section>
-
     <script src="https://js.stripe.com/v3/" ></script>
-    <script>
-        const stripe = Stripe("{{stripe_key}}");
-        const elements = stripe.elements({locale: "{{ app.request.locale }}"});
-        const cardElement = elements.create('card', {
-            style: {
-                base: {
-                    fontSize: '16px',
-                    color: '#EFEEF6',
-                    '::placeholder': {
-                        color: '#CCD5E6'
-                    }
-                },
-                invalid: {
-                    color: '#F59879',
-                    iconColor: '#F59879'
-                }
-            }
-        });
-        cardElement.mount('#card-element');
-
-        function createToken() {
-            document.getElementById("pay-btn").disabled = true;
-            stripe.createToken(cardElement).then(function(result) {
-                if(typeof result.error != 'undefined') {
-                    document.getElementById("pay-btn").disabled = false;
-                    document.getElementById("error-stripe-message").innerText = result.error.message;
-                }
-
-                // creating token success
-                if(typeof result.token != 'undefined') {
-                    document.getElementById("stripe-token-id").value = result.token.id;
-                    document.getElementById('checkout-form').submit();
-                }
-            });
-        }
-    </script>
 {% endblock %}
