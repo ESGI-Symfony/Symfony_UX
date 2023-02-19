@@ -5,12 +5,14 @@
         <div class="flex-column gap-200">
             {{ "home.good_evening" | trans }}
             <h4>{{ "home.explore_universe" | trans }}</h4>
-            <div class="input-group">
-                <input class="input" placeholder="{{ "home.where_you_going" | trans }}" />
+
+            <form class="input-group" action="/search">
+                <input name="search" class="input" placeholder="{{ "home.where_you_going" | trans }}" />
+
                 <div class="icon-container">
                     {{ bootstrap_icon("search") }}
                 </div>
-            </div>
+            </form>
         </div>
 
         <div class="flex-column gap-200">

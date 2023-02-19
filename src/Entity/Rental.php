@@ -57,7 +57,7 @@ class Rental
 
     #[ORM\ManyToOne(inversedBy: 'rentals')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?user $owner = null;
+    private ?User $owner = null;
 
     #[ORM\ManyToMany(targetEntity: RentalOption::class, inversedBy: 'rentals')]
     private Collection $options;
@@ -202,12 +202,12 @@ class Rental
         return $this;
     }
 
-    public function getOwner(): ?user
+    public function getOwner(): ?User
     {
         return $this->owner;
     }
 
-    public function setOwner(?user $owner): self
+    public function setOwner(?User $owner): self
     {
         $this->owner = $owner;
 

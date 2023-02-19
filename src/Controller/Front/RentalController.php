@@ -100,6 +100,4 @@ class RentalController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
-
 }
