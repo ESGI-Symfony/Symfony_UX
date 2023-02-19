@@ -142,4 +142,11 @@ class Reservation
 
         return $this;
     }
+
+    public function getTotalPrice(): float
+    {
+        $interval = $this->getDateBegin()->diff($this->getDateEnd());
+        $days = $interval->format('%a');
+        return $this->getRental()->getPrice() * $days;
+    }
 }
