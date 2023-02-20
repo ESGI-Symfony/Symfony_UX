@@ -21,6 +21,8 @@ services:
       - host.docker.internal:host-gateway
 
   messenger:
+    volumes:
+      - ./:/srv/app
     env_file:
       - .env.local
 
