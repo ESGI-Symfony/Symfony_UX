@@ -7,22 +7,34 @@
         <div class="flex-row flex-wrap gap-100 align-center justify-space-between">
             <div class="flex-row gap-100">
                 {{ bootstrap_icon("geo-alt") }}
-                <p>{{ rental.celestialObject | trans }}</p>
+                {% if type.value is same as('rental') %}
+                    <p>{{ subject.celestialObject | trans }}</p>
+                {% else %}
+                    <p>{{ subject.rental.celestialObject }}</p>
+                {% endif %}
             </div>
             <div class="badge badge-secondary-small">
-                {{ rental.price | number_format(2, ',', '.') }} €
+                {% if type.value is same as('rental') %}
+                    {{ subject.price | number_format(2, ',', '.') }} €
+                {% else %}
+                    <p>{{ subject.rental.price }} €</p>
+                {% endif %}
             </div>
         </div>
-        <h4 class="mb-50">{{ rental.rentType.value | trans }}</h4>
+        {% if type.value is same as('rental') %}
+            <h4 class="mb-50">{{ subject.rentType.value | trans }}</h4>
+        {% else %}
+            <h4 class="mb-50">{{ subject.rental.rentType.value | trans }}</h4>
+        {% endif %}
 
-        {% if type.value is same as('booking') %}
+        {% if type.value is same as('reservation') %}
             <div>
-                <p>From 23-06-2019 to 23-01-2300 {# TODO #}</p>
+                <p>{{ 'from' | trans }} {{ subject.dateBegin | date("Y-m-d") }} {{ 'to' | trans }} {{ subject.dateEnd | date("Y-m-d") }}</p>
             </div>
 
-            {% if rental.sumRating %}
+            {% if subject.reviewMark %}
                 <div class="rating">
-                    {{ include('partials/_stars.html.twig', {rate: rental.sumRating}) }}
+                    {{ include('partials/_stars.html.twig', {rate: subject.reviewMark}) }}
                 </div>
             {% else %}
                 <div>
@@ -32,7 +44,7 @@
         {% endif %}
 
         {% if type.value is same as('rental') %}
-            <p>{{ 'count_bookings' | trans({'%count%': rental.reservations().count}) }}</p>
+            <p>{{ 'count_bookings' | trans({'%count%': subject.reservations().count}) }}</p>
         {% endif %}
 
 

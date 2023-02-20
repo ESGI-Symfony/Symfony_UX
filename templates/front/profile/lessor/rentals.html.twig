@@ -11,7 +11,7 @@
         </a>
         <div class="flex-row-on-medium align-center flex-wrap gap-300 column-900 w-100">
             {% for rental in rentals %}
-                {{ component('booking-card', {rental: rental, type: 'rental'}) }}
+                {{ component('booking-card', {subject: rental, type: 'rental'}) }}
             {% endfor %}
         </div>
     </section>

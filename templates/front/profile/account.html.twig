@@ -21,24 +21,40 @@
         <div class="flex-column gap-200">
             <div class="flex-row justify-space-between">
                 <div class="font-bold">
-                    <span>3</span> {{ 'bookings' | trans }}
+                    {{ 'count_bookings_stylized' | trans({'%count%': user.reservations.count}) | raw }}
                 </div>
                 <a href="{{ path('app_profile_bookings') }}" class="text-decoration-none">
                     <div class="more-informations">{{ 'see_more' | trans }}</div>
                 </a>
             </div>
-            {{ component('booking-card') }}
+            {% set latest_reservation = user.reservations|sort((a, b) => b.dateEnd <=> a.dateEnd)|first %}
+            {% if latest_reservation is not null %}
+                {{ component('booking-card', {subject: latest_reservation, type: 'reservation'}) }}
+            {% endif %}
         </div>
         <div class="flex-column gap-200">
             <div class="flex-row justify-space-between">
                 <div class="font-bold">
-                    <span>3</span> {{ 'rentals' | trans }}
+                    {{ 'count_rentals_stylized' | trans({'%count%': user.rentals.count}) | raw }}
                 </div>
-                <a href="{{ path('app_profile_rentals') }}" class="text-decoration-none">
+                <a href="{{ path('app_profile_rentals_index') }}" class="text-decoration-none">
                     <div class="more-informations">{{ 'see_more' | trans }}</div>
                 </a>
             </div>
-            {{ component('booking-card') }}
+            {% set maxReservations = 0 %}
+            {% set locationWithMaxReservations = null %}
+
+            {% for rental in user.rentals %}
+                {% set numReservations = rental.reservations|length %}
+                {% if numReservations > maxReservations %}
+                    {% set maxReservations = numReservations %}
+                    {% set locationWithMaxReservations = rental %}
+                {% endif %}
+            {% endfor %}
+
+            {% if locationWithMaxReservations is not null %}
+                {{ component('booking-card', {subject: locationWithMaxReservations, type: 'rental'}) }}
+            {% endif %}
         </div>
 
         <hr>
