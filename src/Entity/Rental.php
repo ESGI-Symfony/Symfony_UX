@@ -65,7 +65,7 @@ class Rental
     #[ORM\OneToMany(mappedBy: 'rental', targetEntity: Report::class, orphanRemoval: true)]
     private Collection $reports;
 
-    #[ORM\OneToMany(mappedBy: 'rental', targetEntity: Reservation::class)]
+    #[ORM\OneToMany(mappedBy: 'rental', targetEntity: Reservation::class, orphanRemoval: true)]
     private Collection $reservations;
 
     #[ORM\Column(length: 50)]
@@ -121,7 +121,7 @@ class Rental
         maxSizeMessage: 'rental.image.max_size',
         mimeTypesMessage: 'rental.image.mime_types',
     )]
-    #[Assert\NotNull(message: 'rental.image.not_null')]
+    #[Assert\NotNull(message: 'rental.image.not_null', groups: ['create'])]
     private ?File $imageFile = null;
 
     #[ORM\Column(type: Types::GUID)]
