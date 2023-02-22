@@ -42,15 +42,9 @@ class ReservationRepository extends ServiceEntityRepository
         }
     }
 
-    public function getReservationGroupByMonthYear($user) : ArrayCollection {
-
-        $userId = $user->getId();
+    private function getReservationGroupByMonthYear($sql, $userId): ArrayCollection {
 
         $conn = $this->getEntityManager()->getConnection();
-
-        $sql = "
-            SELECT *, to_char(date_begin, 'YYYY-MM') AS year_month FROM reservation r WHERE r.rental_id = :userId 
-            ";
 
         $stmt = $conn->prepare($sql);
         $reservations = $stmt->executeQuery(['userId' => $userId])->fetchAllAssociative();
@@ -83,6 +77,27 @@ class ReservationRepository extends ServiceEntityRepository
         $reservationsByYearMonth = $reservationsByYearMonth->matching($criteria);
 
         return $reservationsByYearMonth;
+
+    }
+
+    public function getPassedReservation($user) : ArrayCollection {
+
+        $userId = $user->getId();
+
+        $sql = "SELECT *, to_char(date_begin, 'YYYY-MM') AS year_month FROM reservation r WHERE r.buyer_id = :userId AND r.date_begin < NOW()";
+
+        return $this->getReservationGroupByMonthYear($sql, $userId);
+
+    }
+
+    public function getOnGoigReservation($user) : ArrayCollection {
+
+        $userId = $user->getId();
+
+        $sql = "SELECT *, to_char(date_begin, 'YYYY-MM') AS year_month FROM reservation r WHERE r.buyer_id = :userId AND r.date_begin >= NOW()";
+
+        return $this->getReservationGroupByMonthYear($sql, $userId);
+
     }
 
     public function getLastReservation($filters): Reservation {

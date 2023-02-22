@@ -60,7 +60,8 @@ class UserController extends AbstractController
 
         return $this->render('front/profile/tenant/bookings.html.twig', [
             'user' => $user,
-            'reservationsByYearMonth' => $reservationRepository->getReservationGroupByMonthYear($user),
+            'passedReservationsByYearMonth' => $reservationRepository->getPassedReservation($user),
+            'onGoingReservationsByYearMonth' => $reservationRepository->getOnGoigReservation($user),
         ]);
     }
 

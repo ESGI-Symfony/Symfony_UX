@@ -40,8 +40,6 @@
                     <div class="more-informations">{{ 'see_more' | trans }}</div>
                 </a>
             </div>
-            {{ dump(reservation)}}
-
             {{ component('booking-card', {subject: reservation, type: 'reservation'}) }}
         </div>
         <div class="flex-column gap-200">
