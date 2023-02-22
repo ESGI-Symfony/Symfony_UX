@@ -8,6 +8,7 @@ use App\Form\BookReservationFormType;
 use App\Repository\ReservationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -47,7 +48,7 @@ class RentalPageController extends AbstractController
     }
 
     #[Route('/book', name: 'book')]
-    public function book(Rental $rental, Request $request, EntityManagerInterface $entityManager): Response
+    public function book(Rental $rental, Request $request, EntityManagerInterface $entityManager, ReservationRepository $reservationRepository): Response
     {
         $user = $this->getUser();
         if (is_null($user)) {
@@ -62,12 +63,18 @@ class RentalPageController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($reservation);
-            $entityManager->flush();
+            $count = $reservationRepository->getClashingReservationCount($reservation);
 
-            return $this->redirectToRoute('app_stripe_index', [
-                'id' => $reservation->getId(),
-            ]);
+            if ($count > 0) {
+                $form->addError(new FormError('Date selected invalid'));
+            } else {
+                $entityManager->persist($reservation);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('app_stripe_index', [
+                    'id' => $reservation->getId(),
+                ]);
+            }
         }
 
         return $this->render('front/rental/book.html.twig', [
