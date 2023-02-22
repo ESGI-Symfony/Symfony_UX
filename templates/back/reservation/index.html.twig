@@ -1,0 +1,55 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %}Reservation index{% endblock %}
+
+{% block main %}
+
+    <section class="flex-column gap-200 column-700 mx-auto">
+        <h3>Reservation index - {{ reservations|length }}</h3>
+        <a href="{{ path('back_reservation_new') }}" class="btn btn-primary width-fit-content mx-auto">Create new</a>
+        {% for reservation in reservations %}
+        <div class="card-small">
+            <div class="content p-100">
+                <div class="body">
+                    <p class="flex-row gap-100 align-center justify-space-between">
+                        <span>Reservation #{{ reservation.id }}</span>
+                        {% if reservation.paymentToken is not null %}
+                            <span class="notification notification-success">Paid</span>
+                        {% else %}
+                            <span class="notification notification-send">Pending</span>
+                        {% endif %}
+                    </p>
+                    <p>{{ reservation.totalPrice }} € for rental <a href="{{ path('back_rental_show', {id: reservation.rental.id}) }}">#{{ reservation.rental.id }}</a></p>
+                    <p>
+                        <span>From {{ reservation.dateBegin ? reservation.dateBegin|date('Y-m-d') : '' }}</span>
+                        <span>To {{ reservation.dateEnd ? reservation.dateEnd|date('Y-m-d') : '' }}</span>
+                    </p>
+                    <a target="_blank" href="https://dashboard.stripe.com/test/payments/{{ reservation.paymentToken }}">Stripe Token : {{ reservation.paymentToken }}</a>
+
+                    <div class="p-100">
+                        <p>Review :</p>
+                        <small>{{ reservation.reviewMark }}</small>
+                        <small>{{ reservation.reviewComment }}</small>
+                    </div>
+                </div>
+                <div class="footer">
+                    <div>
+                        <p>Buyer <a href="{{ path('back_user_show', {id: reservation.buyer.id}) }}">#{{ reservation.buyer.id }}</a></p>
+                        <p>{{ reservation.buyer.email }}</p>
+                        <p>{{ reservation.buyer.firstName }} {{ reservation.buyer.lastName }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <a href="{{ path('back_reservation_show', {'id': reservation.id}) }}">show</a>
+            <a href="{{ path('back_reservation_edit', {'id': reservation.id}) }}">edit</a>
+        </div>
+    {% else %}
+        <div>
+            <p colspan="7">no records found</p>
+        </div>
+    {% endfor %}
+    </section>
+
+{% endblock %}

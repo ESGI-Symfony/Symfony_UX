@@ -86,7 +86,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Rental::class, orphanRemoval: true)]
     private Collection $rentals;
 
-    #[ORM\OneToMany(mappedBy: 'buyer', targetEntity: Reservation::class)]
+    #[ORM\OneToMany(mappedBy: 'buyer', targetEntity: Reservation::class, orphanRemoval: true)]
     private Collection $reservations;
 
     #[ORM\Column(type: Types::GUID)]

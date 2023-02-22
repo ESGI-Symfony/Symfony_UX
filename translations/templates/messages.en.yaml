@@ -78,3 +78,4 @@ payment_succeed: Payment succeed
 your_payment_successfully_ended: Your reservation was paid successfully, you can now enjoy your trip
 checkout_form: Checkout form
 pay_%amount%_%currency%: Pay %amount% %currency%
+already_booked: Those dates are already booked

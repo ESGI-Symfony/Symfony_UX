@@ -2,7 +2,7 @@
 
 {% block main %}
     <div class="column-700 mx-auto gap-200 flex-column">
-        <h2>To validate</h2>
+        <h3>To validate - {{ pendingRequests|length }}</h3>
         {% for request in pendingRequests %}
             {{ include('back/lessor/requests/_request-card.html.twig', {request: request}) }}
         {% endfor %}

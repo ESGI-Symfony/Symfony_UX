@@ -5,6 +5,7 @@ namespace App\Controller\Back;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use App\Security\Voter\UserVoter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +18,7 @@ class UserController extends AbstractController
     public function index(UserRepository $userRepository): Response
     {
         return $this->render('back/user/index.html.twig', [
-            'users' => $userRepository->findAll(),
+            'users' => $userRepository->findBy([], ['id' => 'DESC']),
         ]);
     }
 
@@ -31,7 +32,7 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $userRepository->save($user, true);
 
-            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('back_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('back/user/new.html.twig', [
@@ -57,7 +58,7 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $userRepository->save($user, true);
 
-            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('back_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('back/user/edit.html.twig', [
@@ -69,10 +70,12 @@ class UserController extends AbstractController
     #[Route('/{id}', name: 'delete', methods: ['POST'])]
     public function delete(Request $request, User $user, UserRepository $userRepository): Response
     {
+
+        $this->denyAccessUnlessGranted(UserVoter::DELETE_ACCOUNTS, $user);
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
             $userRepository->remove($user, true);
         }
 
-        return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('back_user_index', [], Response::HTTP_SEE_OTHER);
     }
 }
