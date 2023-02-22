@@ -49,9 +49,14 @@ class RentalPageController extends AbstractController
     #[Route('/book', name: 'book')]
     public function book(Rental $rental, Request $request, EntityManagerInterface $entityManager): Response
     {
+        $user = $this->getUser();
+        if (is_null($user)) {
+            return $this->redirectToRoute('app_login');
+        }
+
         $reservation = (new Reservation)
             ->setRental($rental)
-            ->setBuyer($this->getUser());
+            ->setBuyer($user);
 
         $form = $this->createForm(BookReservationFormType::class, $reservation);
         $form->handleRequest($request);
@@ -60,9 +65,8 @@ class RentalPageController extends AbstractController
             $entityManager->persist($reservation);
             $entityManager->flush();
 
-            return $this->render('front/rental/payment.html.twig', [
-                'rental' => $rental,
-                'selectedTab' => 'payment',
+            return $this->redirectToRoute('app_stripe_index', [
+                'id' => $reservation->getId(),
             ]);
         }
 
