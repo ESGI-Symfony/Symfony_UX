@@ -8,22 +8,20 @@
             <div class="badge badge-secondary">{{ 'passed' | trans }}</div>
         </div>
         <div class="flex-column gap-400">
-            <div class="flex-column gap-200">
-                <div class="date">
-                    January 2019
+
+            {% for year_month, reservations in reservationsByYearMonth %}
+                <div class="flex-column gap-200">
+                    <div class="date">
+                        {{ year_month }}
+                    </div>
+                    {% for reservation in reservations %}
+                        <div class="flex-column gap-200 scroll-horizontal cards">
+                            {{ component('booking-card', {subject: reservation, type: 'reservation'}) }}
+                        </div>
+                    {% endfor %}
                 </div>
-                <div class="flex-column gap-200 scroll-horizontal cards">
-                    {{ component('booking-card') }}
-                </div>
-            </div>
-            <div class="flex-column gap-200">
-                <div class="date">
-                    Juin 2018
-                </div>
-                <div class="flex-column gap-200 scroll-horizontal cards">
-                    {{ component('booking-card') }}
-                </div>
-            </div>
+            {% endfor %}
+
         </div>
     </div>
 {% endblock %}

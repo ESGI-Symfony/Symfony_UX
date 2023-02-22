@@ -4,6 +4,9 @@ namespace App\Controller\Front;
 
 use App\Entity\User;
 use App\Form\Front\UserProfileFormType;
+use App\Repository\RentalRepository;
+use App\Repository\ReservationRepository;
+use App\Repository\UserLessorRequestRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,12 +18,16 @@ class UserController extends AbstractController
 {
 
     #[Route(path: '/account', name: 'account')]
-    public function account(): Response
+    public function account(RentalRepository $rentalRepository, ReservationRepository $reservationRepository, UserLessorRequestRepository $userLessorRequestRepository): Response
     {
+
         $user = $this->getUser();
 
         return $this->render('front/profile/account.html.twig',  [
             'user' => $user,
+            'rental' => $rentalRepository->getRentalWithMaxReservations(['owner' => $user]),
+            'reservation' => $reservationRepository->getLastReservation(['buyer' => $user]),
+            'notification' => $userLessorRequestRepository->getLastRequest(['lessor' => $user]),
         ]);
     }
 
@@ -47,9 +54,14 @@ class UserController extends AbstractController
     }
 
     #[Route(path: '/bookings', name: 'bookings')]
-    public function bookings(): Response
+    public function bookings(ReservationRepository $reservationRepository): Response
     {
-        return $this->render('front/profile/tenant/bookings.html.twig');
+        $user = $this->getUser();
+
+        return $this->render('front/profile/tenant/bookings.html.twig', [
+            'user' => $user,
+            'reservationsByYearMonth' => $reservationRepository->getReservationGroupByMonthYear($user),
+        ]);
     }
 
 }

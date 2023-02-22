@@ -14,8 +14,21 @@
             <div>
                 {{ user.email }}
             </div>
-            <div class="notification notification-send">
-                {{ bootstrap_icon("rocket-takeoff") }}{{ 'pending_request_lessor_message' | trans }}
+            <div class="notification notification-send flex-column">
+                {% if notification is not empty %}
+                    <div class="flex-row gap-200">
+                        <div>{{ bootstrap_icon("rocket-takeoff") }}</div>
+                        <div>{{ (notification[0].status~'_request_lessor_message') | trans }}</div>
+                    </div>
+                    {% if notification[0].refusing_reason %}
+                        <div class="font-bold">
+                            {{ 'reason_request_lessor_rejected' | trans }}
+                        </div>
+                        <div>
+                            {{ notification[0].refusing_reason }}
+                        </div>
+                    {% endif %}
+                {% endif %}
             </div>
         </div>
         <div class="flex-column gap-200">
@@ -27,10 +40,9 @@
                     <div class="more-informations">{{ 'see_more' | trans }}</div>
                 </a>
             </div>
-            {% set latest_reservation = user.reservations|sort((a, b) => b.dateEnd <=> a.dateEnd)|first %}
-            {% if latest_reservation is not null %}
-                {{ component('booking-card', {subject: latest_reservation, type: 'reservation'}) }}
-            {% endif %}
+            {{ dump(reservation)}}
+
+            {{ component('booking-card', {subject: reservation, type: 'reservation'}) }}
         </div>
         <div class="flex-column gap-200">
             <div class="flex-row justify-space-between">
@@ -41,20 +53,7 @@
                     <div class="more-informations">{{ 'see_more' | trans }}</div>
                 </a>
             </div>
-            {% set maxReservations = 0 %}
-            {% set locationWithMaxReservations = null %}
-
-            {% for rental in user.rentals %}
-                {% set numReservations = rental.reservations|length %}
-                {% if numReservations > maxReservations %}
-                    {% set maxReservations = numReservations %}
-                    {% set locationWithMaxReservations = rental %}
-                {% endif %}
-            {% endfor %}
-
-            {% if locationWithMaxReservations is not null %}
-                {{ component('booking-card', {subject: locationWithMaxReservations, type: 'rental'}) }}
-            {% endif %}
+            {{ component('booking-card', {subject: rental, type: 'rental'}) }}
         </div>
 
         <hr>

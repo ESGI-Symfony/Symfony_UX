@@ -4,7 +4,10 @@ namespace App\Repository;
 
 use App\Entity\Reservation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
  * @extends ServiceEntityRepository<Reservation>
@@ -37,6 +40,68 @@ class ReservationRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function getReservationGroupByMonthYear($user) : ArrayCollection {
+
+        $userId = $user->getId();
+
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = "
+            SELECT *, to_char(date_begin, 'YYYY-MM') AS year_month FROM reservation r WHERE r.rental_id = :userId 
+            ";
+
+        $stmt = $conn->prepare($sql);
+        $reservations = $stmt->executeQuery(['userId' => $userId])->fetchAllAssociative();
+
+        $reservationRepository = $this->getEntityManager()->getRepository(Reservation::class);
+        $entities = [];
+        foreach ($reservations as $reservation) {
+            $id = $reservation['id'];
+            $entities[] = $reservationRepository->find($id);
+        }
+
+        $reservationsByYearMonth = new ArrayCollection();
+        foreach ($entities as $reservation) {
+            $yearMonth = $reservation->getDateBegin()->format('M Y');
+            if (!isset($reservationsByYearMonth[$yearMonth])) {
+                $reservationsByYearMonth[$yearMonth] = new ArrayCollection();
+            }
+            $reservationsByYearMonth[$yearMonth][] = $reservation;
+        }
+
+        foreach ($reservationsByYearMonth as &$reservations) {
+            $reservations = $reservations->toArray();
+            usort($reservations, function($a, $b) {
+                return $a->getDateBegin() <=> $b->getDateBegin();
+            });
+        }
+        unset($reservations);
+
+        $criteria = Criteria::create()->orderBy(['year_month' => 'DESC']);
+        $reservationsByYearMonth = $reservationsByYearMonth->matching($criteria);
+
+        return $reservationsByYearMonth;
+    }
+
+    public function getLastReservation($filters): Reservation {
+
+        $currentDate = new \DateTime();
+        $query = $this->createQueryBuilder('r')
+            ->addSelect('(DATE_DIFF(r.date_begin, :currentDate)) AS HIDDEN dateDiff')
+            ->setParameter('currentDate', $currentDate->format('Y-m-d'))
+            ->orderBy('dateDiff', 'ASC')
+            ->setMaxResults(1);
+
+        foreach ($filters as $key => $value) {
+            $query->andWhere("r.$key = :$key")
+                ->setParameter($key, $value);
+        }
+
+        $results = $query->getQuery()->getResult();
+
+        return $results[0];
     }
 
 //    /**
