@@ -19,12 +19,12 @@ class Reservation
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Assert\NotBlank(message: 'reservation.date_begin.not_blank')]
-    #[Assert\Date(message: 'reservation.date_begin.date')]
+    #[Assert\Type(type: 'DateTimeInterface', message: 'reservation.date_begin.date')]
     private ?\DateTimeInterface $date_begin = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Assert\NotBlank(message: 'reservation.date_end.not_blank')]
-    #[Assert\Date(message: 'reservation.date_end.date')]
+    #[Assert\Type(type: 'DateTimeInterface', message: 'reservation.date_end.date')]
     private ?\DateTimeInterface $date_end = null;
 
     #[ORM\Column(length: 255, nullable: true)]
