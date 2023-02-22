@@ -1,0 +1,19 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %}Rental index{% endblock %}
+
+{% block main %}
+    <div class="column-700 flex-column gap-200 mx-auto">
+        <h3>Rental index</h3>
+
+        {% for rental in rentals %}
+            {{ component('details-card', {rental: rental, rating: 0, options: [], showTotalBookings: true}) }}
+            <div class="flex-row gap-200">
+                <a href="{{ path('back_rental_show', {'id': rental.id}) }}">show</a>
+                <a href="{{ path('back_rental_edit', {'id': rental.id}) }}">edit</a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <a href="{{ path('back_rental_new') }}">Create new</a>
+{% endblock %}

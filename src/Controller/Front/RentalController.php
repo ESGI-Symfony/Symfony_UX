@@ -51,16 +51,16 @@ class RentalController extends AbstractController
         $rental = new Rental;
         $rental->setOwner($user)
             ->setUuid(Uuid::v6());
-        $form = $this->createForm(RentalFormType::class, $rental);
+        $form = $this->createForm(RentalFormType::class, $rental, [
+            'validation_groups' => ['create']
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($rental);
             $entityManager->flush();
 
-            // TODO redirect to rental page
-            throw new \Exception('TODO redirect to rental page');
-            // return $this->render('front/profile/lessor/become_lessor_success.html.twig');
+             return $this->redirectToRoute('app_profile_rentals_index');
         }
 
         return $this->render('front/profile/lessor/create_rental.html.twig', [

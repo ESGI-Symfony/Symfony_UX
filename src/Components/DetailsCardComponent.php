@@ -11,6 +11,7 @@ class DetailsCardComponent
     public Rental $rental;
     public float|null $rating;
     public array $options;
+    public bool $showTotalBookings = false;
 
     /**
      * @return Rental
