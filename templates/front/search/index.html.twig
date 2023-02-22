@@ -8,7 +8,7 @@
             {{ "home.good_evening" | trans }}
             <h4>{{ "home.explore_universe" | trans }}</h4>
 
-            <form class="input-group" action="/search">
+            <form class="input-group" action="/">
                 <input name="search" class="input" placeholder="{{ "home.where_you_going" | trans }}" value="{{ search }}" />
 
                 <div class="icon-container">
@@ -18,12 +18,14 @@
         </div>
 
         <div class="flex-column gap-200">
-            <h4>
-                {{ "search.results_for" | trans }}
-                <span class="highlight">{{ search }}</span>
-            </h4>
+            {% if search != "" %}
+                <h4>
+                    {{ "search.results_for" | trans }}
+                    <span class="highlight">{{ search }}</span>
+                </h4>
 
-            <small>{{ count }} {{ "results" | trans | lower }}</small>
+                <small>{{ count }} {{ "results" | trans | lower }}</small>
+            {% endif %}
 
             <div class="flex-row gap-200">
                 <form>
@@ -43,7 +45,7 @@
 
         <div class="flex-row gap-200">
             {% if previous_page >= 0 %}
-                <a class="btn btn-primary" href="{{ path('front_app_search', {
+                <a class="btn btn-primary" href="{{ path('front_app_home', {
                     'selectedObject': selectedObject,
                     'search': search,
                     'page': previous_page})
@@ -53,7 +55,7 @@
             {% endif %}
 
             {% if hasMorePages %}
-                <a class="btn btn-primary" href="{{ path('front_app_search', {
+                <a class="btn btn-primary" href="{{ path('front_app_home', {
                     'selectedObject': selectedObject,
                     'search': search,
                     'page': next_page})
