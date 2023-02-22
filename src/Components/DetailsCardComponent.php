@@ -25,6 +25,12 @@ class DetailsCardComponent
         return $this->rating;
     }
 
+    public function setRating($rating): self
+    {
+        $this->rating = $rating ? round($rating*2)/2 : 0;
+        return $this;
+    }
+
     public function getOptions(): array
     {
         return $this->options;
