@@ -76,6 +76,7 @@ reservation:
   date_end:
     not_blank: 'The end rental date cannot be blank.'
     date: 'The end rental date must be a valid date.'
+    greater_than: 'The end reservation date must be greater than the begin date.'
 
   payment_token:
     max_length: 'The payment token cannot be longer than {{ limit }} characters.'

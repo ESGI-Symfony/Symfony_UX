@@ -25,6 +25,10 @@ class Reservation
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Assert\NotBlank(message: 'reservation.date_end.not_blank')]
     #[Assert\Type(type: 'DateTimeInterface', message: 'reservation.date_end.date')]
+    #[Assert\Expression(
+        expression: 'this.getDateBegin() < value',
+        message: 'reservation.date_end.greater_than'
+    )]
     private ?\DateTimeInterface $date_end = null;
 
     #[ORM\Column(length: 255, nullable: true)]
