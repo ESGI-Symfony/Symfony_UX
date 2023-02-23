@@ -4,10 +4,10 @@
     <div class="booking-template flex-column gap-300">
         <h4 class="mb-300 text-center">{{ 'count_bookings_stylized' | trans({'%count%': user.reservations.count}) | raw }}</h4>
         <div class="flex-row align-center gap-200">
-            <a href="{{ path('app_profile_bookings_on_going') }}" class="text-decoration-none">
+            <a href="{{ path('app_bookings_on_going') }}" class="text-decoration-none">
                 <div class="{% if not passedReservations %}badge badge-secondary{% endif %}">{{ 'on_going' | trans }}</div>
             </a>
-            <a href="{{ path('app_profile_bookings_passed') }}" class="text-decoration-none">
+            <a href="{{ path('app_bookings_passed') }}" class="text-decoration-none">
                 <div class="{% if passedReservations %}badge badge-secondary{% endif %}">{{ 'passed' | trans }}</div>
             </a>
         </div>
