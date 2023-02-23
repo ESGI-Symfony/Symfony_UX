@@ -2,12 +2,10 @@
 
 {% block body %}
 
-    <div class="container edit-profile flex-column column-400 justify-center mx-auto gap-300">
+    <div class="container edit-profile flex-column column-400 justify-center mx-auto gap-300 w-100">
         <h4 class="text-center"> {{ 'my_profile' | trans | raw }}</h4>
 
-        <a href="{{ path('app_profile_account') }}" class="text-decoration-none">
-            <button class="btn btn-text custom-btn">{{ bootstrap_icon('arrow-left') }} {{ 'back' | trans }}</button>
-        </a>
+        <button class="btn btn-text back-button">{{ bootstrap_icon('arrow-left') }} {{ 'back' | trans }}</button>
 
         {{ form_start(form) }}
 
@@ -19,7 +17,7 @@
                 {{ include('partials/_input.html.twig', {input: form.email}) }}
                 {{ include('partials/_input.html.twig', {input: form.phone}) }}
             </div>
-            <button class="btn btn-primary mx-auto">{{ bootstrap_icon('rocket') }} {{ 'save_my_profile' | trans }}</button>
+            <button class="btn btn-primary mx-auto">{{ bootstrap_icon('rocket-takeoff') }} {{ 'save_my_profile' | trans }}</button>
         </div>
 
         {{ form_end(form) }}

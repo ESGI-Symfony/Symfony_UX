@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 // this route is protected by the firewall
-#[Route(path: '/bookings', name: 'app_bookings_')]
+#[Route(path: '/profile/bookings', name: 'app_profile_bookings_')]
 class BookingsController extends AbstractController
 {
     

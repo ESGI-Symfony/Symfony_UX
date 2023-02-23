@@ -1,26 +1,28 @@
 {% extends 'front/base.html.twig' %}
 
 {% block main %}
-    <div class="flex-column account gap-400">
+    <div class="flex-column account gap-400 column-700 mx-auto">
         <div class="flex-column align-center justify-center gap-200">
             <div class="flex-row align-center justify-center">
                 <div>
                     <h4 class="text-center">{{ 'hello' | trans }} <span>{{ user.firstname }}</span></h4>
                 </div>
-                <a href="{{ path('app_profile_edit') }}" class="text-decoration-none">
+                <a href="{{ path('front_app_profile_edit') }}" class="text-decoration-none">
                     <button class="edit-account btn btn-text mx-auto">{{ bootstrap_icon('pencil') }}</button>
                 </a>
             </div>
             <div>
                 {{ user.email }}
             </div>
-            <div class="notification notification-send flex-column">
-                {% if notification is not empty %}
+            {% if notification is not empty %}
+                {% set notification_class = notification[0].status is same as('refused') ? 'alert' : 'send' %}
+                {% set notification_class = notification[0].status is same as('validated') ? 'success' : notification_class %}
+                <div class="notification notification-{{ notification_class }} flex-column">
                     <div class="flex-row gap-200">
                         <div>{{ bootstrap_icon("rocket-takeoff") }}</div>
                         <div>{{ (notification[0].status~'_request_lessor_message') | trans }}</div>
                     </div>
-                    {% if notification[0].refusing_reason %}
+                    {% if notification[0].status is same as('refused') and notification[0].refusing_reason %}
                         <div class="font-bold">
                             {{ 'reason_request_lessor_rejected' | trans }}
                         </div>
@@ -28,15 +30,15 @@
                             {{ notification[0].refusing_reason }}
                         </div>
                     {% endif %}
-                {% endif %}
-            </div>
+                </div>
+            {% endif %}
         </div>
         <div class="flex-column gap-200">
             <div class="flex-row justify-space-between">
                 <div class="font-bold">
                     {{ 'count_bookings_stylized' | trans({'%count%': user.reservations.count}) | raw }}
                 </div>
-                <a href="{{ path('app_profile_bookings') }}" class="text-decoration-none">
+                <a href="{{ path('front_app_profile_bookings_on_going') }}" class="text-decoration-none">
                     <div class="more-informations">{{ 'see_more' | trans }}</div>
                 </a>
             </div>
@@ -47,7 +49,7 @@
                 <div class="font-bold">
                     {{ 'count_rentals_stylized' | trans({'%count%': user.rentals.count}) | raw }}
                 </div>
-                <a href="{{ path('app_profile_rentals_index') }}" class="text-decoration-none">
+                <a href="{{ path('front_app_profile_rentals_index') }}" class="text-decoration-none">
                     <div class="more-informations">{{ 'see_more' | trans }}</div>
                 </a>
             </div>
@@ -59,7 +61,7 @@
         <div class="flex-column align-center gap-300">
             <div>{{ 'terms_of_sales' | trans }}</div>
             <div>{{ 'data_privacy' | trans }}</div>
-            <div class="btn btn-outline-primary">{{ 'logout' | trans }}</div>
+            <a class="btn btn-outline-primary" href="{{ path('app_logout') }}">{{ 'logout' | trans }}</a>
         </div>
 
     </div>

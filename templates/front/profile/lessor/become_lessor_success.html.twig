@@ -5,8 +5,9 @@
         <h4 class="mb-300 text-center"> {{ 'we_come_back_to_you' | trans }}</h4>
         <span class="separator"></span>
         <p class="mt-300"> {{ 'we_come_back_to_you_explained' | trans }}</p>
-        {# TODO add profile route#}
-        <button class="btn btn-primary mt-300 width-fit-content">{{ 'go_to_profile' | trans }}</button>
+        <a href="{{ path('front_app_profile_index') }}" class="text-decoration-none">
+            <button class="btn btn-primary mt-300 width-fit-content">{{ 'go_to_profile' | trans }}</button>
+        </a>
         <a href="{{ path('front_app_home') }}" class="text-decoration-none">
             <button class="btn btn-secondary mt-300 width-fit-content">{{ 'back_to_home' | trans }}</button>
         </a>

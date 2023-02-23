@@ -7,6 +7,7 @@ use App\Form\Front\UserProfileFormType;
 use App\Repository\RentalRepository;
 use App\Repository\ReservationRepository;
 use App\Repository\UserLessorRequestRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
 
-    #[Route(path: '/account', name: 'account')]
+    #[Route(path: '/', name: 'index')]
     public function account(RentalRepository $rentalRepository, ReservationRepository $reservationRepository, UserLessorRequestRepository $userLessorRequestRepository): Response
     {
 
@@ -43,7 +44,7 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $userRepository->save($user, true);
 
-            return $this->redirectToRoute('app_profile_account', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('front_app_profile_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('front/profile/edit_profile.html.twig', [

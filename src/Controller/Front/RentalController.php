@@ -27,7 +27,7 @@ class RentalController extends AbstractController
     {
         if(!$this->isGranted(UserVoter::RENTALS, $this->getUser())) {
             if ($this->isGranted(UserVoter::BECOME_LESSOR, $this->getUser())) {
-                return $this->redirectToRoute('app_profile_rentals_become_lessor');
+                return $this->redirectToRoute('front_app_profile_rentals_become_lessor');
             }
             return $this->redirectToRoute('app_home');
         }
@@ -60,7 +60,7 @@ class RentalController extends AbstractController
             $entityManager->persist($rental);
             $entityManager->flush();
 
-             return $this->redirectToRoute('app_profile_rentals_index');
+             return $this->redirectToRoute('front_app_profile_rentals_index');
         }
 
         return $this->render('front/profile/lessor/create_rental.html.twig', [

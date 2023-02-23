@@ -44,10 +44,10 @@ class RentalRepository extends ServiceEntityRepository
     public function getRentalWithMaxReservations($filters): Rental {
 
         $query = $this->createQueryBuilder('r')
-            ->select('r, COUNT(rev.id) AS reservation_count')
+            ->select('r')
             ->leftJoin('r.reservations', 'rev')
             ->groupBy('r.id')
-            ->orderBy('reservation_count', 'DESC')
+            ->orderBy('COUNT(rev.id)', 'DESC')
             ->setMaxResults(1);
 
         foreach ($filters as $key => $value) {
@@ -59,11 +59,7 @@ class RentalRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
 
-        foreach ($results as $result) {
-            $rental = $result[0];
-        }
-
-        return $rental;
+        return $results[0];
     }
 
     public function search(string $search, string $object, bool $withReviews = false): QueryBuilder
