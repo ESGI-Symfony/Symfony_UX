@@ -3,7 +3,7 @@
 {% block title %}{{ "title_reset_password" | trans }}{% endblock %}
 
 {% block main %}
-    {{ form_start(resetForm) }}
+    {{ form_start(resetForm), { 'attr' : { 'class': 'flex-column align-center justify-centerD' } }) }}
     <div class="container-password h-150 flex-column align-center justify-center gap-300 width-300">
         <div class="flex-column align-center justify-center gap-300">
             <h4 class=" h4 mb-3 font-weight-normal">{{ "title_reset_password" | trans }}</h4>

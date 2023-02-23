@@ -88,19 +88,19 @@ text_email_exist: If an account matching your email exists, then an email was ju
 spam: If you don't receive an email please check your spam folder or
 try: Try again
 title_register: Register
-title_verify_email : Verify email sended
+title_verify_email: Verify email sended
 title_reset_password_email: Password Reset Email Sent
 title_reset_password: Reset your password
 reset_password: To reset your password, please visit the following link
-hello : Hello !
-reset_password_button : Reset password
-text_logout : You are logged in as
-logout : Logout
-forgot : Forgot password ?
-no_account : Doesn't have an account yet ?
-text_sign_in : Please sign in to continue our app
+hello: Hello !
+reset_password_button: Reset password
+text_logout: You are logged in as
+logout: Logout
+forgot: Forgot password ?
+no_account: Doesn't have an account yet ?
+text_sign_in: Please sign in to continue our app
 sign_in_now: Sign in now
-log_in : Log in!
-text_account_reset : Enter your email account to reset your password
-sent_email : Sent email
-forgot_password : Forgot password
+log_in: Log in!
+text_account_reset: Enter your email account to reset your password
+sent_email: Sent email
+forgot_password: Forgot password
