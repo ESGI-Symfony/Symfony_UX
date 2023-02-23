@@ -1,0 +1,22 @@
+{% extends 'front/rental/base.html.twig' %}
+
+{% block title %}{{ rental.rentType.value | trans }} in {{ rental.celestialObject | trans }} - Spacebnb{% endblock %}
+
+{% block main %}
+    <div class="flex-column gap-100">
+        <h5>{{ "book" | trans }}</h5>
+
+        {{ form_start(form) }}
+
+        <div class="flex-column gap-200 mb-300">
+            {{ include('partials/_input.html.twig', {input: form.date_begin}) }}
+            {{ include('partials/_input.html.twig', {input: form.date_end}) }}
+        </div>
+
+        {{ form_errors(form) }}
+
+        <button class="btn btn-primary ms-auto">{{ bootstrap_icon('rocket-takeoff') }} {{ 'book' | trans }}</button>
+
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

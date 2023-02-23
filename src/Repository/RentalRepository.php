@@ -3,10 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Rental;
-use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -65,6 +64,30 @@ class RentalRepository extends ServiceEntityRepository
         }
 
         return $rental;
+    }
+
+    public function search(string $search, string $object, bool $withReviews = false): QueryBuilder
+    {
+        $queryBuilder = $this->createQueryBuilder('r')
+            ->where('(r.celestial_object LIKE :search')
+            ->orWhere('r.description LIKE :search')
+            ->orWhere('r.rent_type LIKE :search)')
+            ->setParameter('search', '%' . strtolower($search) . '%');
+
+        if ($withReviews) {
+            $queryBuilder->leftJoin('r.reservations', 'rev')
+                ->addSelect('AVG(rev.review_mark) as sum_rating')
+                ->leftJoin('r.options', 'opt')
+                ->addSelect('opt.name as options') // TODO: Get array of options
+                ->groupBy('r.id', 'opt.id');
+        }
+
+        if (!empty($object)) {
+            $queryBuilder->andWhere('r.celestial_object = :celestial_object')
+                ->setParameter('celestial_object', $object);
+        }
+
+        return $queryBuilder;
     }
 
     public function getRentalsWithSumRating($filters): ArrayCollection

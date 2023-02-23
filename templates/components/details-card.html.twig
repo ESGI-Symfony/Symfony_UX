@@ -1,39 +1,48 @@
-{% for housing in computed.housings %}
-
-  <div class="card-small">
-    <div class="header">
-      <img class="image" src="{{ asset('images/saturn.jpg') }}">
+<div class="card-small">
+  <div class="header">
+    <img class="image" src="{{ asset('images/saturn.jpg') }}">
+    {% if rating != null %}
       <div class="rating">
-        4
+        {{ rating }}
         {{ bootstrap_icon("star-fill") }}
       </div>
-    </div>
-
-    <div class="content">
-      <div class="flex-row gap-100">
-        {{ bootstrap_icon("geo-alt") }}
-        Saturn
-      </div>
-
-      <h4>{{ housing.name }}</h4>
-
-      <div class="body">
-        {{ housing.description }}
-      </div>
-
-      <div class="footer">
-        <div class="features">
-          <span>Features</span>
-
-          <div class="icons">
-            {{ bootstrap_icon("train-front") }}
-            {{ bootstrap_icon("radioactive") }}
-          </div>
-        </div>
-
-        <button class="btn btn-primary">Book・100€</button>
-      </div>
-    </div>
+    {% endif %}
   </div>
 
-{% endfor %}
+  <div class="content">
+    <div class="flex-row gap-100">
+      {{ bootstrap_icon("geo-alt") }}
+      {{ rental.celestialObject | trans }}
+    </div>
+
+    <h4>{{ rental.rentType.value | trans }}</h4>
+
+    <div class="body">
+      <p>{{ rental.description }}</p>
+
+      {% if showTotalBookings %}
+        <p class="mt-100">{{ 'count_bookings' | trans({'%count%': rental.reservations().count}) }}</p>
+      {% endif %}
+    </div>
+
+    <div class="footer">
+      {% if options|length > 0 %}
+        <div class="features">
+          <span>{{ "features" | trans }}</span>
+
+          <div class="icons">
+            {% for option in options %}
+              <span>
+                {{ option }}
+              </span>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+
+      <a class="btn btn-primary" href="{{ path('front_rental_overview', {'id': rental.id}) }}">
+          {{ "book" | trans }}・{{ rental.price }}€
+      </a>
+    </div>
+  </div>
+</div>

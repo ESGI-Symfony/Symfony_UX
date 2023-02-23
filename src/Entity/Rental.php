@@ -57,7 +57,7 @@ class Rental
 
     #[ORM\ManyToOne(inversedBy: 'rentals')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?user $owner = null;
+    private ?User $owner = null;
 
     #[ORM\ManyToMany(targetEntity: RentalOption::class, inversedBy: 'rentals')]
     private Collection $options;
@@ -65,7 +65,7 @@ class Rental
     #[ORM\OneToMany(mappedBy: 'rental', targetEntity: Report::class, orphanRemoval: true)]
     private Collection $reports;
 
-    #[ORM\OneToMany(mappedBy: 'rental', targetEntity: Reservation::class)]
+    #[ORM\OneToMany(mappedBy: 'rental', targetEntity: Reservation::class, orphanRemoval: true)]
     private Collection $reservations;
 
     #[ORM\Column(length: 50)]
@@ -121,7 +121,7 @@ class Rental
         maxSizeMessage: 'rental.image.max_size',
         mimeTypesMessage: 'rental.image.mime_types',
     )]
-    #[Assert\NotNull(message: 'rental.image.not_null')]
+    #[Assert\NotNull(message: 'rental.image.not_null', groups: ['create'])]
     private ?File $imageFile = null;
 
     #[ORM\Column(type: Types::GUID)]
@@ -202,12 +202,12 @@ class Rental
         return $this;
     }
 
-    public function getOwner(): ?user
+    public function getOwner(): ?User
     {
         return $this->owner;
     }
 
-    public function setOwner(?user $owner): self
+    public function setOwner(?User $owner): self
     {
         $this->owner = $owner;
 

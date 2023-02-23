@@ -1,0 +1,27 @@
+{% extends 'front/rental/base.html.twig' %}
+
+{% block title %}{{ rental.rentType.value | trans }} in {{ rental.celestialObject | trans }} - Spacebnb{% endblock %}
+
+{% block main %}
+    <div class="flex-column gap-100">
+        <h5>{{ "reviews" | trans }}</h5>
+
+        <div class="flex-column gap-200">
+        {% for reservation in reservations %}
+            <div class="flex-column gap-100">
+                <h6 class="flex-row gap-200">
+                    <div class="flex-row gap-50">{{ bootstrap_icon("star-fill") }} {{ reservation.reviewMark }}</div>
+                    {{ reservation.buyer.nickname }}
+                </h6>
+
+                <p>
+                {% if reservation.reviewComment == null %}
+                    <i>{{ "no_review_comment" | trans }}</i>
+                {% endif %}
+                    {{ reservation.reviewComment }}
+                </p>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}

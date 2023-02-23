@@ -46,6 +46,12 @@
 	}
 }
 
+.inline-group {
+	display: flex;
+	overflow: auto;
+	padding-bottom: 10px;
+}
+
 .input-error-message {
 	color: $betelgeuse;
 }

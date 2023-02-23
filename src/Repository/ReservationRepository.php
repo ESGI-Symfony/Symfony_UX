@@ -42,6 +42,18 @@ class ReservationRepository extends ServiceEntityRepository
         }
     }
 
+    public function getClashingReservationCount(Reservation $reservation): int
+    {
+        return $this->createQueryBuilder("r")
+            ->where("r.date_begin <= :begin")
+            ->andWhere("r.date_end >= :end")
+            ->setParameter("begin", $reservation->getDateBegin())
+            ->setParameter("end", $reservation->getDateEnd())
+            ->select("count(r.id)")
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     private function getReservationGroupByMonthYear($sql, $userId): ArrayCollection {
 
         $conn = $this->getEntityManager()->getConnection();

@@ -7,4 +7,7 @@
 
 // any CSS you import will output into a single css file (app.scss in this case)
 import '../styles/app.scss';
-import './input.js';
+
+import './back-button.mjs';
+import './input';
+import './stripe';

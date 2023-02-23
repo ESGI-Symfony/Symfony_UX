@@ -12,6 +12,7 @@
 @import "bookings";
 @import "templates/account";
 @import "notification";
+@import "colors";
 
 html, body {
     font-size: $fs-300;
@@ -29,6 +30,10 @@ body {
 
 a {
     color: $alnitak;
+}
+
+ol, ul {
+    list-style: disc inside;
 }
 
 #admin-button {

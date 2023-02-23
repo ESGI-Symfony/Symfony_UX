@@ -1,24 +1,23 @@
 <?php
 
-namespace App\Form\Front;
+namespace App\Form\Back;
 
 use App\Entity\Rental;
 use App\Entity\RentalOption;
 use App\Entity\Transport;
+use App\Entity\User;
 use App\Enums\RentalTypes;
 use App\FakeApi\CelestialObjects;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
-class RentalFormType extends AbstractType
+class RentalType extends AbstractType
 {
     private TranslatorInterface $translator;
 
@@ -33,37 +32,18 @@ class RentalFormType extends AbstractType
             ->add('rent_type', EnumType::class, [
                 'class' => RentalTypes::class,
                 'choice_label' => fn ($choice) => RentalTypes::getValuesTranslated($this->translator)[$choice->value],
-                'label' => 'rent_type',
             ])
-            ->add('description', TextareaType::class, [
-                'attr' => [
-                    'placeholder' => 'describe_your_rental',
-                ],
-                'label' => 'description',
-            ])
-            ->add('max_capacity', IntegerType::class, [
-                'attr' => [
-                    'placeholder' => 'max_guests_available',
-                ],
-                'label' => 'capacity',
-            ])
-            ->add('price', IntegerType::class, [
-                'attr' => [
-                    'placeholder' => 'price_by_night',
-                ],
-                'label' => 'price',
-            ])
-            ->add('room_count', IntegerType::class, [
-                'attr' => [
-                    'placeholder' => 'room_count',
-                ],
-                'label' => 'rooms',
-            ])
-            ->add('bathroom_count', IntegerType::class, [
-                'attr' => [
-                    'placeholder' => 'bathroom_count',
-                ],
-                'label' => 'bathrooms',
+            ->add('description')
+            ->add('price')
+            ->add('max_capacity')
+            ->add('room_count')
+            ->add('bathroom_count')
+            ->add('longitude')
+            ->add('latitude')
+            ->add('uuid')
+            ->add('owner', EntityType::class, [
+                'class' => User::class,
+                'choice_label' => 'email',
             ])
             ->add('options', EntityType::class, [
                 'class' => RentalOption::class,
@@ -79,12 +59,6 @@ class RentalFormType extends AbstractType
                 'choices' => array_flip(CelestialObjects::getValuesOrderedByTranslation($this->translator)),
                 'label' => 'celestial_object',
             ])
-            ->add('longitude', IntegerType::class, [
-                'label' => 'longitude',
-            ])
-            ->add('latitude', IntegerType::class, [
-                'label' => 'latitude',
-            ])
             ->add('transports', EntityType::class, [
                 'class' => Transport::class,
                 'choice_label' => function (?Transport $transport) {
@@ -96,11 +70,11 @@ class RentalFormType extends AbstractType
                 'required' => false,
             ])
             ->add('imageFile', VichImageType::class, [
-                'required' => true,
+                'required' => false,
                 'download_uri' => true,
                 'image_uri' => true,
                 'asset_helper' => true,
-                'label' => 'main_image'
+                'label' => 'main_image',
             ])
         ;
     }

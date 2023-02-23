@@ -1,0 +1,23 @@
+{% extends 'front/base.html.twig' %}
+
+{% block title %}{{ 'pay_your_reservation' | trans }}{% endblock %}
+
+{% block main %}
+    <form class="column-400 mx-auto flex-column gap-200" id='checkout-form' method='post' action="{{ path('front_app_stripe_charge', {id: reservation.id}) }}">
+        <input type='hidden' name='stripeToken' id='stripe-token-id'>
+        <label for="stripe-card-element">{{ 'checkout_form' | trans }}</label>
+        <div id="stripe-card-element"></div>
+        <button
+                id='pay-btn'
+                class="btn btn-primary ms-auto"
+                type="button">
+            {{ 'pay_%amount%_%currency%' | trans({'%amount%': reservation.totalPrice, '%currency%': '€'}) }}
+        </button>
+        <p id="error-stripe-message"></p>
+    <form>
+
+    <section>
+        {# TODO Show reservation card #}
+    </section>
+    <script src="https://js.stripe.com/v3/" ></script>
+{% endblock %}
