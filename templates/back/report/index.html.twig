@@ -13,7 +13,7 @@
                 <div class="content p-100">
                     <div class="body flex-column gap-100">
                         <p class="flex-row gap-50 align-center">
-                            <span class="notification notification-forbidden">{{ report.type.value }}</span>
+                            <span class="notification notification-forbidden">{{ ('report_'~report.type.value) | trans}}</span>
                             <span>#{{ report.id }}</span>
                         </p>
                         <p class="flex-row gap-50 align-center">
