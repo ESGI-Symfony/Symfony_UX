@@ -3,7 +3,7 @@
 {% block title %}{{ "title_register" | trans }}{% endblock %}
 
 {% block main %}
-    {{ form_start(registrationForm) }}
+    {{ form_start(registrationForm, { 'attr' : { 'class': 'flex-column align-center justify-center' } }) }}
     <div class="container h-150 flex-column align-center justify-center gap-300 width-300">
         <div class="flex-column align-center justify-center gap-300">
             <h4 class="h4 mb-3 font-weight-normal">{{ "sign_up" | trans }}</h4>
