@@ -53,15 +53,27 @@ class UserController extends AbstractController
 
     }
 
-    #[Route(path: '/bookings', name: 'bookings')]
-    public function bookings(ReservationRepository $reservationRepository): Response
+    #[Route(path: '/bookings/passed', name: 'bookings_passed')]
+    public function bookingsPassed(ReservationRepository $reservationRepository): Response
     {
         $user = $this->getUser();
 
         return $this->render('front/profile/tenant/bookings.html.twig', [
             'user' => $user,
-            'passedReservationsByYearMonth' => $reservationRepository->getPassedReservation($user),
-            'onGoingReservationsByYearMonth' => $reservationRepository->getOnGoigReservation($user),
+            'passedReservations' => true,
+            'reservations' => $reservationRepository->getPassedReservation($user),
+        ]);
+    }
+
+    #[Route(path: '/bookings/ongoing', name: 'bookings_on_going')]
+    public function bookingsOnGoing(ReservationRepository $reservationRepository): Response
+    {
+        $user = $this->getUser();
+
+        return $this->render('front/profile/tenant/bookings.html.twig', [
+            'user' => $user,
+            'passedReservations' => false,
+            'reservations' => $reservationRepository->getOnGoigReservation($user),
         ]);
     }
 
