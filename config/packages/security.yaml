@@ -34,6 +34,9 @@ security:
     access_control:
          - { path: ^/admin, roles: ROLE_ADMIN }
          - { path: ^/profile, roles: ROLE_USER }
+         - { path: ^/rental/[0-9]+/book, roles: ROLE_USER }
+         - { path: ^/rental/[0-9]+/report, roles: ROLE_USER }
+         - { path: ^/stripe}, roles: ROLE_USER }
 
     role_hierarchy:
         ROLE_LESSOR: ROLE_USER

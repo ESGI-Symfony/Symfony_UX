@@ -78,3 +78,8 @@ payment_succeed: Payment succeed
 your_payment_successfully_ended: Your reservation was paid successfully, you can now enjoy your trip
 checkout_form: Checkout form
 pay_%amount%_%currency%: Pay %amount% %currency%
+report_type: Report type
+comment: Comment
+report: Report
+we_have_received_your_report: We have received your report
+we_will_check_whats_wrong_explained: We will check what’s wrong with this rental as soon as possible, thank you for your help in improving our service

@@ -3,9 +3,13 @@
 namespace App\Controller\Front;
 
 use App\Entity\Rental;
+use App\Entity\Report;
 use App\Entity\Reservation;
 use App\Form\BookReservationFormType;
+use App\Form\Front\ReportFormType;
+use App\Repository\ReportRepository;
 use App\Repository\ReservationRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
@@ -52,6 +56,7 @@ class RentalPageController extends AbstractController
     {
         $user = $this->getUser();
         if (is_null($user)) {
+            // should be triggered by security.yaml
             return $this->redirectToRoute('app_login');
         }
 
@@ -81,6 +86,52 @@ class RentalPageController extends AbstractController
             'form' => $form->createView(),
             'rental' => $rental,
             'selectedTab' => 'book',
+        ]);
+    }
+
+    #[Route('/report', name: 'report')]
+    public function report(Rental $rental, Request $request, EntityManagerInterface $entityManager, ReportRepository $reportRepository): Response
+    {
+        $user = $this->getUser();
+        if (is_null($user)) {
+            // should be triggered by security.yaml
+            return $this->redirectToRoute('app_login');
+        }
+
+        // check if user already reported this rental
+        $existingReport = $reportRepository->findOneBy([
+            'author' => $user,
+            'rental' => $rental,
+        ]);
+        if (!is_null($existingReport)) {
+            return $this->render('front/rental/report_success.html.twig', [
+                'rental' => $rental,
+                'selectedTab' => 'report',
+            ]);
+        }
+
+        $report = new Report();
+
+        $form = $this->createForm(ReportFormType::class, $report);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $report->setRental($rental);
+            $report->setAuthor($this->getUser());
+
+            $entityManager->persist($report);
+            $entityManager->flush();
+
+            return $this->render('front/rental/report_success.html.twig', [
+                'rental' => $rental,
+                'selectedTab' => 'report',
+            ]);
+        }
+
+        return $this->render('front/rental/report.html.twig', [
+            'form' => $form->createView(),
+            'rental' => $rental,
+            'selectedTab' => 'report',
         ]);
     }
 }

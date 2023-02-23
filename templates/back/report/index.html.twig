@@ -1,0 +1,36 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %}Report index{% endblock %}
+
+{% block main %}
+    <section class="flex-column gap-200 column-900 mx-auto">
+        <h3>Report index - {{ reports|length }}</h3>
+
+        <a href="{{ path('back_report_new') }}" class="btn btn-primary width-fit-content mx-auto">Create new</a>
+
+        {% for report in reports %}
+            <div class="card-small">
+                <div class="content p-100">
+                    <div class="body flex-column gap-100">
+                        <p class="flex-row gap-50 align-center">
+                            <span class="notification notification-forbidden">{{ report.type.value }}</span>
+                            <span>#{{ report.id }}</span>
+                        </p>
+                        <p class="flex-row gap-50 align-center">
+                            <a href="{{ path('back_rental_show', {id: report.rental.id}) }}">Rental #{{ report.rental.id }}</a>
+                            <small>{{ report.rental.reports|length }} report(s)</small>
+                        </p>
+                        <p>{{ report.comment }}</p>
+                        <p>Reported by <a href="{{ path('back_user_show', {id: report.author.id}) }}">{{ report.author.email }}</a></p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <a href="{{ path('back_report_show', {'id': report.id}) }}">show</a>
+                <a href="{{ path('back_report_edit', {'id': report.id}) }}">edit</a>
+            </div>
+        {% else %}
+            <p>no records found</p>
+        {% endfor %}
+    </section>
+{% endblock %}

@@ -8,7 +8,7 @@
             <button class="btn btn-text back-button">{{ bootstrap_icon('arrow-left') }} {{ "back" | trans }}</button>
         </div>
 
-        <div class="container bg-procyon color-dark-matter rounded-top-400">
+        <div class="container bg-procyon color-dark-matter rounded-top-400 column-900 w-100 mx-auto">
             <div class="flex-column gap-200">
                 <div class="flex-row justify-space-between">
                     <div class="flex-column gap-100">
@@ -21,7 +21,7 @@
                     </div>
 
                     <div class="flex-column gap-100 align-end">
-                        <h6 class="color-alnitak">{{ rental.price }}€</h6>
+                        <h6 class="color-alnitak">{{ rental.price }} €</h6>
 
                         <small>{{ "estimated" | trans }}</small>
                     </div>
@@ -43,7 +43,9 @@
                     </div>
 
                     <div class="badge">
-                        {{ bootstrap_icon("flag") }}
+                        <a class="badge flex-column{% if selectedTab == 'report' %} badge-accent{% endif %}" href="{{ path('front_rental_report', {'id': rental.id}) }}">
+                            {{ bootstrap_icon("flag") }}
+                        </a>
                     </div>
                 </div>
 
