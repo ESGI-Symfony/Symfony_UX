@@ -1,8 +1,6 @@
 {% set attr = attr is defined ? attr : [] %}
-<div class="flex-column gap-100">
-    <div class="input-group">
-        {{ form_widget(input, {'attr': {'class': 'input-champ'}|merge(attr) }) }}
-    </div>
+<div class="input-group input-group-password">
+    {{ form_widget(input, {'attr': {'class': 'input'}|merge(attr) }) }}
 </div>
 <div class="input-error-message">
     {{ form_errors(input) }}

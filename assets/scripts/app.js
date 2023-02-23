@@ -10,3 +10,4 @@ import '../styles/app.scss';
 
 import './back-button.mjs';
 import './input.js';
+import './password.js';

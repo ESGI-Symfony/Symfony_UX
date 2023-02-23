@@ -1,6 +1,6 @@
 {% extends 'front/base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}{{ "log_in" | trans }}{% endblock %}
 
 {% block main %}
     <div class="flex-row h-100">
@@ -8,12 +8,13 @@
 
             {% if app.user %}
                 <div class="mb-3">
-                    You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                    {{ "text_logout" | trans }} {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">{{ "logout" | trans }}</a>
                 </div>
             {% endif %}
+
             <div class="flex-column align-stretch gap-300">
-                <h4 class="h4 mb-3 font-weight-normal">Sign in now</h4>
-                <span class="h6 small">Please sign in to continue our app</span>
+                <h4 class="h4 mb-3 font-weight-normal">{{ "sign_in_now" | trans }}</h4>
+                <span class="h6 small">{{ "text_sign_in" | trans }}</span>
                 <div class="flex-grow gap-300">
                     <div class="input-group">
                         <input class="input" placeholder="{{ "email_example" | trans }}" type="email"
@@ -32,17 +33,18 @@
                         <div class="color-dark-matter container-pwd password-toggle-off">
                             {{ bootstrap_icon('eye-slash') }}
                         </div>
+
                     </div>
                 </div>
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                <a href="{{ path('app_forgot_password_request') }}">Forgot password ?</a>
+                <a href="{{ path('app_forgot_password_request') }}">{{ "forgot" | trans }}</a>
                 <div class="flex-row justify-center">
-                    <button class="btn btn-primary" type="submit">{{ bootstrap_icon("rocket-takeoff") }} Sign in
+                    <button class="btn btn-primary" type="submit">{{ bootstrap_icon("rocket-takeoff") }} {{ "sign_in" | trans }}
                     </button>
                 </div>
                 <div class="flex-row flex-wrap gap-300">
-                    <span class="white-space-no-wrap">Doesn't have an account yet ?</span>
-                    <a class="white-space-no-wrap" href="{{ path('app_register') }}">Sign up</a>
+                    <span class="white-space-no-wrap">{{ "no_account" | trans }}</span>
+                    <a class="white-space-no-wrap" href="{{ path('app_register') }}">{{ "sign_up" | trans }}</a>
                 </div>
             </div>
             <div class="p-200">
@@ -56,24 +58,6 @@
         <div class="flex-grow max-width-cat">
             <img class="" src="{{ asset('images/space_cat.png') }}">
         </div>
-
-        <script>
-            const eye = document.querySelector(".password-toggle");
-            const eyeOff = document.querySelector(".password-toggle-off");
-            const passwordField = document.querySelector("#inputPassword");
-
-            eye.addEventListener("click", () => {
-                eye.style.display = "none";
-                eyeOff.style.display = "block";
-                passwordField.type = "text";
-            });
-
-            eyeOff.addEventListener("click", () => {
-                eyeOff.style.display = "none";
-                eye.style.display = "block";
-                passwordField.type = "password";
-            });
-        </script>
 
     </div>
 {% endblock %}
