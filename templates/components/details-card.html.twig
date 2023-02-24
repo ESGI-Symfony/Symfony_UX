@@ -18,21 +18,27 @@
     <h4>{{ rental.rentType.value | trans }}</h4>
 
     <div class="body">
-      {{ rental.description }}
+      <p>{{ rental.description }}</p>
+
+      {% if showTotalBookings %}
+        <p class="mt-100">{{ 'count_bookings' | trans({'%count%': rental.reservations().count}) }}</p>
+      {% endif %}
     </div>
 
     <div class="footer">
-      <div class="features">
-        <span>{{ "features" | trans }}</span>
+      {% if options|length > 0 %}
+        <div class="features">
+          <span>{{ "features" | trans }}</span>
 
-        <div class="icons">
-          {% for option in options %}
-            <span>
-              {{ option }}
-            </span>
-          {% endfor %}
+          <div class="icons">
+            {% for option in options %}
+              <span>
+                {{ option }}
+              </span>
+            {% endfor %}
+          </div>
         </div>
-      </div>
+      {% endif %}
 
       <a class="btn btn-primary" href="{{ path('front_rental_overview', {'id': rental.id}) }}">
           {{ "book" | trans }}・{{ rental.price }}€

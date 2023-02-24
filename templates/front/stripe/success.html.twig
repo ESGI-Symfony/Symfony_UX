@@ -1,0 +1,16 @@
+{% extends 'front/base.html.twig' %}
+
+{% block title %}{{ 'pay_your_reservation' | trans }}{% endblock %}
+
+{% block main %}
+    <section class="flex-column column-400 mx-auto text-center justify-center align-center">
+        <h4 class="mb-300 text-center"> {{ 'payment_succeed' | trans }}</h4>
+        <span class="separator"></span>
+        <p class="mt-300"> {{ 'your_payment_successfully_ended' | trans }}</p>
+        {# TODO profile link #}
+        <button class="btn btn-primary mt-300 width-fit-content">{{ 'go_to_profile' | trans }}</button>
+        <a href="{{ path('front_app_home') }}" class="text-decoration-none">
+            <button class="btn btn-secondary mt-300 width-fit-content">{{ 'back_to_home' | trans }}</button>
+        </a>
+    </section>
+{% endblock %}

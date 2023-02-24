@@ -104,3 +104,11 @@ log_in: Log in!
 text_account_reset: Enter your email account to reset your password
 sent_email: Sent email
 forgot_password: Forgot password
+
+pay_your_reservation: Pay your reservation
+payment_succeed: Payment succeed
+your_payment_successfully_ended: Your reservation was paid successfully, you can now enjoy your trip
+checkout_form: Checkout form
+pay_%amount%_%currency%: Pay %amount% %currency%
+already_booked: Those dates are already booked
+

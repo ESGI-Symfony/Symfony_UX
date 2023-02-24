@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SearchController extends AbstractController
 {
-    #[Route('/search', name: 'app_search', methods: ['GET'])]
+    #[Route('/', name: 'front_app_home', methods: ['GET'])]
     public function index(Request $request, RentalRepository $rental_repository): Response
     {
         $search = $request->query->get('search', '');
