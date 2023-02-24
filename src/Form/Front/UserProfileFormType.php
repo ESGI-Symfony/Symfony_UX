@@ -5,6 +5,7 @@ namespace App\Form\Front;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -37,16 +38,23 @@ class UserProfileFormType extends AbstractType
             ->add('phone', TextType::class, [
                 'attr' => [
                     'placeholder' => 'your_galactic_phone',
-                ],
-                'required' => false,
+                ]
             ])
         ;
+        if (in_array('ROLE_LESSOR', $options['role'])) {
+            $builder->add('lessor_number', IntegerType::class, [
+                'attr' => [
+                    'placeholder' => 'your_lessor_number',
+                ],
+            ]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'role' => 'ROLE_USER'
         ]);
     }
 }

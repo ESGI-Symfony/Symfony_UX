@@ -16,6 +16,9 @@
                 {{ include('partials/_input.html.twig', {input: form.firstname}) }}
                 {{ include('partials/_input.html.twig', {input: form.email}) }}
                 {{ include('partials/_input.html.twig', {input: form.phone}) }}
+                {% if form.lessor_number is defined %}
+                    {{ include('partials/_input.html.twig', {input: form.lessor_number}) }}
+                {% endif %}
             </div>
             <button class="btn btn-primary mx-auto">{{ bootstrap_icon('rocket-takeoff') }} {{ 'save_my_profile' | trans }}</button>
         </div>

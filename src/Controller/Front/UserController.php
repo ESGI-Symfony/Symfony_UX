@@ -38,7 +38,10 @@ class UserController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
-        $form = $this->createForm(UserProfileFormType::class, $user);
+        $form = $this->createForm(UserProfileFormType::class, $user, [
+            'validation_groups' => $user->isLessor() ? ['Default', 'lessor'] : ['Default'],
+            'role' => $user->getRoles()
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
