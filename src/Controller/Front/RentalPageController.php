@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/rental/{id}', name: 'front_rental_', requirements: ['id' => '\d+'])]
+#[Route('/rental/{id}', name: 'rental_', requirements: ['id' => '\d+'])]
 class RentalPageController extends AbstractController
 {
     #[Route('/overview', name: 'overview')]

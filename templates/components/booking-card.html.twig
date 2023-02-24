@@ -1,4 +1,7 @@
 <div class="booking-card">
+    {% if type.value is same as('rental') %}
+        <a href="{{ path('front_rental_overview', {id: subject.id}) }}" class="card-link"></a>
+    {% endif %}
     <div class="header">
         <img class="image" src="{{ asset('images/saturn.jpg') }}">
     </div>
