@@ -38,6 +38,12 @@
                         <a class="badge{% if selectedTab == 'reviews' %} badge-primary{% endif %}" href="{{ path('front_rental_reviews', {'id': rental.id}) }}">
                             {{ "reviews" | trans }}
                         </a>
+
+                        {% if app.user is same as(rental.owner) or is_granted('ROLE_ADMIN') %}
+                            <a class="badge{% if selectedTab == 'bookings' %} badge-primary{% endif %}" href="{{ path('front_rental_bookings', {'id': rental.id}) }}">
+                                {{ "count_bookings" | trans({'%count%': rental.reservations|length}) }}
+                            </a>
+                        {% endif %}
                     </div>
 
                     <div class="badge">

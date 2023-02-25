@@ -2,6 +2,8 @@
 
 namespace App\Security\Voter;
 
+use App\Entity\Rental;
+use App\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -12,13 +14,13 @@ class UserVoter extends Voter
     public const RENTALS = 'RENTALS';
     public const DELETE_ACCOUNTS = 'DELETE_ACCOUNTS';
     public const CREATE_RENTALS = 'CREATE_RENTALS';
+    public const SHOW_BOOKINGS = 'SHOW_BOOKINGS';
 
     protected function supports(string $attribute, $subject): bool
     {
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
-        return in_array($attribute, [self::BECOME_LESSOR, self::RENTALS, self::CREATE_RENTALS, self::DELETE_ACCOUNTS])
-            && $subject instanceof \App\Entity\User;
+        return in_array($attribute, [self::BECOME_LESSOR, self::RENTALS, self::CREATE_RENTALS, self::DELETE_ACCOUNTS, self::SHOW_BOOKINGS]);
     }
 
     protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
@@ -41,7 +43,8 @@ class UserVoter extends Voter
         return match ($attribute) {
             self::BECOME_LESSOR => $isAdmin || !$user->isLessor(),
             self::RENTALS, self::CREATE_RENTALS => $isAdmin || $user->isLessor(),
-            self::DELETE_ACCOUNTS => $user !== $subject && $isAdmin,
+            self::DELETE_ACCOUNTS => $subject instanceof User && $user !== $subject && $isAdmin,
+            self::SHOW_BOOKINGS => $subject instanceof Rental && ($user === $subject->getOwner() || $isAdmin),
             default => false,
         };
     }

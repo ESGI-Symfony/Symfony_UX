@@ -28,8 +28,8 @@ class ReservationFixtures extends Fixture implements DependentFixtureInterface
         $users = $manager->getRepository(User::class)->findAll();
 
         foreach ($rentals as $rental) {
-            $begin = $faker->dateTimeBetween('now', '+1 year');
-            $end = $faker->dateTimeBetween($begin, '+1 year');
+            $begin = $faker->dateTimeBetween('-2 years', 'now');
+            $end = $faker->dateTimeBetween($begin, 'now');
             $addReview = $faker->boolean();
 
             for($i = 0; $i < $faker->numberBetween(0, 10); $i++) {
@@ -39,8 +39,9 @@ class ReservationFixtures extends Fixture implements DependentFixtureInterface
                     ->setBuyer($faker->randomElement($users))
                     ->setDateBegin($begin)
                     ->setDateEnd($end)
-                    ->setReviewMark($addReview ? $faker->numberBetween(0, 5) : null)
+                    ->setReviewMark($addReview ? $faker->numberBetween(1, 5) : null)
                     ->setReviewComment($addReview ? $faker->paragraph : null)
+                    ->setCreatedAt($faker->dateTimeBetween('-3 years', $begin))
                 ;
                 $manager->persist($object);
             }

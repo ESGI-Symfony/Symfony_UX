@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\CustomTimestampableTrait;
 use App\Enums\RentalTypes;
 use App\Repository\RentalRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -17,6 +18,8 @@ use Vich\UploaderBundle\Mapping\Annotation\UploadableField;
 #[Uploadable]
 class Rental
 {
+    use CustomTimestampableTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

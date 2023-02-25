@@ -11,6 +11,7 @@ use App\Form\Front\ReportFormType;
 use App\Form\Front\ReviewReservationFormType;
 use App\Repository\ReportRepository;
 use App\Repository\ReservationRepository;
+use App\Security\Voter\UserVoter;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
@@ -163,6 +164,20 @@ class RentalPageController extends AbstractController
             'form' => $form->createView(),
             'rental' => $rental,
             'selectedTab' => 'report',
+        ]);
+    }
+
+    #[Route('/bookings', name: 'bookings')]
+    public function bookings(Rental $rental, ReservationRepository $reservationRepository): Response
+    {
+        $this->denyAccessUnlessGranted(UserVoter::SHOW_BOOKINGS, $rental);
+
+        $reservations = $reservationRepository->findBy(['rental' => $rental], ['createdAt' => 'DESC']);
+
+        return $this->render('front/rental/bookings.html.twig', [
+            'rental' => $rental,
+            'reservations' => $reservations,
+            'selectedTab' => 'bookings',
         ]);
     }
 }
