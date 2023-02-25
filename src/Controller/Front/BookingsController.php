@@ -20,7 +20,7 @@ class BookingsController extends AbstractController
         return $this->render('front/profile/tenant/bookings.html.twig', [
             'user' => $user,
             'passedReservations' => true,
-            'reservations' => $reservationRepository->getPassedReservation($user),
+            'reservations' => $reservationRepository->getReservationGroupByMonthYear($user, 'passed'),
         ]);
     }
 
@@ -32,7 +32,7 @@ class BookingsController extends AbstractController
         return $this->render('front/profile/tenant/bookings.html.twig', [
             'user' => $user,
             'passedReservations' => false,
-            'reservations' => $reservationRepository->getOnGoigReservation($user),
+            'reservations' => $reservationRepository->getReservationGroupByMonthYear($user, 'future'),
         ]);
     }
 

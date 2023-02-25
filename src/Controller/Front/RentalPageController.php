@@ -4,7 +4,7 @@ namespace App\Controller\Front;
 
 use App\Entity\Rental;
 use App\Entity\Reservation;
-use App\Form\BookReservationFormType;
+use App\Form\Front\BookReservationFormType;
 use App\Repository\ReservationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,6 +12,7 @@ use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route('/rental/{id}', name: 'rental_', requirements: ['id' => '\d+'])]
 class RentalPageController extends AbstractController
@@ -48,7 +49,7 @@ class RentalPageController extends AbstractController
     }
 
     #[Route('/book', name: 'book')]
-    public function book(Rental $rental, Request $request, EntityManagerInterface $entityManager, ReservationRepository $reservationRepository): Response
+    public function book(Rental $rental, Request $request, EntityManagerInterface $entityManager, ReservationRepository $reservationRepository, TranslatorInterface $translator): Response
     {
         $user = $this->getUser();
         if (is_null($user)) {
@@ -66,7 +67,7 @@ class RentalPageController extends AbstractController
             $count = $reservationRepository->getClashingReservationCount($reservation);
 
             if ($count > 0) {
-                $form->addError(new FormError('Date selected invalid'));
+                $form->addError(new FormError($translator->trans('already_booked')));
             } else {
                 $entityManager->persist($reservation);
                 $entityManager->flush();

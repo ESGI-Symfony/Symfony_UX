@@ -1,5 +1,7 @@
 {% extends 'front/base.html.twig' %}
 
+{% block title %}{{ 'your_rentals' | trans }}{% endblock %}
+
 {% block main %}
     <section class="flex-column gap-300 mx-auto text-center justify-center align-center column-900">
         <button class="btn btn-text back-button me-auto">{{ bootstrap_icon('arrow-left') }} {{ 'back' | trans }}</button>

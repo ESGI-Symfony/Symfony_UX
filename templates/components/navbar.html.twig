@@ -1,7 +1,7 @@
 {# templates/components/navbar.html.twig #}
 
 
-<div class="flex-row full-width align-center justify-space-around navbar py-200">
+<div class="flex-row align-center justify-space-around navbar py-200">
     {% for item in items %}
 
         <a href="{{ path(item.path ?: 'front_app_home') }}" class="btn btn-text">

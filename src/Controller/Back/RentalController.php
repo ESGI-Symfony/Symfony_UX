@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Uid\Uuid;
 
 #[Route('/rental', name: 'rental_')]
 class RentalController extends AbstractController
@@ -25,7 +26,7 @@ class RentalController extends AbstractController
     public function new(Request $request, RentalRepository $rentalRepository): Response
     {
         $rental = new Rental();
-        $rental->setUuid(uniqid());
+        $rental->setUuid(Uuid::v6());
         $form = $this->createForm(RentalType::class, $rental);
         $form->handleRequest($request);
 
