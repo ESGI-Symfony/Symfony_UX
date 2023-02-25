@@ -12,6 +12,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Uid\Uuid;
 
 class RentalFixtures extends Fixture implements DependentFixtureInterface
@@ -27,6 +28,9 @@ class RentalFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
+        $fs = new Filesystem();
+        $fs->copy(__DIR__.'/../../public/images/saturn.jpg', __DIR__.'/../../public/images/storage/rentals/saturn.jpg');
+
         $faker = Factory::create();
         $transports = $manager->getRepository(Transport::class)->findAll();
         $options = $manager->getRepository(RentalOption::class)->findAll();
@@ -42,7 +46,7 @@ class RentalFixtures extends Fixture implements DependentFixtureInterface
                 ->setPrice($faker->numberBetween(1, 10000))
                 ->setRentType($faker->randomElement(RentalTypes::cases()))
                 ->setUuid($faker->uuid)
-                ->setImage($faker->filePath())
+                ->setImage('saturn.jpg')
 
                 ->setLongitude($faker->longitude)
                 ->setLatitude($faker->latitude)
