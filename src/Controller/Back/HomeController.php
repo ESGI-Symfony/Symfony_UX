@@ -12,6 +12,6 @@ class HomeController extends AbstractController
     #[Route(path: '/', name: 'app_home')]
     public function home(): Response
     {
-        return $this->render('back/home/index.html.twig', ['message' => 'Hello world Back']);
+        return $this->render('back/home/index.html.twig');
     }
 }

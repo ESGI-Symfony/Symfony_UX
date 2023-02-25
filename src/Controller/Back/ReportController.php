@@ -34,7 +34,7 @@ class ReportController extends AbstractController
             return $this->redirectToRoute('back_report_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('back/report/new.html.twig', [
+        return $this->render('back/report/new.html.twig', [
             'report' => $report,
             'form' => $form,
         ]);
@@ -60,7 +60,7 @@ class ReportController extends AbstractController
             return $this->redirectToRoute('back_report_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('back/report/edit.html.twig', [
+        return $this->render('back/report/edit.html.twig', [
             'report' => $report,
             'form' => $form,
         ]);

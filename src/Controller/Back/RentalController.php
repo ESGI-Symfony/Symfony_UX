@@ -36,7 +36,7 @@ class RentalController extends AbstractController
             return $this->redirectToRoute('back_rental_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('back/rental/new.html.twig', [
+        return $this->render('back/rental/new.html.twig', [
             'rental' => $rental,
             'form' => $form,
         ]);
@@ -62,7 +62,7 @@ class RentalController extends AbstractController
             return $this->redirectToRoute('back_rental_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('back/rental/edit.html.twig', [
+        return $this->render('back/rental/edit.html.twig', [
             'rental' => $rental,
             'form' => $form,
         ]);

@@ -7,6 +7,9 @@ vich_uploader:
     mappings:
         rentals:
             uri_prefix: /images/rentals
+            delete_on_update: true
+            delete_on_remove: true
+            inject_on_load: false
             upload_destination: '%kernel.project_dir%/public/images/storage/rentals'
             namer:
                 service: Vich\UploaderBundle\Naming\PropertyNamer

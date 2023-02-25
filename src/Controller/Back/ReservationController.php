@@ -34,7 +34,7 @@ class ReservationController extends AbstractController
             return $this->redirectToRoute('back_reservation_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('back/reservation/new.html.twig', [
+        return $this->render('back/reservation/new.html.twig', [
             'reservation' => $reservation,
             'form' => $form,
         ]);
@@ -60,7 +60,7 @@ class ReservationController extends AbstractController
             return $this->redirectToRoute('back_reservation_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('back/reservation/edit.html.twig', [
+        return $this->render('back/reservation/edit.html.twig', [
             'reservation' => $reservation,
             'form' => $form,
         ]);
