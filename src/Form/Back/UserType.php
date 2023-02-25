@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Back;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
@@ -51,3 +51,4 @@ class UserType extends AbstractType
         ]);
     }
 }
+

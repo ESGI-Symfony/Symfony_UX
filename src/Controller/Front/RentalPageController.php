@@ -4,7 +4,7 @@ namespace App\Controller\Front;
 
 use App\Entity\Rental;
 use App\Entity\Reservation;
-use App\Form\BookReservationFormType;
+use App\Form\Front\BookReservationFormType;
 use App\Repository\ReservationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-#[Route('/rental/{id}', name: 'front_rental_', requirements: ['id' => '\d+'])]
+#[Route('/rental/{id}', name: 'rental_', requirements: ['id' => '\d+'])]
 class RentalPageController extends AbstractController
 {
     #[Route('/overview', name: 'overview')]

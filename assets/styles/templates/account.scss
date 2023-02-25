@@ -1,0 +1,36 @@
+@import "assets/styles/variables";
+
+.account {
+
+  span {
+    color: $sun;
+  }
+  
+  .edit-account {
+    cursor: pointer;
+  }
+
+  .font-bold {
+    font-weight: $fw-bold;
+    font-size: $fs-400;
+  }
+
+  .more-informations {
+    color: $rigel;
+    cursor: pointer;
+  }
+
+  hr {
+    width: 75%;
+    border-color: $sun;
+  }
+
+}
+
+.edit-profile {
+
+  .custom-btn {
+    padding: 0;
+  }
+
+}
