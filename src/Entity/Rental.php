@@ -404,7 +404,9 @@ class Rental
     public function setImage(?string $image): self
     {
         $this->image = $image;
-
+        if ($image) {
+            $this->setUpdatedAt(new \DateTime());
+        }
         return $this;
     }
 
@@ -422,7 +424,9 @@ class Rental
     public function setImageFile(?File $imageFile): self
     {
         $this->imageFile = $imageFile;
-
+        if ($imageFile) {
+            $this->setUpdatedAt(new \DateTime());
+        }
         return $this;
     }
 
