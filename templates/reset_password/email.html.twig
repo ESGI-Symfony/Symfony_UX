@@ -1,10 +1,8 @@
-<body style="font-family: Arial, sans-serif;background: linear-gradient(167.95deg, #000000 0%, #02043C 58.4%, #390F40 86.52%, #450050 100%);display: flex;justify-content: center;align-items: center; text-align: center;color: white;">
-
-<div>
-    <h1>{{ "hello" | trans }}</h1>
-    <p>{{ "reset_password" | trans }}</p>
-    <a href="{{ url('app_reset_password', {token: resetToken.token}) }}" style="color:#6990C5;">{{ url('app_reset_password', {token: resetToken.token}) }}</a>
-    <p>{{ "link_expiration" | trans }} {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.</p>
-
+<div style="font-family: Arial, sans-serif;background: linear-gradient(167.95deg, #000000 0%, #02043C 58.4%, #390F40 86.52%, #450050 100%);display: flex;justify-content: center;align-items: center; text-align: center;color: white;">
+    <div>
+        <h1>{{ "hello" | trans }}</h1>
+        <p>{{ "reset_password" | trans }}</p>
+        <a href="{{ url('app_reset_password', {token: resetToken.token}) }}" style="color:#6990C5;">{{ url('app_reset_password', {token: resetToken.token}) }}</a>
+        <p>{{ "link_expiration" | trans }} {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.</p>
+    </div>
 </div>
-</body>

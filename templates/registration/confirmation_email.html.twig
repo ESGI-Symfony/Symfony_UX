@@ -1,13 +1,12 @@
-<body style="font-family: Arial, sans-serif;background: linear-gradient(167.95deg, #000000 0%, #02043C 58.4%, #390F40 86.52%, #450050 100%);display: flex;justify-content: center;align-items: center; text-align: center;color: white;">
-
-<div>
-    <h1>{{ "welcome" | trans }} {{ bootstrap_icon("rocket-takeoff") }}</h1>
-    <p>
-        {{ "confirm_email_text" | trans }} :  <br><br>
-        <a href="{{ signedUrl }}" style="color:#6990C5;">{{ "confirm_email" | trans }}</a>.
-        {{ "link_expiration" | trans }} {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
-        <br><br>
-        {{ "registration" | trans }}
-    </p>
+<div style="font-family: Arial, sans-serif;background: linear-gradient(167.95deg, #000000 0%, #02043C 58.4%, #390F40 86.52%, #450050 100%);display: flex;justify-content: center;align-items: center; text-align: center;color: white;">
+    <div>
+        <h1>{{ "welcome" | trans({}, 'app', locale) }} {{ bootstrap_icon("rocket-takeoff") }}</h1>
+        <p>
+            {{ "confirm_email_text" | trans }} :  <br><br>
+            <a href="{{ signedUrl }}" style="color:#6990C5;">{{ "confirm_email" | trans }}</a>.
+            {{ "link_expiration" | trans }} {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
+            <br><br>
+            {{ "registration" | trans }}
+        </p>
+    </div>
 </div>
-</body>
