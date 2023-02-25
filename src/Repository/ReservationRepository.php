@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Rental;
 use App\Entity\Reservation;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -102,6 +103,33 @@ class ReservationRepository extends ServiceEntityRepository
         $results = $query->getQuery()->getResult();
 
         return $results[0];
+    }
+
+    public function findUserReservationToReviewForRental(User $user, Rental $rental): ?Reservation
+    {
+        $currentDate = new \DateTime();
+        return $this->createQueryBuilder('r')
+            ->where('r.buyer = :buyer')
+            ->andWhere('r.rental = :rental')
+            ->andWhere('r.date_begin < :currentDate')
+            ->andWhere('r.review_mark IS NULL')
+            ->setParameter('buyer', $user)
+            ->setParameter('rental', $rental)
+            ->setParameter('currentDate', $currentDate->format('Y-m-d'))
+            ->orderBy('r.date_begin', 'ASC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function findReservationsWithReviews(Rental $rental)
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.rental = :rental')
+            ->andWhere('r.review_mark IS NOT NULL')
+            ->setParameter('rental', $rental)
+            ->getQuery()
+            ->getResult();
     }
 
     //    /**

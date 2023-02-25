@@ -5,8 +5,10 @@ namespace App\Controller\Front;
 use App\Entity\Rental;
 use App\Entity\Report;
 use App\Entity\Reservation;
+use App\Entity\User;
 use App\Form\Front\BookReservationFormType;
 use App\Form\Front\ReportFormType;
+use App\Form\Front\ReviewReservationFormType;
 use App\Repository\ReportRepository;
 use App\Repository\ReservationRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -40,14 +42,43 @@ class RentalPageController extends AbstractController
     }
 
     #[Route('/reviews', name: 'reviews')]
-    public function reviews(Rental $rental, ReservationRepository $reservationRepository): Response
+    public function reviews(
+        Rental $rental,
+        Request $request,
+        ReservationRepository $reservationRepository,
+        EntityManagerInterface $entityManager
+    ): Response
     {
-        $reservations = $reservationRepository->findBy(['rental' => $rental]);
+        $reservations = $reservationRepository->findReservationsWithReviews($rental);
+
+        $firstUserReservationWithoutReview = $form = null;
+        /** @var User $user */
+        $user = $this->getUser();
+        if ($user) {
+            if ($firstUserReservationWithoutReview = $reservationRepository->findUserReservationToReviewForRental(
+                $user,
+                $rental
+            )) {
+                $form = $this->createForm(ReviewReservationFormType::class, $firstUserReservationWithoutReview);
+                $form->handleRequest($request);
+
+                if ($form->isSubmitted() && $form->isValid()) {
+                    $entityManager->persist($firstUserReservationWithoutReview);
+                    $entityManager->flush();
+
+                    return $this->redirectToRoute('front_rental_reviews', [
+                        'id' => $rental->getId(),
+                    ]);
+                }
+            }
+        }
 
         return $this->render('front/rental/reviews.html.twig', [
             'rental' => $rental,
             'selectedTab' => 'reviews',
             'reservations' => $reservations,
+            'firstUserReservationWithoutReview' => $firstUserReservationWithoutReview,
+            'form' => $form,
         ]);
     }
 
