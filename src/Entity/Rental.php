@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation\Slug;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation\Uploadable;
@@ -133,6 +134,10 @@ class Rental
     private ?string $uuid = null;
 
     private float $sum_rating = 0;
+
+    #[ORM\Column(length: 255)]
+    #[Slug(fields: ['rent_type', 'celestial_object'], unique: true)]
+    private ?string $slug = null;
 
     public function __construct()
     {
@@ -451,6 +456,18 @@ class Rental
     {
         // round to half
         $this->sum_rating = $sumRating ? round($sumRating*2)/2 : 0;
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
         return $this;
     }
 }

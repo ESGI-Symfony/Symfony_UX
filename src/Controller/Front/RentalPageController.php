@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-#[Route('/rental/{id}', name: 'rental_', requirements: ['id' => '\d+'])]
+#[Route('/rental/{slug}', name: 'rental_', requirements: ['slug' => '[a-zA-Z1-9\-_\/]+'])]
 class RentalPageController extends AbstractController
 {
     #[Route('/overview', name: 'overview')]
@@ -68,7 +68,7 @@ class RentalPageController extends AbstractController
                     $entityManager->flush();
 
                     return $this->redirectToRoute('front_rental_reviews', [
-                        'id' => $rental->getId(),
+                        'slug' => $rental->getSlug(),
                     ]);
                 }
             }

@@ -40,7 +40,7 @@
         </div>
       {% endif %}
 
-      <a class="btn btn-primary" href="{{ path('front_rental_overview', {'id': rental.id}) }}">
+      <a class="btn btn-primary" href="{{ path('front_rental_overview', {'slug': rental.slug}) }}">
           {{ "book" | trans }}・{{ rental.price }} €
       </a>
     </div>
