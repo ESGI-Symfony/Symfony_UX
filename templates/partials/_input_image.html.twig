@@ -1,6 +1,6 @@
 {% set attr = attr is defined ? attr : [] %}
 
-{{ form_label(input) }}
+<div class="flex-row gap-50">{{ form_label(input) }} {% if input.vars.required %}*{% endif %}</div>
 <div class="input-image {{ form_errors(input) ? 'input-error' : '' }}">
     <button class="btn btn-secondary ms-auto" type="button">{{ bootstrap_icon('plus-circle') }} {{ 'add_an_image' | trans }}</button>
     {{ form_widget(input, {'attr': {'class': 'input upload-image-input', 'type': 'hidden'}|merge(attr) }) }}

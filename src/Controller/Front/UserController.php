@@ -33,14 +33,14 @@ class UserController extends AbstractController
     }
 
     #[Route(path: '/edit', name: 'edit')]
-    public function edit(Request $request, UserRepository $userRepository): Response
+    public function edit(Request $request, UserRepository $userRepository, UserLessorRequestRepository $userLessorRequestRepository): Response
     {
         /** @var User $user */
         $user = $this->getUser();
 
+        $shouldShowLessorFields = in_array('ROLE_LESSOR', $user->getRoles()) || $userLessorRequestRepository->findOneBy(['lessor' => $user, 'status' => 'pending']);
         $form = $this->createForm(UserProfileFormType::class, $user, [
-            'validation_groups' => $user->isLessor() ? ['Default', 'lessor'] : ['Default'],
-            'role' => $user->getRoles()
+            'validation_groups' => $shouldShowLessorFields ? ['Default', 'lessor'] : ['Default'],
         ]);
         $form->handleRequest($request);
 

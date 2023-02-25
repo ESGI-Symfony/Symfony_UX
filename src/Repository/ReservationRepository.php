@@ -86,7 +86,7 @@ class ReservationRepository extends ServiceEntityRepository
         return $reservationsByYearMonth;
     }
 
-    public function getLastReservation($filters): Reservation
+    public function getLastReservation($filters): ?Reservation
     {
         $currentDate = new \DateTime();
         $query = $this->createQueryBuilder('r')
@@ -102,7 +102,7 @@ class ReservationRepository extends ServiceEntityRepository
 
         $results = $query->getQuery()->getResult();
 
-        return $results[0];
+        return count($results) ? $results[0] : null;
     }
 
     public function findUserReservationToReviewForRental(User $user, Rental $rental): ?Reservation

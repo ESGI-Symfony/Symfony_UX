@@ -14,6 +14,7 @@ class UserProfileFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $isLessor = in_array('lessor', $options['validation_groups']);
         $builder
             ->add('email', EmailType::class, [
                 'attr' => [
@@ -29,19 +30,22 @@ class UserProfileFormType extends AbstractType
                 'attr' => [
                     'placeholder' => 'your_name',
                 ],
+                'required' => $isLessor
             ])
             ->add('lastname', TextType::class, [
                 'attr' => [
                     'placeholder' => 'your_last_name',
                 ],
+                'required' => $isLessor
             ])
             ->add('phone', TextType::class, [
                 'attr' => [
                     'placeholder' => 'your_galactic_phone',
-                ]
+                ],
+                'required' => $isLessor
             ])
         ;
-        if (in_array('ROLE_LESSOR', $options['role'])) {
+        if ($isLessor) {
             $builder->add('lessor_number', IntegerType::class, [
                 'attr' => [
                     'placeholder' => 'your_lessor_number',
