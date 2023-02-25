@@ -1,10 +1,8 @@
-{% extends 'base.html.twig' %}
+{% extends 'front/base.html.twig' %}
 
-{% block body %}
-    {{ component('header') }}
-
-    <main class="flex-column gap-200 flex-grow">
-        <div class="p-300">
+{% block main %}
+    <section class="flex-column gap-200 flex-grow h-100 rental-section">
+        <div class="p-100">
             <button class="btn btn-text back-button">{{ bootstrap_icon('arrow-left') }} {{ "back" | trans }}</button>
         </div>
 
@@ -49,10 +47,8 @@
                     </div>
                 </div>
 
-                {% block main %}{% endblock %}
+                {% block pannel %}{% endblock %}
             </div>
         </div>
-    </main>
-
-    {{ component('navbar') }}
+    </section>
 {% endblock %}

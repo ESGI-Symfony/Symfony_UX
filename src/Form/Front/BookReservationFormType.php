@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Front;
 
 use App\Entity\Reservation;
 use Symfony\Component\Form\AbstractType;
@@ -14,10 +14,13 @@ class BookReservationFormType extends AbstractType
     {
         $builder
             ->add('date_begin', DateType::class, [
-                'widget' => 'choice',
-                'input'  => 'datetime_immutable'
+                'widget' => 'single_text',
+                'input'  => 'datetime'
             ])
-            ->add('date_end', DateType::class)
+            ->add('date_end', DateType::class, [
+                'widget' => 'single_text',
+                'input'  => 'datetime',
+            ])
         ;
     }
 

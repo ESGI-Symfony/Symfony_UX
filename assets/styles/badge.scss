@@ -1,5 +1,9 @@
 @import "variables";
 
+.unselected-badge {
+	color: $procyon;
+}
+
 .badge {
 	padding: 4px 8px;
 	border-radius: 20px;
@@ -9,6 +13,8 @@
 	color: unset;
 	background-color: unset;
 	border: unset;
+	display: flex;
+	align-items: center;
 
 	&-primary {
 		background-color: $alnitak;
@@ -19,4 +25,10 @@
 		background-color: $betelgeuse;
 		color: $dark-matter;
 	}
+
+	&-secondary {
+		background-color: $betelgeuse;
+		color: $dark-matter;
+	}
+
 }

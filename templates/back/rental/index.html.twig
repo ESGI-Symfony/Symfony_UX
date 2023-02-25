@@ -4,7 +4,9 @@
 
 {% block main %}
     <div class="column-700 flex-column gap-200 mx-auto">
-        <h3>Rental index</h3>
+        <h3>Rental index - {{ rentals|length }}</h3>
+
+        <a href="{{ path('back_rental_new') }}"  class="btn btn-primary width-fit-content mx-auto">Create new</a>
 
         {% for rental in rentals %}
             {{ component('details-card', {rental: rental, rating: 0, options: [], showTotalBookings: true}) }}
@@ -15,5 +17,4 @@
         {% endfor %}
     </div>
 
-    <a href="{{ path('back_rental_new') }}">Create new</a>
 {% endblock %}
