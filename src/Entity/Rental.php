@@ -113,7 +113,7 @@ class Rental
     #[ORM\ManyToMany(targetEntity: Transport::class, inversedBy: 'rentals')]
     private Collection $transports;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255)]
     private ?string $image = null;
 
     #[UploadableField(mapping: 'rentals', fileNameProperty: 'image')]
