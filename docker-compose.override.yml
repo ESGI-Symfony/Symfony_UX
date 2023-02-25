@@ -21,10 +21,12 @@ services:
       - host.docker.internal:host-gateway
 
   messenger:
-    volumes:
-      - ./:/srv/app
     env_file:
       - .env.local
+    build:
+      target: app_messenger_dev
+    volumes:
+      - ./:/srv/app
 
   node:
     build:
