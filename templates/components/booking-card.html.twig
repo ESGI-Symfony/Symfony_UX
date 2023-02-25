@@ -3,7 +3,11 @@
         <a href="{{ path('front_rental_overview', {id: subject.id}) }}" class="card-link"></a>
     {% endif %}
     <div class="header">
-        <img class="image" src="{{ asset('images/saturn.jpg') }}">
+        {% if type.value is same as('rental') %}
+            <img class="image" src='{{ asset("images/storage/rentals/#{subject.image}") }}'>
+        {% else %}
+            <img class="image" src='{{ asset("images/storage/rentals/#{subject.rental.image}") }}'>
+        {% endif %}
     </div>
 
     <div class="content">

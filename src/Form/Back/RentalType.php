@@ -71,10 +71,11 @@ class RentalType extends AbstractType
             ])
             ->add('imageFile', VichImageType::class, [
                 'required' => false,
-                'download_uri' => true,
-                'image_uri' => true,
-                'asset_helper' => true,
                 'label' => 'main_image',
+                'image_uri' => false,
+                'allow_delete' => false,
+                'asset_helper' => true,
+                'download_uri' => false,
             ])
         ;
     }

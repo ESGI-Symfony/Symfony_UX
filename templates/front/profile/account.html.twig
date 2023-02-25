@@ -35,28 +35,32 @@
                 </div>
             {% endif %}
         </div>
-        <div class="flex-column gap-200">
-            <div class="flex-row justify-space-between">
-                <div class="font-bold">
-                    {{ 'count_bookings_stylized' | trans({'%count%': user.reservations.count}) | raw }}
+        {% if user.reservations.count > 0 %}
+            <div class="flex-column gap-200">
+                <div class="flex-row justify-space-between">
+                    <div class="font-bold">
+                        {{ 'count_bookings_stylized' | trans({'%count%': user.reservations.count}) | raw }}
+                    </div>
+                    <a href="{{ path('front_app_profile_bookings_on_going') }}" class="text-decoration-none">
+                        <div class="more-informations">{{ 'see_more' | trans }}</div>
+                    </a>
                 </div>
-                <a href="{{ path('front_app_profile_bookings_on_going') }}" class="text-decoration-none">
-                    <div class="more-informations">{{ 'see_more' | trans }}</div>
-                </a>
+                {{ component('booking-card', {subject: reservation, type: 'reservation'}) }}
             </div>
-            {{ component('booking-card', {subject: reservation, type: 'reservation'}) }}
-        </div>
-        <div class="flex-column gap-200">
-            <div class="flex-row justify-space-between">
-                <div class="font-bold">
-                    {{ 'count_rentals_stylized' | trans({'%count%': user.rentals.count}) | raw }}
+        {% endif %}
+        {% if user.rentals.count > 0 %}
+            <div class="flex-column gap-200">
+                <div class="flex-row justify-space-between">
+                    <div class="font-bold">
+                        {{ 'count_rentals_stylized' | trans({'%count%': user.rentals.count}) | raw }}
+                    </div>
+                    <a href="{{ path('front_app_profile_rentals_index') }}" class="text-decoration-none">
+                        <div class="more-informations">{{ 'see_more' | trans }}</div>
+                    </a>
                 </div>
-                <a href="{{ path('front_app_profile_rentals_index') }}" class="text-decoration-none">
-                    <div class="more-informations">{{ 'see_more' | trans }}</div>
-                </a>
+                {{ component('booking-card', {subject: rental, type: 'rental'}) }}
             </div>
-            {{ component('booking-card', {subject: rental, type: 'rental'}) }}
-        </div>
+        {% endif %}
 
         <hr>
 

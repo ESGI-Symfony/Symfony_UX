@@ -41,7 +41,7 @@ class RentalRepository extends ServiceEntityRepository
         }
     }
 
-    public function getRentalWithMaxReservations($filters): Rental {
+    public function getRentalWithMaxReservations($filters): Rental|null {
 
         $query = $this->createQueryBuilder('r')
             ->select('r')
@@ -59,7 +59,7 @@ class RentalRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
 
-        return $results[0];
+        return count($results) ? $results[0] : null;
     }
 
     public function search(string $search, string $object, bool $withReviews = false): QueryBuilder
