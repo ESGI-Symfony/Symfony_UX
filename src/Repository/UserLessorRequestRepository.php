@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\UserLessorRequest;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -37,6 +38,28 @@ class UserLessorRequestRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function getLastRequest($filters): ArrayCollection {
+
+        $query = $this->createQueryBuilder('ur')
+            ->select('ur.status, ur.refusing_reason')
+            ->orderBy('ur.id', 'DESC')
+            ->setMaxResults(1);
+
+        foreach ($filters as $key => $value) {
+            $query->andWhere("ur.$key = :$key")
+                ->setParameter($key, $value);
+        }
+
+        $results = $query->getQuery()->getResult();
+
+        $collection = new ArrayCollection();
+        foreach ($results as $result) {
+            $collection->add($result);
+        }
+
+        return $collection;
     }
 
 //    /**

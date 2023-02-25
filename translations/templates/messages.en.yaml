@@ -5,6 +5,10 @@ home:
   exclusive_package: Exclusive Packages
   explore_categories: Explore categories
 
+login :
+  password: Password
+  email_example: example@gmail.com
+
 search:
   results_for: Results for
   next: Next page
@@ -20,16 +24,33 @@ your_name: Your name
 your_last_name: Your last name
 your_galactic_phone: Your galactic phone
 your_lessor_number: Your lessor number
+your_email: Your email
+your_password: Your password
+your_nickname: Your nickname
 add_your_rental_tip: To add your rentals, we need to get in touch first
 become_lessor_stylized: Become <span class="highlight">lessor</span>
 become_lessor: Become lessor
+save_my_profile: Save my profile
+back: Back
 we_come_back_to_you: We come back to you
 we_come_back_to_you_explained: Huston, we’ve got your information. Frequently check your profile to follow your request’s status
 go_to_profile: Go to your profile
 back_to_home: Back to home
 your_rentals: Your rentals
+bookings: bookings
+on_going: On going
+passed: Passed
+hello: Hello
+pending_request_lessor_message: Your lessor request is pending, we will get back to you soon
+refused_request_lessor_message: Your lessor request has been rejected, you can try again after reviewing our feedback
+validated_request_lessor_message: Your lessor request has been validated, you can now add your rentals
+reason_request_lessor_rejected: 'Reason of rejection:'
+see_more: See more
+terms_of_sales: Terms of sales
+data_privacy: Data privacy
+logout: Logout
+my_profile: My <span class="highlight">profile</span>
 estimated: Estimated
-
 create_a_rental_stylized: Create a <span class="highlight">rental</span>
 rental_information: Rental information
 address: Address
@@ -62,7 +83,6 @@ overview: Overview
 access: Access
 book_now: Book now
 book: Book
-back: Back
 all: All
 results: Results
 features: Features
@@ -79,3 +99,13 @@ your_payment_successfully_ended: Your reservation was paid successfully, you can
 checkout_form: Checkout form
 pay_%amount%_%currency%: Pay %amount% %currency%
 already_booked: Those dates are already booked
+rental_in_object: 'rental in object'
+your_bookings: Your bookings
+create_a_rental: Create a rental
+your_profile: Your profile
+edit_your_profile: Edit your profile
+report_type: Report type
+comment: Comment
+report: Report
+we_have_received_your_report: We have received your report
+we_will_check_whats_wrong_explained: We will check what’s wrong with this rental as soon as possible, thank you for your help in improving our service

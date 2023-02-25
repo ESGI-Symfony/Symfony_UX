@@ -37,3 +37,9 @@ ixion: Ixion
 varuna: Varuna
 nix: Nix
 hydra: Hydra
+report_owner_behavior: There's a problem with the rental owner
+report_rental: There's a problem with the rental
+report_payment: You have a problem booking this rental
+report_description: There's a problem with the rental's description
+report_place: There's a problem with the rental's location
+report_other: You have another problem

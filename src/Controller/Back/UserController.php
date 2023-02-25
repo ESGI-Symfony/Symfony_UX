@@ -3,7 +3,7 @@
 namespace App\Controller\Back;
 
 use App\Entity\User;
-use App\Form\UserType;
+use App\Form\Back\UserType;
 use App\Repository\UserRepository;
 use App\Security\Voter\UserVoter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -61,7 +61,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('back_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('back/user/edit.html.twig', [
+        return $this->render('back/user/edit.html.twig', [
             'user' => $user,
             'form' => $form,
         ]);

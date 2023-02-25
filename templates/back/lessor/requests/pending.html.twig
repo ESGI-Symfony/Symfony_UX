@@ -1,5 +1,7 @@
 {% extends 'back/base.html.twig' %}
 
+{% block title %}Pending rentals{% endblock %}
+
 {% block main %}
     <div class="column-700 mx-auto gap-200 flex-column">
         <h3>To validate - {{ pendingRequests|length }}</h3>
