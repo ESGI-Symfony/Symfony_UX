@@ -1,0 +1,15 @@
+@import "variables";
+
+.booking-template {
+
+  @include medium {
+    .cards {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+
+  > h4 > span {
+    color: $sun;
+  }
+}

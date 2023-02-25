@@ -242,14 +242,17 @@ $prefixes: (
   }
 }
 
-.flex-child-equals {
-  display: flex;
-  flex-direction: row;
-  box-sizing: border-box;
-  flex: 1;
-  width: 100%;
-  @include medium {
-    max-width: 50%;
+.booking-card-flex-child-equals {
+  .booking-card {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    flex: 1;
+    width: 100%;
+    @include medium {
+      max-width: 50%;
+      min-width: 300px;
+    }
   }
 }
 

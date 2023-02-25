@@ -6,8 +6,8 @@ use App\Entity\Rental;
 use App\Entity\User;
 use App\Entity\UserLessorRequest;
 use App\Enums\UserLessorRequestStatus;
-use App\Form\LessorRequestFormType;
-use App\Form\RentalFormType;
+use App\Form\Front\RentalFormType;
+use App\Form\Front\LessorRequestFormType;
 use App\Repository\RentalRepository;
 use App\Repository\UserLessorRequestRepository;
 use App\Security\Voter\UserVoter;
@@ -27,7 +27,7 @@ class RentalController extends AbstractController
     {
         if(!$this->isGranted(UserVoter::RENTALS, $this->getUser())) {
             if ($this->isGranted(UserVoter::BECOME_LESSOR, $this->getUser())) {
-                return $this->redirectToRoute('app_profile_rentals_become_lessor');
+                return $this->redirectToRoute('front_app_profile_rentals_become_lessor');
             }
             return $this->redirectToRoute('app_home');
         }
@@ -60,7 +60,7 @@ class RentalController extends AbstractController
             $entityManager->persist($rental);
             $entityManager->flush();
 
-             return $this->redirectToRoute('app_profile_rentals_index');
+             return $this->redirectToRoute('front_app_profile_rentals_index');
         }
 
         return $this->render('front/profile/lessor/create_rental.html.twig', [

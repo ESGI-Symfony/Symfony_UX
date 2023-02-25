@@ -92,7 +92,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::GUID)]
     private ?string $uuid = null;
 
-    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Report::class)]
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Report::class, orphanRemoval: true)]
     private Collection $reports;
 
     #[ORM\Column(length: 42, nullable: true)]

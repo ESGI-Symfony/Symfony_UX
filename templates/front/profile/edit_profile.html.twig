@@ -1,0 +1,30 @@
+{% extends 'front/base.html.twig' %}
+
+{% block title %}{{ 'edit_your_profile' | trans }}{% endblock %}
+
+{% block body %}
+
+    <div class="container edit-profile flex-column column-400 justify-center mx-auto gap-300 w-100">
+        <h4 class="text-center"> {{ 'my_profile' | trans | raw }}</h4>
+
+        <button class="btn btn-text back-button">{{ bootstrap_icon('arrow-left') }} {{ 'back' | trans }}</button>
+
+        {{ form_start(form) }}
+
+        <div class="flex-column gap-400">
+            <div class="flex-column gap-200">
+                {{ include('partials/_input.html.twig', {input: form.nickname}) }}
+                {{ include('partials/_input.html.twig', {input: form.lastname}) }}
+                {{ include('partials/_input.html.twig', {input: form.firstname}) }}
+                {{ include('partials/_input.html.twig', {input: form.email}) }}
+                {{ include('partials/_input.html.twig', {input: form.phone}) }}
+                {% if form.lessor_number is defined %}
+                    {{ include('partials/_input.html.twig', {input: form.lessor_number}) }}
+                {% endif %}
+            </div>
+            <button class="btn btn-primary mx-auto">{{ bootstrap_icon('rocket-takeoff') }} {{ 'save_my_profile' | trans }}</button>
+        </div>
+
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
