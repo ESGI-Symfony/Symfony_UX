@@ -398,9 +398,11 @@ class Rental
     /**
      * @param string|null $image
      */
-    public function setImage(?string $image): void
+    public function setImage(?string $image): self
     {
         $this->image = $image;
+
+        return $this;
     }
 
     /**
@@ -414,9 +416,11 @@ class Rental
     /**
      * @param File|null $imageFile
      */
-    public function setImageFile(?File $imageFile): void
+    public function setImageFile(?File $imageFile): self
     {
         $this->imageFile = $imageFile;
+
+        return $this;
     }
 
     public function getUuid(): ?string

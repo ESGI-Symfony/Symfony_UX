@@ -42,6 +42,7 @@ class RentalFixtures extends Fixture implements DependentFixtureInterface
                 ->setPrice($faker->numberBetween(1, 10000))
                 ->setRentType($faker->randomElement(RentalTypes::cases()))
                 ->setUuid($faker->uuid)
+                ->setImage($faker->filePath())
 
                 ->setLongitude($faker->longitude)
                 ->setLatitude($faker->latitude)
