@@ -160,7 +160,7 @@ RUN set -eux; \
 
 RUN rm -f .env.local.php
 
-FROM app_php AS app_messenger_dev
+FROM app_php_dev AS app_messenger_dev
 
 CMD php bin/console messenger:consume async -vv
 
