@@ -29,7 +29,6 @@ class RentalFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $fs = new Filesystem();
-        $fs->copy(__DIR__.'/../../public/images/saturn.jpg', __DIR__.'/../../public/images/storage/rentals/saturn.jpg');
 
         $faker = Factory::create();
         $transports = $manager->getRepository(Transport::class)->findAll();
@@ -38,6 +37,7 @@ class RentalFixtures extends Fixture implements DependentFixtureInterface
         $users = array_filter($manager->getRepository(User::class)->findAll(), fn(User $user) => $user->isLessor());
 
         for ($i = 0; $i < 100; $i++) {
+            $uuid = $faker->uuid;
             $object = (new Rental())
                 ->setDescription($faker->paragraph)
                 ->setMaxCapacity($faker->numberBetween(1, 10))
@@ -45,8 +45,8 @@ class RentalFixtures extends Fixture implements DependentFixtureInterface
                 ->setBathroomCount($faker->numberBetween(1, 4))
                 ->setPrice($faker->numberBetween(1, 10000))
                 ->setRentType($faker->randomElement(RentalTypes::cases()))
-                ->setUuid($faker->uuid)
-                ->setImage('saturn.jpg')
+                ->setUuid($uuid)
+                ->setImage("$uuid.jpg")
 
                 ->setLongitude($faker->longitude)
                 ->setLatitude($faker->latitude)
@@ -56,6 +56,7 @@ class RentalFixtures extends Fixture implements DependentFixtureInterface
                 ->addOption($faker->randomElement($options))
                 ->addTransport($faker->randomElement($transports))
             ;
+            $fs->copy(__DIR__.'/../../public/images/saturn.jpg', __DIR__."/../../public/images/storage/rentals/$uuid.jpg");
 
             $manager->persist($object);
         }

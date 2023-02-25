@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\CustomTimestampableTrait;
 use App\Repository\ReservationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -12,6 +13,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
 class Reservation
 {
+    use CustomTimestampableTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -34,7 +37,7 @@ class Reservation
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Length(
         max: 255,
-        maxMessage: 'reservation.payment_token.max_length'
+        maxMessage: 'reservations.payment_token.max_length'
     )]
     #[Assert\Type(type: 'string', message: 'reservation.payment_token.type')]
     private ?string $payment_token = null;
@@ -48,9 +51,16 @@ class Reservation
     private ?User $buyer = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\Type(type: 'integer', message: 'reservation.review_mark.type')]
+    #[Assert\Range(
+        notInRangeMessage: 'reservation.review_mark.range',
+        min: 1,
+        max: 5,
+    )]
     private ?int $review_mark = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Assert\Type(type: 'string', message: 'reservation.review_comment.type')]
     private ?string $review_comment = null;
 
 

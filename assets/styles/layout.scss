@@ -181,6 +181,10 @@ $prefixes: (
   display: block;
   width: 100%;
   border-bottom: 1px solid $sun;
+
+  &-alnitak {
+    border-bottom: 1px solid $alnitak;
+  }
 }
 
 .column-400 {

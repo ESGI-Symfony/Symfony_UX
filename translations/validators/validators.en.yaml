@@ -82,6 +82,14 @@ reservation:
     max_length: 'The payment token cannot be longer than {{ limit }} characters.'
     type: 'The payment token must be a string.'
 
+  review_mark:
+    type: 'The review mark must be an integer.'
+    range: 'The review mark must be between {{ min }} and {{ max }}.'
+
+  review_comment:
+    type: 'The review comment must be a string.'
+    range: 'The review comment must be between {{ min }} and {{ max }}.'
+
 review:
   comment:
     not_blank: 'The comment cannot be blank.'

@@ -139,3 +139,13 @@ comment: Comment
 report: Report
 we_have_received_your_report: We have received your report
 we_will_check_whats_wrong_explained: We will check what’s wrong with this rental as soon as possible, thank you for your help in improving our service
+add_a_review_for_this_reservation: Add a review for this reservation
+review_mark: Your mark about this booking
+review_comment: Your opinion
+no_review_yet: No review for now
+no_booking_yet: No booking for now
+add_a_review: Add a review
+add_a_review_for_your_reservation_%from%_%to%: Add a review for your reservation from %from% to %to%
+"%from%_%to%": "%from% to %to%"
+add_your_review: Add your review
+ordered_at_%date%: Ordered at %date%

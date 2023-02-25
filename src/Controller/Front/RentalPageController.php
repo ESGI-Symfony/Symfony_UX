@@ -5,10 +5,13 @@ namespace App\Controller\Front;
 use App\Entity\Rental;
 use App\Entity\Report;
 use App\Entity\Reservation;
+use App\Entity\User;
 use App\Form\Front\BookReservationFormType;
 use App\Form\Front\ReportFormType;
+use App\Form\Front\ReviewReservationFormType;
 use App\Repository\ReportRepository;
 use App\Repository\ReservationRepository;
+use App\Security\Voter\UserVoter;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
@@ -17,7 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-#[Route('/rental/{id}', name: 'rental_', requirements: ['id' => '\d+'])]
+#[Route('/rental/{slug}', name: 'rental_', requirements: ['slug' => '[a-zA-Z1-9\-_\/]+'])]
 class RentalPageController extends AbstractController
 {
     #[Route('/overview', name: 'overview')]
@@ -40,14 +43,43 @@ class RentalPageController extends AbstractController
     }
 
     #[Route('/reviews', name: 'reviews')]
-    public function reviews(Rental $rental, ReservationRepository $reservationRepository): Response
+    public function reviews(
+        Rental $rental,
+        Request $request,
+        ReservationRepository $reservationRepository,
+        EntityManagerInterface $entityManager
+    ): Response
     {
-        $reservations = $reservationRepository->findBy(['rental' => $rental]);
+        $reservations = $reservationRepository->findReservationsWithReviews($rental);
+
+        $firstUserReservationWithoutReview = $form = null;
+        /** @var User $user */
+        $user = $this->getUser();
+        if ($user) {
+            if ($firstUserReservationWithoutReview = $reservationRepository->findUserReservationToReviewForRental(
+                $user,
+                $rental
+            )) {
+                $form = $this->createForm(ReviewReservationFormType::class, $firstUserReservationWithoutReview);
+                $form->handleRequest($request);
+
+                if ($form->isSubmitted() && $form->isValid()) {
+                    $entityManager->persist($firstUserReservationWithoutReview);
+                    $entityManager->flush();
+
+                    return $this->redirectToRoute('front_rental_reviews', [
+                        'slug' => $rental->getSlug(),
+                    ]);
+                }
+            }
+        }
 
         return $this->render('front/rental/reviews.html.twig', [
             'rental' => $rental,
             'selectedTab' => 'reviews',
             'reservations' => $reservations,
+            'firstUserReservationWithoutReview' => $firstUserReservationWithoutReview,
+            'form' => $form,
         ]);
     }
 
@@ -132,6 +164,20 @@ class RentalPageController extends AbstractController
             'form' => $form->createView(),
             'rental' => $rental,
             'selectedTab' => 'report',
+        ]);
+    }
+
+    #[Route('/bookings', name: 'bookings')]
+    public function bookings(Rental $rental, ReservationRepository $reservationRepository): Response
+    {
+        $this->denyAccessUnlessGranted(UserVoter::SHOW_BOOKINGS, $rental);
+
+        $reservations = $reservationRepository->findBy(['rental' => $rental], ['createdAt' => 'DESC']);
+
+        return $this->render('front/rental/bookings.html.twig', [
+            'rental' => $rental,
+            'reservations' => $reservations,
+            'selectedTab' => 'bookings',
         ]);
     }
 }

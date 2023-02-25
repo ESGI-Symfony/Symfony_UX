@@ -1,6 +1,6 @@
 {% set attr = attr is defined ? attr : [] %}
 
-{{ form_label(input) }}
+<div class="flex-row gap-50">{{ form_label(input) }} {% if input.vars.required %}*{% endif %}</div>
 <div class="input-group {{ form_errors(input) ? 'input-error' : '' }}">
     {{ form_widget(input, {'attr': {'class': 'input'}|merge(attr) }) }}
 </div>

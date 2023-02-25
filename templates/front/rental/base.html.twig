@@ -27,21 +27,27 @@
 
                 <div class="flex-row">
                     <div class="flex-grow flex-row gap-200 align-center">
-                        <a class="badge{% if selectedTab == 'overview' %} badge-primary{% endif %}" href="{{ path('front_rental_overview', {'id': rental.id}) }}">
+                        <a class="badge{% if selectedTab == 'overview' %} badge-primary{% endif %}" href="{{ path('front_rental_overview', {'slug': rental.slug}) }}">
                             {{ "overview" | trans }}
                         </a>
 
-                        <a class="badge{% if selectedTab == 'access' %} badge-primary{% endif %}" href="{{ path('front_rental_access', {'id': rental.id}) }}">
+                        <a class="badge{% if selectedTab == 'access' %} badge-primary{% endif %}" href="{{ path('front_rental_access', {'slug': rental.slug}) }}">
                             {{ "access" | trans }}
                         </a>
 
-                        <a class="badge{% if selectedTab == 'reviews' %} badge-primary{% endif %}" href="{{ path('front_rental_reviews', {'id': rental.id}) }}">
+                        <a class="badge{% if selectedTab == 'reviews' %} badge-primary{% endif %}" href="{{ path('front_rental_reviews', {'slug': rental.slug}) }}">
                             {{ "reviews" | trans }}
                         </a>
+
+                        {% if app.user is same as(rental.owner) or is_granted('ROLE_ADMIN') %}
+                            <a class="badge{% if selectedTab == 'bookings' %} badge-primary{% endif %}" href="{{ path('front_rental_bookings', {'slug': rental.slug}) }}">
+                                {{ "count_bookings" | trans({'%count%': rental.reservations|length}) }}
+                            </a>
+                        {% endif %}
                     </div>
 
                     <div class="badge">
-                        <a class="badge flex-column{% if selectedTab == 'report' %} badge-accent{% endif %}" href="{{ path('front_rental_report', {'id': rental.id}) }}">
+                        <a class="badge flex-column{% if selectedTab == 'report' %} badge-accent{% endif %}" href="{{ path('front_rental_report', {'slug': rental.slug}) }}">
                             {{ bootstrap_icon("flag") }}
                         </a>
                     </div>
