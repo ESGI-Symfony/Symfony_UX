@@ -23,6 +23,10 @@ services:
   messenger:
     env_file:
       - .env.local
+    build:
+      target: app_messenger_dev
+    volumes:
+      - ./:/srv/app
 
   node:
     build:
