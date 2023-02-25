@@ -16,11 +16,11 @@
                     <p>{{ subject.rental.celestialObject }}</p>
                 {% endif %}
             </div>
-            <div class="badge badge-secondary-small">
+            <div class="badge badge-secondary">
                 {% if type.value is same as('rental') %}
-                    {{ subject.price | number_format(2, ',', '.') }} €
+                    {{ subject.price | format_currency('EUR') }}
                 {% else %}
-                    <p>{{ subject.rental.price }} €</p>
+                    <p>{{ subject.totalPrice | format_currency('EUR') }}</p>
                 {% endif %}
             </div>
         </div>
