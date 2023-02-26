@@ -17,14 +17,14 @@
                 {{ user.email }}
             </div>
             {% if notification is not empty %}
-                {% set notification_class = notification[0].status is same as('refused') ? 'alert' : 'send' %}
+                {% set notification_class = notification[0].status is same as('rejected') ? 'alert' : 'send' %}
                 {% set notification_class = notification[0].status is same as('validated') ? 'success' : notification_class %}
                 <div class="notification notification-{{ notification_class }} flex-column">
                     <div class="flex-row gap-200">
                         <div>{{ bootstrap_icon("rocket-takeoff") }}</div>
                         <div>{{ (notification[0].status~'_request_lessor_message') | trans }}</div>
                     </div>
-                    {% if notification[0].status is same as('refused') and notification[0].refusing_reason %}
+                    {% if notification[0].status is same as('rejected') and notification[0].refusing_reason %}
                         <div class="font-bold">
                             {{ 'reason_request_lessor_rejected' | trans }}
                         </div>
