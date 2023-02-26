@@ -8,11 +8,13 @@ services:
       args:
         SYMFONY_VERSION: ${SYMFONY_VERSION:-}
         STABILITY: ${STABILITY:-stable}
+        SERVER_NAME: ${SERVER_NAME:-}
     depends_on:
       - database
     restart: unless-stopped
     volumes:
       - php_socket:/var/run/php
+      - image_storage:/srv/app/public/images/storage
     healthcheck:
       interval: 10s
       timeout: 3s
@@ -22,7 +24,7 @@ services:
       DATABASE_URL: postgresql://${POSTGRES_USER:-symfony}:${POSTGRES_PASSWORD:-ChangeMe}@database:5432/${POSTGRES_DB:-app}?serverVersion=${POSTGRES_VERSION:-13}
       MAILER_DSN: ${MAILER_DSN}
       MAILER_FROM: ${MAILER_FROM}
-      SERVER_NAME: ${SERVER_NAME:-localhost}
+      SERVER_NAME: ${SERVER_NAME:-}
 
   messenger:
     build:
@@ -31,6 +33,7 @@ services:
       args:
         SYMFONY_VERSION: ${SYMFONY_VERSION:-}
         STABILITY: ${STABILITY:-stable}
+        SERVER_NAME: ${SERVER_NAME:-}
     depends_on:
       - database
       - php
@@ -39,6 +42,7 @@ services:
       DATABASE_URL: postgresql://${POSTGRES_USER:-symfony}:${POSTGRES_PASSWORD:-ChangeMe}@database:5432/${POSTGRES_DB:-app}?serverVersion=${POSTGRES_VERSION:-13}
       MAILER_DSN: ${MAILER_DSN}
       MAILER_FROM: ${MAILER_FROM}
+      SERVER_NAME: ${SERVER_NAME:-}
 
   node:
     env_file:
@@ -64,6 +68,7 @@ services:
     restart: unless-stopped
     volumes:
       - php_socket:/var/run/php
+      - image_storage:/srv/app/public/images/storage
 
   database:
     image: postgres:${POSTGRES_VERSION:-13}-alpine
@@ -78,6 +83,7 @@ services:
 ###< symfony/mercure-bundle ###
 volumes:
   php_socket:
+  image_storage:
   ###> doctrine/doctrine-bundle ###
   db_data:
   ###< doctrine/doctrine-bundle ###
