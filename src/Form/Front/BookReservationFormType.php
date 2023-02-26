@@ -15,11 +15,17 @@ class BookReservationFormType extends AbstractType
         $builder
             ->add('date_begin', DateType::class, [
                 'widget' => 'single_text',
-                'input'  => 'datetime'
+                'input'  => 'datetime',
+                'attr'   => [
+                    'min' => (new \DateTime())->format('Y-m-d'),
+                ],
             ])
             ->add('date_end', DateType::class, [
                 'widget' => 'single_text',
                 'input'  => 'datetime',
+                'attr'   => [
+                    'min' => (new \DateTime())->format('Y-m-d'),
+                ],
             ])
         ;
     }

@@ -23,6 +23,10 @@ class Reservation
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Assert\NotBlank(message: 'reservation.date_begin.not_blank')]
     #[Assert\Type(type: 'DateTimeInterface', message: 'reservation.date_begin.date')]
+    #[Assert\Expression(
+        expression: 'this.getMinBookingDate() < value',
+        message: 'reservation.date_begin.greater_than_now',
+    )]
     private ?\DateTimeInterface $date_begin = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
@@ -162,5 +166,10 @@ class Reservation
         $interval = $this->getDateBegin()->diff($this->getDateEnd());
         $days = $interval->format('%a');
         return $this->getRental()->getPrice() * $days;
+    }
+
+    public function getMinBookingDate(): \DateTimeInterface
+    {
+        return new \DateTime();
     }
 }

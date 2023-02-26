@@ -72,6 +72,7 @@ reservation:
   date_begin:
     not_blank: 'The begin reservation date cannot be blank.'
     date: 'The begin reservation date must be a valid date.'
+    greater_than_now: 'The begin reservation date must be greater than today.'
 
   date_end:
     not_blank: 'The end rental date cannot be blank.'

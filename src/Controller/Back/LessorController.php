@@ -30,6 +30,7 @@ class LessorController extends AbstractController
     public function validate(UserLessorRequest $userLessorRequest, EntityManagerInterface $entityManager): Response
     {
         $userLessorRequest->setStatus(UserLessorRequestStatus::Validated);
+        $userLessorRequest->getLessor()->addRole('ROLE_LESSOR');
 
         $entityManager->persist($userLessorRequest);
         $entityManager->flush();
