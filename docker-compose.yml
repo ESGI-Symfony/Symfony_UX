@@ -38,8 +38,17 @@ services:
       MAILER_DSN: ${MAILER_DSN}
 
   node:
+    env_file:
+      - .env.local
+    environment:
+      STRIPE_KEY: ${STRIPE_KEY}
     build:
+      context: .
       target: app_node_build
+      args:
+        STRIPE_KEY: ${STRIPE_KEY}
+    volumes:
+      - ./:/srv/app
 
   nginx:
     build:
