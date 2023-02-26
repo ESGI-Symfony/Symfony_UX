@@ -41,7 +41,7 @@ bookings: bookings
 on_going: On going
 passed: Passed
 pending_request_lessor_message: Your lessor request is pending, we will get back to you soon
-refused_request_lessor_message: Your lessor request has been rejected, you can try again after reviewing our feedback
+rejected_request_lessor_message: Your lessor request has been rejected, you can try again after reviewing our feedback
 validated_request_lessor_message: Your lessor request has been validated, you can now add your rentals
 reason_request_lessor_rejected: 'Reason of rejection:'
 see_more: See more

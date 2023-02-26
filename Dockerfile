@@ -20,9 +20,15 @@ COPY . .
 
 FROM app_node AS app_node_dev
 
+ARG STRIPE_KEY
+ENV STRIPE_KEY ${STRIPE_KEY}
+
 CMD npm run watch
 
 FROM app_node AS app_node_build
+
+ARG STRIPE_KEY
+ENV STRIPE_KEY ${STRIPE_KEY}
 
 RUN npm run build
 
@@ -38,6 +44,7 @@ ARG SYMFONY_VERSION=""
 ENV SYMFONY_VERSION ${SYMFONY_VERSION}
 
 ENV APP_ENV=prod
+ENV SERVER_NAME=""
 
 WORKDIR /srv/app
 
