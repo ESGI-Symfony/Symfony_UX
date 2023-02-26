@@ -1,0 +1,14 @@
+{% set attr = attr is defined ? attr : [] %}
+
+<div class="flex-row gap-50">{{ form_label(input) }} {% if input.vars.required %}*{% endif %}</div>
+<div class="checkboxes-input {{ form_errors(input) ? 'input-error' : '' }}">
+    {% for check in input.children %}
+        <div class="checkbox-input">
+            {{ form_widget(check, {'attr': {'class': 'input'}|merge(attr) }) }}
+            {{ form_label(check) }}
+        </div>
+    {% endfor %}
+</div>
+<div class="input-error-message">
+    {{ form_errors(input) }}
+</div>

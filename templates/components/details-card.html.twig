@@ -1,0 +1,48 @@
+<div class="card-small">
+  <div class="header">
+    <img class="image" src='{{ asset("images/storage/rentals/#{rental.image}") }}'>
+    {% if rating != null %}
+      <div class="rating">
+        {{ rating }}
+        {{ bootstrap_icon("star-fill") }}
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="content">
+    <div class="flex-row gap-100">
+      {{ bootstrap_icon("geo-alt") }}
+      {{ rental.celestialObject | trans }}
+    </div>
+
+    <h4>{{ rental.rentType.value | trans }}</h4>
+
+    <div class="body">
+      <p>{{ rental.description }}</p>
+
+      {% if showTotalBookings %}
+        <p class="mt-100">{{ 'count_bookings' | trans({'%count%': rental.reservations().count}) }}</p>
+      {% endif %}
+    </div>
+
+    <div class="footer">
+      {% if options|length > 0 %}
+        <div class="features">
+          <span>{{ "features" | trans }}</span>
+
+          <div class="icons">
+            {% for option in options %}
+              <span>
+                {{ option }}
+              </span>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+
+      <a class="btn btn-primary" href="{{ path('front_rental_overview', {'slug': rental.slug}) }}">
+          {{ "book" | trans }}・{{ rental.price }} €
+      </a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+{% extends 'front/base.html.twig' %}
+
+{% block title %}{{ "title_reset_password" | trans }}{% endblock %}
+
+{% block main %}
+    {% for flash_error in app.flashes('reset_password_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+    {{ form_start(requestForm, { 'attr' : { 'class': 'flex-column align-center justify-center' } }) }}
+    <div class="container-password h-150 flex-column align-center justify-center gap-300 width-300">
+        <div class="flex-column align-center justify-center gap-300">
+            <h4 class=" h4 mb-3 font-weight-normal">{{ "forgot_password" | trans }}</h4>
+            <span class="h6 small text-align-center ">{{ "text_account_reset" | trans }}</span>
+        </div>
+        {{ include('partials/_input_register.html.twig', {input: requestForm.email}) }}
+        <div class="text-center">
+            <button class="btn btn-primary">{{ bootstrap_icon("rocket-takeoff") }} {{ "send_email" | trans }}</button>
+        </div>
+        {{ form_end(requestForm) }}
+    </div>
+{% endblock %}

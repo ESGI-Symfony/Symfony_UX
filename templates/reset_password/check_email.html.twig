@@ -1,0 +1,15 @@
+{% extends 'front/base.html.twig' %}
+
+{% block title %}{{ "title_reset_password_email" | trans }}{% endblock %}
+
+{% block main %}
+    <div class="h-100 flex-column align-center justify-center gap-300">
+    <span>
+        {{ "text_email_exist" | trans }}
+        {{ "link_expiration" | trans }} {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+    </span>
+        <span>{{ "spam" | trans }}
+        <a href="{{ path('app_forgot_password_request') }}">{{ "try" | trans }}</a>.
+    </span>
+    </div>
+{% endblock %}

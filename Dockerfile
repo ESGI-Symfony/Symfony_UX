@@ -5,7 +5,26 @@
 
 # https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact
 ARG PHP_VERSION=8.1
-ARG CADDY_VERSION=2
+ARG NGINX_VERSION=1.23
+ARG NODE_VERSION=18
+
+FROM node:${NODE_VERSION}-alpine AS app_node
+
+WORKDIR /srv/app
+
+COPY package.json .
+COPY package-lock.json .
+
+RUN npm install
+COPY . .
+
+FROM app_node AS app_node_dev
+
+CMD npm run watch
+
+FROM app_node AS app_node_build
+
+RUN npm run build
 
 # Prod image
 FROM php:${PHP_VERSION}-fpm-alpine AS app_php
@@ -29,6 +48,7 @@ RUN apk add --no-cache \
 		file \
 		gettext \
 		git \
+		linux-headers \
 	;
 
 RUN set -eux; \
@@ -109,6 +129,8 @@ RUN set -eux; \
 COPY . .
 RUN rm -Rf docker/
 
+COPY --from=app_node_build /srv/app/public/build public/build/
+
 RUN set -eux; \
 	mkdir -p var/cache var/log; \
     if [ -f composer.json ]; then \
@@ -138,20 +160,21 @@ RUN set -eux; \
 
 RUN rm -f .env.local.php
 
-# Build Caddy with the Mercure and Vulcain modules
-FROM caddy:${CADDY_VERSION}-builder-alpine AS app_caddy_builder
+FROM app_php_dev AS app_messenger_dev
 
-RUN xcaddy build \
-	--with github.com/dunglas/mercure \
-	--with github.com/dunglas/mercure/caddy \
-	--with github.com/dunglas/vulcain \
-	--with github.com/dunglas/vulcain/caddy
+CMD php bin/console messenger:consume async -vv
 
-# Caddy image
-FROM caddy:${CADDY_VERSION} AS app_caddy
+FROM app_php AS app_messenger
+
+CMD php bin/console messenger:consume async -vv
+
+# Nginx image
+FROM nginx:${NGINX_VERSION}-alpine AS app_nginx
 
 WORKDIR /srv/app
 
-COPY --from=app_caddy_builder /usr/bin/caddy /usr/bin/caddy
 COPY --from=app_php /srv/app/public public/
-COPY docker/caddy/Caddyfile /etc/caddy/Caddyfile
+COPY --from=app_node_build /srv/app/public/build public/build/
+COPY docker/nginx/nginx.conf /etc/nginx/nginx.conf
+
+EXPOSE 80/tcp

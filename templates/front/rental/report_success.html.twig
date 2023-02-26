@@ -1,0 +1,16 @@
+{% extends 'front/rental/base.html.twig' %}
+
+{% block title %}{{ rental.rentType.value | trans }} in {{ rental.celestialObject | trans }} - Spacebnb{% endblock %}
+
+{% block main %}
+    <div class="flex-column gap-200 justify-center">
+        <h5>{{ "report" | trans }}</h5>
+        <div class="flex-column gap-200 text-center">
+            <h6>{{ bootstrap_icon('check-all') }} {{ 'we_have_received_your_report' | trans }}</h6>
+            <p>{{ 'we_will_check_whats_wrong_explained' | trans }}</p>
+            <a href="{{ path('front_app_home') }}" class="text-decoration-none mx-auto">
+                <button class="btn btn-primary width-fit-content">{{ 'back_to_home' | trans }}</button>
+            </a>
+        </div>
+    </div>
+{% endblock %}

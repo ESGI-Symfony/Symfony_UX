@@ -1,0 +1,153 @@
+home:
+  good_evening: Good evening
+  explore_universe: Explore the universe
+  where_you_going: Where are you going?
+  exclusive_package: Exclusive Packages
+  explore_categories: Explore categories
+
+login :
+  password: Password
+  email_example: example@gmail.com
+
+search:
+  results_for: Results for
+  next: Next page
+  previous: Previous page
+
+motivation: Motivation
+firstname: Firstname
+lastname: Lastname
+phone: Phone
+lessor_number: Lessor number
+your_motivation_explained: Explain your project in few lines, present yourself, talk about what type of customer you would like
+your_name: Your name
+your_last_name: Your last name
+your_galactic_phone: Your galactic phone
+your_lessor_number: Your lessor number
+your_email: Your email
+your_password: Your password
+your_nickname: Your nickname
+add_your_rental_tip: To add your rentals, we need to get in touch first
+become_lessor_stylized: Become <span class="highlight">lessor</span>
+become_lessor: Become lessor
+save_my_profile: Save my profile
+back: Back
+we_come_back_to_you: We come back to you
+we_come_back_to_you_explained: Huston, we’ve got your information. Frequently check your profile to follow your request’s status
+go_to_profile: Go to your profile
+back_to_home: Back to home
+your_rentals: Your rentals
+bookings: bookings
+on_going: On going
+passed: Passed
+pending_request_lessor_message: Your lessor request is pending, we will get back to you soon
+refused_request_lessor_message: Your lessor request has been rejected, you can try again after reviewing our feedback
+validated_request_lessor_message: Your lessor request has been validated, you can now add your rentals
+reason_request_lessor_rejected: 'Reason of rejection:'
+see_more: See more
+terms_of_sales: Terms of sales
+data_privacy: Data privacy
+my_profile: My <span class="highlight">profile</span>
+estimated: Estimated
+create_a_rental_stylized: Create a <span class="highlight">rental</span>
+rental_information: Rental information
+address: Address
+miscellaneous: Miscellaneous
+main_image: Main image
+rent_type: Rental type
+description: Description
+describe_your_rental: Describe your rental, your rooms, the environment, the activities, anything that can interest a buyer
+max_guests_available: Max guests available
+capacity: Capacity
+price_by_night: Price by night
+price: Price
+rooms: Rooms
+bathrooms: Bathrooms
+room_count: Number of rooms
+bathroom_count: Number of bathrooms
+rental_options: Rental options
+celestial_object: Celestial object
+longitude: Longitude
+latitude: Latitude
+transports: Transports
+add_my_rental: Add my rental
+add_an_image: Add an image
+add_a_rental: Add a rental
+password: Password
+email_example: example@gmail.com
+nickname: Nickname
+reviews: Reviews
+overview: Overview
+access: Access
+book_now: Book now
+book: Book
+all: All
+results: Results
+features: Features
+count_bookings: '[0,1]%count% booking|[2,Inf[%count% bookings'
+count_bookings_stylized: '[0,1]<span class="highlight">%count%</span> booking|[2,Inf[<span class="highlight">%count%</span> bookings'
+count_rentals_stylized: '[0,1]<span class="highlight">%count%</span> rental|[2,Inf[<span class="highlight">%count%</span> rentals'
+refuse: Refuse
+refuse_this_rental: Refuse this rental
+refusing_reason: Refusing reason
+no_review_comment: No review comment
+
+welcome: Welcome to SpaceBnB
+confirm_email_text: Please confirm your email address by clicking the following link
+confirm_email: Confirm my Email
+link_expiration: This link will expire in
+registration: Thanks you for the registration !
+verify_email: A verify email has been sent to you, click on the verify link to validate your account
+resend_email: Resend Verify Email
+fill_account: Please fill the details and create account
+sign_up: Sign up
+sign_in: Sign in
+text_email_exist: If an account matching your email exists, then an email was just sent for reset your password.
+spam: If you don't receive an email please check your spam folder or
+try: Try again
+title_register: Register
+title_verify_email: Verify email sended
+title_reset_password_email: Password Reset Email Sent
+title_reset_password: Reset your password
+reset_password: To reset your password, please visit the following link
+hello: Hello !
+reset_password_button: Reset password
+text_logout: You are logged in as
+logout: Logout
+forgot: Forgot password ?
+no_account: Doesn't have an account yet ?
+text_sign_in: Please sign in to continue our app
+sign_in_now: Sign in now
+log_in: Log in!
+text_account_reset: Enter your email account to reset your password
+send_email: Send email
+forgot_password: Forgot password
+
+pay_your_reservation: Pay your reservation
+payment_succeed: Payment succeed
+your_payment_successfully_ended: Your reservation was paid successfully, you can now enjoy your trip
+checkout_form: Checkout form
+pay_%amount%_%currency%: Pay %amount% %currency%
+already_booked: Those dates are already booked
+rental_in_object: 'rental in object'
+your_bookings: Your bookings
+create_a_rental: Create a rental
+your_profile: Your profile
+edit_your_profile: Edit your profile
+report_type: Report type
+comment: Comment
+report: Report
+we_have_received_your_report: We have received your report
+we_will_check_whats_wrong_explained: We will check what’s wrong with this rental as soon as possible, thank you for your help in improving our service
+add_a_review_for_this_reservation: Add a review for this reservation
+review_mark: Your mark about this booking
+review_comment: Your opinion
+no_review_yet: No review for now
+no_booking_yet: No booking for now
+add_a_review: Add a review
+add_a_review_for_your_reservation_%from%_%to%: Add a review for your reservation from %from% to %to%
+"%from%_%to%": "%from% to %to%"
+add_your_review: Add your review
+ordered_at_%date%: Ordered at %date%
+no_rental_created: You have not created any rental yet
+no_reservations_yet: No booking to show

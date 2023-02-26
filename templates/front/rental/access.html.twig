@@ -1,0 +1,15 @@
+{% extends 'front/rental/base.html.twig' %}
+
+{% block title %}{{ 'rental_in_object' | trans({rental: rental.rentType.value, object: rental.celestialObject}) }} - Spacebnb{% endblock %}
+
+{% block pannel %}
+    <div class="flex-column gap-100">
+        <h5>{{ "access" | trans }}</h5>
+
+        <ul>
+            {% for transport in transports %}
+                <li>{{ transport.name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

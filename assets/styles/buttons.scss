@@ -1,0 +1,82 @@
+@import "variables";
+
+.btn {
+	cursor: pointer;
+	display: flex;
+	gap: $spacing-100;
+	padding: $spacing-100 $spacing-200;
+	border-radius: $spacing-200;
+	white-space: nowrap;
+	border: none;
+	background-color: transparent;
+	transition: .2s background-color, .2s color;
+	align-items: center;
+	font-family: 'Poppins', sans-serif;
+	font-size: $fs-300;
+	text-decoration: none;
+
+	&-primary {
+		background-color: $alnitak;
+		color: $dark-matter;
+
+		&:hover {
+			background-color: darken($alnitak, 10%);
+		}
+	}
+
+	&-secondary {
+		background-color: $procyon;
+		color: $dark-matter;
+
+		&:hover {
+			background-color: darken($procyon, 10%);
+		}
+	}
+
+	&-accent {
+		background-color: $betelgeuse;
+		color: $dark-matter;
+
+		&:hover {
+			background-color: darken($betelgeuse, 10%);
+		}
+	}
+
+	&-text {
+		color: $procyon;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	&-outline-primary {
+		border: solid 1px $alnitak;
+		color: $alnitak;
+
+		&:hover {
+			background-color: $alnitak;
+			color: $dark-matter;
+		}
+	}
+
+	&-outline-secondary {
+		border: solid 1px $procyon;
+		color: $procyon;
+
+		&:hover {
+			background-color: $procyon;
+			color: $dark-matter;
+		}
+	}
+
+	&-outline-accent {
+		border: solid 1px $betelgeuse;
+		color: $betelgeuse;
+
+		&:hover {
+			background-color: $betelgeuse;
+			color: $dark-matter;
+		}
+	}
+}

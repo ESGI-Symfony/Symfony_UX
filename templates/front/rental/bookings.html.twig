@@ -1,0 +1,27 @@
+{% extends 'front/rental/base.html.twig' %}
+
+{% block title %}{{ 'rental_in_object' | trans({rental: rental.rentType.value, object: rental.celestialObject}) }} - Spacebnb{% endblock %}
+
+{% block pannel %}
+    <div class="flex-column gap-200">
+        <div class="flex-column gap-300 border-bottom">
+            {% for reservation in reservations %}
+                <div class="flex-column gap-200">
+                    <div class="flex-row gap-100 justify-space-between">
+                        <h6 class="flex-row gap-200">{{ '%from%_%to%' | trans({'%from%':reservation.dateBegin|date('Y-m-d'), '%to%':reservation.dateEnd|date('Y-m-d')}) }}</h6>
+                        <div class="badge badge-secondary">{{ reservation.totalPrice|format_currency('EUR') }}</div>
+                    </div>
+                    <div class="flex-column gap-100">
+                        <p>{{ reservation.buyer.nickname }} - {{ reservation.buyer.email }}</p>
+                        <p>{{ reservation.buyer.phone }}</p>
+                        <p>{{ 'ordered_at_%date%' | trans({'%date%':reservation.createdAt|date('Y-m-d')}) }}</p>
+                    </div>
+                </div>
+                <div class="separator separator-alnitak"></div>
+            {% endfor %}
+            {% if reservations|length <= 0 %}
+                <p>{{ 'no_booking_yet' | trans }}</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

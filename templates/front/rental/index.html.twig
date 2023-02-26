@@ -1,0 +1,15 @@
+{% extends 'front/rental/base.html.twig' %}
+
+{% block title %}{{ 'rental_in_object' | trans({rental: rental.rentType.value, object: rental.celestialObject}) }} - Spacebnb{% endblock %}
+
+{% block pannel %}
+    <div class="flex-column gap-100">
+        <h5>{{ "description" | trans }}</h5>
+
+        <p>{{ rental.description }}</p>
+    </div>
+
+    <div class="flex-row align-start">
+        <a href="{{ path('front_rental_book', {slug: rental.slug}) }}" class="btn btn-primary">{{ bootstrap_icon("rocket-takeoff") }} {{ "book_now" | trans }}</a>
+    </div>
+{% endblock %}

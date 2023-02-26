@@ -1,0 +1,265 @@
+@import "variables";
+@import "breakpoints";
+
+$spacings: (50: $spacing-50, 100: $spacing-100, 200: $spacing-200, 300: $spacing-300, 400: $spacing-400, 500: $spacing-500, 600: $spacing-600);
+$prefixes: (
+        "gap": "gap",
+        "p": "padding",
+        "pt": "padding-top",
+        "pb": "padding-bottom",
+        "ps": "padding-left",
+        "pe": "padding-right",
+        "m": "margin",
+        "mt": "margin-top",
+        "mb": "margin-bottom",
+        "ms": "margin-left",
+        "me": "margin-right",
+);
+
+@each $name, $spacing in $spacings {
+  @each $class, $property in $prefixes {
+    .#{$class}-#{$name} {
+      #{$property}: $spacing;
+    }
+  }
+
+  .px-#{$name} {
+    padding-left: $spacing;
+    padding-right: $spacing;
+  }
+
+  .py-#{$name} {
+    padding-top: $spacing;
+    padding-bottom: $spacing;
+  }
+
+  .mx-#{$name} {
+    margin-left: $spacing;
+    margin-right: $spacing;
+  }
+
+  .my-#{$name} {
+    margin-top: $spacing;
+    margin-bottom: $spacing;
+  }
+
+  .rounded-#{$name} {
+    border-radius: $spacing;
+  }
+
+  .rounded-top-#{$name} {
+    border-radius: $spacing $spacing 0 0;
+  }
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.me-auto {
+  margin-right: auto;
+}
+
+.ms-auto {
+  margin-left: auto;
+}
+
+.flex {
+  &-column {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-row {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &-grow {
+    flex-grow: 1;
+  }
+
+  &-wrap {
+    flex-wrap: wrap;
+  }
+}
+
+.justify-space-around {
+  justify-content: space-around;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.align-start {
+  align-items: flex-start;
+}
+
+.align-end {
+  align-items: flex-end;
+}
+
+.align-stretch {
+  align-items: stretch;
+}
+
+.justify-space-between {
+  justify-content: space-between;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.full-width {
+  width: 100vw;
+}
+
+.max-width {
+  max-width: 350px;
+}
+
+.max-width-cat {
+  display: none;
+  @include medium {
+    display: block;
+    z-index: -10;
+    position: absolute;
+    bottom: 70px;
+    right: 70px;
+    overflow: hidden;
+  }
+
+}
+
+.white-space-no-wrap {
+  white-space: nowrap;
+}
+
+.container {
+  padding: $spacing-300;
+  flex-grow: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.container-pwd {
+  padding: $spacing-200;
+  flex-grow: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.container-password {
+  padding: 10em;
+  flex-grow: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.input-error-message{
+  align-items: center;
+  justify-content: center;
+}
+
+.scroll-horizontal {
+  overflow-x: auto;
+  width: auto;
+}
+
+.highlight {
+  color: $sun;
+}
+
+.separator {
+  display: block;
+  width: 100%;
+  border-bottom: 1px solid $sun;
+
+  &-alnitak {
+    border-bottom: 1px solid $alnitak;
+  }
+}
+
+.column-400 {
+  max-width: 400px;
+}
+
+.column-700 {
+  max-width: 700px;
+}
+
+.column-900 {
+  max-width: 900px;
+}
+
+.width-fit-content {
+  width: fit-content;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+.h-150 {
+  height: 150%;
+}
+
+.h-300 {
+  height: 350%;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.text-decoration-none {
+  text-decoration: none;
+}
+
+.text-area-none {
+  resize: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.flex-row-on-medium {
+  display: flex;
+  flex-direction: column;
+  @include medium {
+    flex-direction: row;
+  }
+}
+.flex-column-on-medium {
+  display: flex;
+  flex-direction: row;
+  @include medium {
+    flex-direction: column;
+  }
+}
+
+.booking-card-flex-child-equals {
+  .booking-card {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    flex: 1;
+    width: 100%;
+    @include medium {
+      max-width: 50%;
+      min-width: 300px;
+    }
+  }
+}
+
+.no-list-style {
+    list-style: none;
+}

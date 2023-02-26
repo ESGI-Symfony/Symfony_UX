@@ -1,0 +1,30 @@
+@import "variables";
+
+.notification {
+	border-radius: $spacing-100/2;
+	border: 1px solid $rigel;
+	padding: $spacing-100 $spacing-200;
+	display: flex;
+	gap: $spacing-200;
+
+	&-send {
+		border-color: $vega;
+		color: $vega;
+	}
+
+	&-success {
+		border-color: $n-292;
+		color: $n-292;
+	}
+
+	&-forbidden {
+		border-color: $betelgeuse;
+		color: $betelgeuse;
+	}
+
+	&-alert {
+		border-color: $sun;
+		color: $sun;
+	}
+
+}

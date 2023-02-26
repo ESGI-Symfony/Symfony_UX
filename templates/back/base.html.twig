@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <nav>
+        <ul class="flex-row flex-wrap p-50 gap-100 no-list-style">
+            <li>
+                <a href="{{ path('front_app_home') }}" class="btn btn-secondary">
+                    {{ bootstrap_icon('house') }}
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('back_user_index') }}" class="btn btn-secondary">
+                    {{ bootstrap_icon('people') }} Users
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('back_lessor_pending') }}" class="btn btn-secondary">
+                    {{ bootstrap_icon('rocket-takeoff') }} Lessor Requests
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('back_rental_index') }}" class="btn btn-secondary">
+                    {{ bootstrap_icon('buildings') }} Rentals
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('back_report_index') }}" class="btn btn-secondary">
+                    {{ bootstrap_icon('flag') }} Reports
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('back_reservation_index') }}" class="btn btn-secondary">
+                    {{ bootstrap_icon('bookmark') }} Reservations
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        {% block main %}{% endblock %}
+    </main>
+{% endblock %}

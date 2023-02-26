@@ -1,0 +1,44 @@
+{% extends 'front/rental/base.html.twig' %}
+
+{% block title %}{{ 'rental_in_object' | trans({rental: rental.rentType.value, object: rental.celestialObject}) }} - Spacebnb{% endblock %}
+
+{% block pannel %}
+    <div class="flex-column gap-100">
+
+        {%  if firstUserReservationWithoutReview %}
+            <h5>{{ 'add_a_review' | trans }}</h5>
+            <p>{{ 'add_a_review_for_your_reservation_%from%_%to%' | trans({'%from%':firstUserReservationWithoutReview.dateBegin|date('Y-m-d'), '%to%':firstUserReservationWithoutReview.dateEnd|date('Y-m-d')}) }}</p>
+            {{ form_start(form) }}
+                <div class="flex-column gap-100">
+                    {{ include('partials/_input.html.twig', {input: form.review_mark}) }}
+                    {{ include('partials/_input.html.twig', {input: form.review_comment, attr: {'rows': 4}}) }}
+                </div>
+                {{ form_widget(form) }}
+                <button class="btn btn-primary ms-auto">{{ bootstrap_icon('send') }} {{ 'add_your_review' | trans }}</button>
+            {{ form_end(form) }}
+        {% endif %}
+
+        <h5>{{ "reviews" | trans }}</h5>
+
+        <div class="flex-column gap-200">
+        {% for reservation in reservations %}
+            <div class="flex-column gap-100">
+                <h6 class="flex-row gap-200">
+                    <div class="flex-row gap-50">{{ bootstrap_icon("star-fill") }} {{ reservation.reviewMark }}</div>
+                    {{ reservation.buyer.nickname }}
+                </h6>
+
+                <p>
+                {% if reservation.reviewComment == null %}
+                    <i>{{ "no_review_comment" | trans }}</i>
+                {% endif %}
+                    {{ reservation.reviewComment }}
+                </p>
+            </div>
+        {% endfor %}
+        {% if reservations|length <= 0 %}
+            <p>{{ 'no_review_yet' | trans }}</p>
+        {% endif %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,14 @@
+@import "variables";
+@import "breakpoints";
+
+.header {
+  font-family: 'Unbounded', cursive;
+
+  .image-header {
+    width: 20px;
+
+    img {
+      width: 100%;
+    }
+  }
+}

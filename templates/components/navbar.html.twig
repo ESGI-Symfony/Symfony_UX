@@ -1,0 +1,24 @@
+{# templates/components/navbar.html.twig #}
+
+
+<div class="flex-row align-center justify-space-around navbar py-200">
+    {% for item in items %}
+
+        <a href="{{ path(item.path ?: 'front_app_home') }}" class="btn btn-text">
+            {% if item.icon == 'search' %}
+                <div class="flex-row align-center justify-center circle">
+                    {{ bootstrap_icon(item.icon) }}
+                </div>
+            {% else %}
+                <div class="flex flex-column align-center gap-100">
+                    {{ bootstrap_icon(item.icon) }}
+                    {% if item.name %}
+                        <div class="icon-name">
+                            {{ item.name | trans }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </a>
+    {% endfor %}
+</div>

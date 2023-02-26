@@ -1,0 +1,68 @@
+{% extends 'front/base.html.twig' %}
+
+{% block main %}
+    <div class="flex-column gap-600">
+        <div class="flex-column gap-200">
+            {{ "home.good_evening" | trans }}
+            <h4>{{ "home.explore_universe" | trans }}</h4>
+
+            <form class="input-group" action="/">
+                <input name="search" class="input" placeholder="{{ "home.where_you_going" | trans }}" value="{{ search }}" />
+
+                <div class="icon-container">
+                    {{ bootstrap_icon("search") }}
+                </div>
+            </form>
+        </div>
+
+        <div class="flex-column gap-200">
+            {% if search != "" %}
+                <h4>
+                    {{ "search.results_for" | trans }}
+                    <span class="highlight">{{ search }}</span>
+                </h4>
+
+                <small>{{ count }} {{ "results" | trans | lower }}</small>
+            {% endif %}
+
+            <div class="flex-row gap-200 mx-auto w-100">
+                <form class="inline-group">
+                    <input type="hidden" name="search" value="{{ search }}">
+                    <button name="object" value="" class="badge{% if selectedObject == null %} badge-primary{% endif %}">{{ "all" | trans }}</button>
+
+                    {% for object in objects %}
+                        <button name="object" value="{{ object }}" class="badge{% if selectedObject == object %} badge-primary{% endif %}">{{ object | trans }}</button>
+                    {% endfor %}
+                </form>
+            </div>
+
+            <div class="column-900 mx-auto gap-200 flex-column">
+                {% for rental in rentals %}
+                    {{ component('details-card', {rental: rental.0, rating: rental.sum_rating, options: [rental.options]}) }}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="flex-row gap-200">
+            {% if previous_page >= 0 %}
+                <a class="btn btn-primary" href="{{ path('front_app_home', {
+                    'object': selectedObject,
+                    'search': search,
+                    'page': previous_page})
+                }}">
+                    {{ "search.previous" | trans }}
+                </a>
+            {% endif %}
+
+            {% if hasMorePages %}
+                <a class="btn btn-primary" href="{{ path('front_app_home', {
+                    'object': selectedObject,
+                    'search': search,
+                    'page': next_page})
+                }}">
+                    {{ "search.next" | trans }}
+                </a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

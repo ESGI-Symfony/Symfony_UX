@@ -1,0 +1,44 @@
+@import "reset";
+@import "variables";
+@import "buttons";
+@import "layout";
+@import "typography";
+@import "input";
+@import "badge";
+@import "card";
+@import "navbarComponent";
+@import "category";
+@import "headerComponent";
+@import "bookings";
+@import "templates/account";
+@import "templates/rental";
+@import "notification";
+@import "colors";
+
+html, body {
+    font-size: $fs-300;
+}
+
+body {
+    color: $procyon;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: linear-gradient(167.95deg, #000000 0%, #02043C 58.4%, #390F40 86.52%, #450050 100%);
+}
+
+a {
+    color: $alnitak;
+}
+
+ol, ul {
+    list-style: disc inside;
+}
+
+#admin-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}

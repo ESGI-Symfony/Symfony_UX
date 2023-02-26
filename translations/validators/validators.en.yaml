@@ -1,0 +1,159 @@
+rental:
+  celestial_object:
+    not_blank: 'The celestial object name cannot be blank.'
+    max_length: 'The celestial object name cannot be longer than {{ limit }} characters.'
+    type: 'The celestial object name must be a string.'
+
+  longitude:
+    not_null: 'The longitude cannot be null.'
+    type: 'The longitude must be a float.'
+    range: 'Longitude must be between {{ min }} and {{ max }}.'
+
+  latitude:
+    not_null: 'The latitude cannot be null.'
+    type: 'The latitude must be a float.'
+    range: 'Latitude must be between {{ min }} and {{ max }}.'
+
+  type:
+    not_blank: 'The rental type cannot be blank.'
+    max_length: 'The rental type cannot be longer than {{ limit }} characters.'
+    type: 'The rental type must be a string.'
+    choice: 'The rental type must be one of {{ choices }}.'
+
+  description:
+    not_blank: 'The rental description cannot be blank.'
+    max_length: 'The rental description cannot be longer than {{ limit }} characters.'
+    type: 'The rental description must be a string.'
+
+  price:
+    not_null: 'The price cannot be null.'
+    type: 'The price must be a float.'
+    positive: 'The price must be greater than 0.'
+
+  max_capacity:
+    not_null: 'The max guest capacity cannot be null.'
+    type: 'The max guest capacity must be an integer.'
+    positive: 'The max guest capacity must be greater than 0.'
+
+  room_count:
+    not_null: 'The room count cannot be null.'
+    type: 'The room count must be an integer.'
+    positive: 'The room count must be greater or equal than 0.'
+
+  bathroom_count:
+    not_null: 'The bathroom count cannot be null.'
+    type: 'The bathroom count must be an integer.'
+    positive: 'The bathroom count must be greater or equal than 0.'
+
+  image:
+    not_null: 'The image cannot be null.'
+    max_size: 'The file is too large ({{ size }} {{ suffix }}). Allowed maximum size is {{ limit }} {{ suffix }}.'
+    mime_types: 'The file is not a valid image ({{ type }}). Allowed mime types are {{ types }}.'
+
+rental_option:
+  name:
+    not_blank: 'The rental option name cannot be blank.'
+    max_length: 'The rental option name cannot be longer than {{ limit }} characters.'
+    type: 'The rental option name must be a string.'
+
+report:
+  comment:
+    not_blank: 'The comment cannot be blank.'
+    max_length: 'The comment cannot be longer than {{ limit }} characters.'
+    type: 'The comment must be a string.'
+
+  type:
+    not_blank: 'The report type cannot be blank.'
+    max_length: 'The report type cannot be longer than {{ limit }} characters.'
+    type: 'The report type must be a string.'
+    choice: 'The report type must be one of {{ choices }}.'
+
+reservation:
+  date_begin:
+    not_blank: 'The begin reservation date cannot be blank.'
+    date: 'The begin reservation date must be a valid date.'
+
+  date_end:
+    not_blank: 'The end rental date cannot be blank.'
+    date: 'The end rental date must be a valid date.'
+    greater_than: 'The end reservation date must be greater than the begin date.'
+
+  payment_token:
+    max_length: 'The payment token cannot be longer than {{ limit }} characters.'
+    type: 'The payment token must be a string.'
+
+  review_mark:
+    type: 'The review mark must be an integer.'
+    range: 'The review mark must be between {{ min }} and {{ max }}.'
+
+  review_comment:
+    type: 'The review comment must be a string.'
+    range: 'The review comment must be between {{ min }} and {{ max }}.'
+
+review:
+  comment:
+    not_blank: 'The comment cannot be blank.'
+    max_length: 'The comment cannot be longer than {{ limit }} characters.'
+    type: 'The comment must be a string.'
+
+  rating:
+    not_null: 'The rating cannot be null.'
+    type: 'The rating must be an integer.'
+    range: 'The rating must be between {{ min }} and {{ max }}.'
+  refusing_reason:
+    type: 'The refusing reason must be a string.'
+
+transport:
+  name:
+    not_blank: 'The name cannot be blank.'
+    max_length: 'The name cannot be longer than {{ limit }} characters.'
+    type: 'The name must be a string.'
+
+user:
+  email:
+    not_blank: 'The email cannot be blank.'
+    max_length: 'The email cannot be longer than {{ limit }} characters.'
+    type: 'The email {{ value }} is not a valid email.'
+
+  nickname:
+    not_blank: 'The nickname cannot be blank.'
+    max_length: 'The nickname cannot be longer than {{ limit }} characters.'
+    type: 'The nickname must be a string.'
+
+  password:
+    not_blank: 'The password cannot be blank.'
+    min_length: 'The password must be at least {{ limit }} characters.'
+    max_length: 'The password cannot be longer than {{ limit }} characters.'
+    type: 'The password must be a string.'
+
+  is_verified:
+    type: 'The is_verified status must be a boolean.'
+
+  firstname:
+    max_length: 'The firstname cannot be longer than {{ limit }} characters.'
+    type: 'The firstname must be a string.'
+    not_blank: 'The firstname cannot be blank.'
+
+  lastname:
+    max_length: 'The lastname cannot be longer than {{ limit }} characters.'
+    type: 'The lastname must be a string.'
+    not_blank: 'The lastname cannot be blank.'
+
+  lessor_number:
+    type: 'The lessor number must be a number.'
+    not_blank: 'The lessor number cannot be blank.'
+
+  phone:
+    not_blank: 'The phone number cannot be blank.'
+
+user_lessor:
+  motivation:
+    not_blank: 'The motivation cannot be blank.'
+    type: 'The motivation must be a string.'
+
+  status:
+    not_blank: 'The status cannot be blank.'
+    max_length: 'The status cannot be longer than {{ limit }} characters.'
+    type: 'The status must be a string.'
+    choice: 'The status must be one of {{ choices }}.'
+

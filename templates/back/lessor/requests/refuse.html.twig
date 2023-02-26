@@ -1,0 +1,21 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %}Refuse this rental{% endblock %}
+
+{% block main %}
+
+<section class="flex-column mx-auto justify-center column-700 gap-100">
+    <h4 class="mb-300 text-center mx-auto">{{ 'refuse_this_rental' | trans }}</h4>
+    {{ include('back/lessor/requests/_request-card.html.twig', {request: userLessorRequest, hide_actions: true}) }}
+    {{ form_start(form) }}
+        <div class="flex-column gap-200 mb-300">
+            {{ include('partials/_input.html.twig', {input: form.refusing_reason, attr: {'rows': 8}}) }}
+            <button class="btn btn-primary ms-auto">
+                {{ 'refuse' | trans }}
+            </button>
+            {{ form_errors(form) }}
+        </div>
+    {{ form_end(form) }}
+</section>
+
+{% endblock %}

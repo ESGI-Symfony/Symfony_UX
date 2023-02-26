@@ -1,0 +1,30 @@
+{% extends 'front/base.html.twig' %}
+
+{% block title %}{{ 'your_bookings' | trans }}{% endblock %}
+
+{% block main %}
+    <div class="booking-template flex-column gap-300 column-700 mx-auto">
+        <button class="btn btn-text back-button">{{ bootstrap_icon('arrow-left') }} {{ 'back' | trans }}</button>
+        <h4 class="mb-300 text-center">{{ 'count_bookings_stylized' | trans({'%count%': user.reservations.count}) | raw }}</h4>
+        <div class="flex-row align-center gap-200">
+            <a href="{{ path('front_app_profile_bookings_on_going') }}" class="text-decoration-none">
+                <div class="unselected-badge fs-300 {% if not passedReservations %}badge badge-secondary{% endif %}">{{ 'on_going' | trans }}</div>
+            </a>
+            <a href="{{ path('front_app_profile_bookings_passed') }}" class="text-decoration-none">
+                <div class="unselected-badge fs-300 {% if passedReservations %}badge badge-secondary{% endif %}">{{ 'passed' | trans }}</div>
+            </a>
+        </div>
+
+        {% for year_month, reservations in reservations %}
+            <div class="date">
+                {{ year_month|date('F Y') }}
+            </div>
+            {% for reservation in reservations %}
+                    {{ component('booking-card', {subject: reservation, type: 'reservation'}) }}
+            {% endfor %}
+        {% endfor %}
+        {% if reservations|length <= 0 %}
+            <p>{{ 'no_reservations_yet' | trans }}</p>
+        {% endif %}
+    </div>
+{% endblock %}

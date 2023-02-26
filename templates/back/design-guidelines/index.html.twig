@@ -1,0 +1,35 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %}Guideline{% endblock %}
+
+{% block main %}
+    <div class="background-image"></div>
+
+    <div class="flex flex-row">
+        <button class="btn btn-primary">Button primary</button>
+        <button class="btn btn-secondary">Button secondary</button>
+        <button class="btn btn-text">Button text</button>
+        <button class="btn btn-outline-primary">Button outline primary</button>
+        <button class="btn btn-outline-secondary">Button outline primary</button>
+    </div>
+
+    <div class="flex flex-column">
+        <h1>H1 title</h1>
+        <h2>H2 title</h2>
+        <h3>H3 title</h3>
+        <h4>H4 title</h4>
+        <h5>H5 title</h5>
+        <h6>H6 title</h6>
+        <p>Default text</p>
+        <small>Small text</small>
+    </div>
+
+    <div class="flex flex-row">
+        <div class="notification notification-send">{{ bootstrap_icon("rocket-takeoff") }} Action info</div>
+        <div class="notification notification-success">{{ bootstrap_icon("check-circle") }} Action info</div>
+        <div class="notification notification-forbidden">{{ bootstrap_icon("x-circle") }} Action info</div>
+        <div class="notification notification-alert">{{ bootstrap_icon("exclamation-triangle") }} Action info</div>
+        <div class="notification">Action info</div>
+    </div>
+
+{% endblock %}

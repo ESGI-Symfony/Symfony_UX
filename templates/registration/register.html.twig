@@ -1,0 +1,24 @@
+{% extends 'front/base.html.twig' %}
+
+{% block title %}{{ "title_register" | trans }}{% endblock %}
+
+{% block main %}
+    {{ form_start(registrationForm, { 'attr' : { 'class': 'flex-column align-center justify-center' } }) }}
+    <div class="container h-150 flex-column align-center justify-center gap-300 width-300">
+        <div class="flex-column align-center justify-center gap-300">
+            <h4 class="h4 mb-3 font-weight-normal">{{ "sign_up" | trans }}</h4>
+            <span class="h6 small">{{ "fill_account" | trans }}</span>
+        </div>
+
+        {{ include('partials/_input_register.html.twig', {input: registrationForm.nickname}) }}
+        {{ include('partials/_input_register.html.twig', {input: registrationForm.email}) }}
+        {{ include('partials/_input_password.html.twig', {input: registrationForm.plainPassword}) }}
+        {{ include('partials/_input_checkbox.html.twig', {input: registrationForm.agreeTerms}) }}
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">{{ bootstrap_icon("rocket-takeoff") }} {{ "sign_in" | trans }}</button>
+        </div>
+        {{ form_end(registrationForm) }}
+    </div>
+{% endblock %}
+

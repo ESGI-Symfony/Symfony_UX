@@ -1,0 +1,63 @@
+{% extends 'front/base.html.twig' %}
+
+{% block title %}{{ "log_in" | trans }}{% endblock %}
+
+{% block main %}
+    <div class="flex-row h-100">
+        <form method="post" class="h-100 w-100 flex-column align-center justify-center max-width align-end">
+
+            {% if app.user %}
+                <div class="mb-3">
+                    {{ "text_logout" | trans }} {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">{{ "logout" | trans }}</a>
+                </div>
+            {% endif %}
+
+            <div class="flex-column align-stretch gap-300">
+                <h4 class="h4 mb-3 font-weight-normal">{{ "sign_in_now" | trans }}</h4>
+                <span class="h6 small">{{ "text_sign_in" | trans }}</span>
+                <div class="flex-grow gap-300">
+                    <div class="input-group">
+                        <input class="input" placeholder="{{ "email_example" | trans }}" type="email"
+                               value="{{ last_username }}" name="email" id="inputEmail" class="form-control"
+                               autocomplete="email" required autofocus>
+                    </div>
+                </div>
+                <div class="flex-grow gap-300">
+                    <div class="input-group">
+                        <input class="input" placeholder="{{ "password" | trans }}" type="password"
+                               name="password" id="inputPassword" class="form-control"
+                               autocomplete="current-password" required>
+                        <div class="color-dark-matter container-pwd password-toggle">
+                            {{ bootstrap_icon('eye') }}
+                        </div>
+                        <div class="color-dark-matter container-pwd password-toggle-off">
+                            {{ bootstrap_icon('eye-slash') }}
+                        </div>
+
+                    </div>
+                </div>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                <a href="{{ path('app_forgot_password_request') }}">{{ "forgot" | trans }}</a>
+                <div class="flex-row justify-center">
+                    <button class="btn btn-primary" type="submit">{{ bootstrap_icon("rocket-takeoff") }} {{ "sign_in" | trans }}
+                    </button>
+                </div>
+                <div class="flex-row flex-wrap gap-300">
+                    <span class="white-space-no-wrap">{{ "no_account" | trans }}</span>
+                    <a class="white-space-no-wrap" href="{{ path('app_register') }}">{{ "sign_up" | trans }}</a>
+                </div>
+            </div>
+            <div class="p-200">
+            {% if error %}
+                <span class="alert alert-danger input-error-message">{{ error.messageKey|trans(error.messageData, 'security') }}</span>
+            {% endif %}
+            </div>
+
+        </form>
+
+        <div class="flex-grow max-width-cat">
+            <img class="" src="{{ asset('images/space_cat.png') }}">
+        </div>
+
+    </div>
+{% endblock %}
