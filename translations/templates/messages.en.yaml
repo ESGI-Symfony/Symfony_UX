@@ -120,7 +120,7 @@ text_sign_in: Please sign in to continue our app
 sign_in_now: Sign in now
 log_in: Log in!
 text_account_reset: Enter your email account to reset your password
-sent_email: Sent email
+send_email: Send email
 forgot_password: Forgot password
 
 pay_your_reservation: Pay your reservation
@@ -149,3 +149,5 @@ add_a_review_for_your_reservation_%from%_%to%: Add a review for your reservation
 "%from%_%to%": "%from% to %to%"
 add_your_review: Add your review
 ordered_at_%date%: Ordered at %date%
+no_rental_created: You have not created any rental yet
+no_reservations_yet: No booking to show

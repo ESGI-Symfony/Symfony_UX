@@ -16,6 +16,9 @@
             {% for rental in rentals %}
                 {{ component('booking-card', {subject: rental, type: 'rental'}) }}
             {% endfor %}
+            {% if rentals|length <= 0 %}
+                <p>{{ 'no_rental_created' | trans }}</p>
+            {% endif %}
         </div>
     </section>
 {% endblock %}

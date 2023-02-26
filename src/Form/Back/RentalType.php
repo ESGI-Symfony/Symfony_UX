@@ -40,7 +40,6 @@ class RentalType extends AbstractType
             ->add('bathroom_count')
             ->add('longitude')
             ->add('latitude')
-            ->add('uuid')
             ->add('owner', EntityType::class, [
                 'class' => User::class,
                 'choice_label' => 'email',
