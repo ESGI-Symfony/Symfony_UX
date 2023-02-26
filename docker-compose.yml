@@ -22,6 +22,7 @@ services:
       DATABASE_URL: postgresql://${POSTGRES_USER:-symfony}:${POSTGRES_PASSWORD:-ChangeMe}@database:5432/${POSTGRES_DB:-app}?serverVersion=${POSTGRES_VERSION:-13}
       MAILER_DSN: ${MAILER_DSN}
       MAILER_FROM: ${MAILER_FROM}
+      SERVER_NAME: ${SERVER_NAME:-localhost}
 
   messenger:
     build:
