@@ -3,7 +3,7 @@
 {% block title %}{{ rental.rentType.value | trans }} in {{ rental.celestialObject | trans }} - Spacebnb{% endblock %}
 
 {% block main %}
-    <div class="flex-column gap-100">
+    <div class="flex-column gap-100 column-700 mx-auto">
         <h5>{{ "report" | trans }}</h5>
 
         {{ form_start(form) }}
@@ -12,7 +12,7 @@
                     {{ include('partials/_input.html.twig', {input: form.comment, attr: {'rows': 8}}) }}
                 </div>
             {{ form_widget(form) }}
-            <button class="btn btn-primary ms-auto">{{ bootstrap_icon('rocket-takeoff') }} {{ 'become_lessor' | trans }}</button>
+            <button class="btn btn-primary ms-auto">{{ bootstrap_icon('flag') }} {{ 'report' | trans }}</button>
         {{ form_end(form) }}
     </div>
 {% endblock %}
